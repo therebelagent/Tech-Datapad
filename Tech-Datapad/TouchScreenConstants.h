@@ -1,0 +1,10 @@
+#define YP A3
+#define XM A2
+#define YM 9
+#define XP 8
+#define TS_MINX 906
+#define TS_MAXX 116
+#define TS_MINY 92
+#define TS_MAXY 952
+#define MINPRESSURE 10
+#define MAXPRESSURE 1000
