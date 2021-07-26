@@ -12,17 +12,15 @@ public:
         int16_t centerX = tftlcd->width() / 2;
         int16_t centerY = tftlcd->height() / 2;
         int16_t radius = centerX - 1;
-        drawFixedScreenDetails(tftlcd, centerX, centerY, radius);
-        drawPoweredDownCannon(tftlcd, centerX, centerY, radius);
-        delay(1000);
-        drawPoweredUpCannonAnimation(tftlcd, centerX, centerY, radius);
+        int16_t cannonX, cannonY;
+        drawFixedScreenDetails(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        drawPoweredDownCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        delay(1500);
+        drawPoweredUpCannonAnimation(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
     }
 
 private:
     DDSGraphicalUtility *_ddsGraphicalUtility = new DDSGraphicalUtility();
-
-private:
-    int16_t _x, _y;
 
     int16_t getInnerRadius(int16_t radius) { return radius * 0.93; }
 
@@ -34,22 +32,22 @@ private:
 
     int16_t getBannerTop(int16_t y) { return y - 80; }
 
-    void drawPoweredDownCannon(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius)
+    void drawPoweredDownCannon(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
     {
         int16_t diameter = radius * 2;
         drawTopBanner(tftlcd, POWERED_CANNON_DOWN_BANNER, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
-        drawCannon(tftlcd, _x, _y, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
+        drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredUpCannonAnimation(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius)
+    void drawPoweredUpCannonAnimation(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
     {
         int16_t diameter = radius * 2;
         drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 30);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawTopBanner(tftlcd, POWERED_UP_CANNON_BANNER, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
-        drawCannon(tftlcd, _x, _y, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
+        drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
     }
 
     void drawCannonPoweringProgressBar(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour, int16_t pause = 0)
@@ -85,7 +83,7 @@ private:
         _ddsGraphicalUtility->printCenteredText(tftlcd, text, &Aurebesh8pt7b, centerX, y + (bannerHeight / 2), 0, 0, TFT_WHITE);
     }
 
-    void drawFixedScreenDetails(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius)
+    void drawFixedScreenDetails(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
     {
         int16_t innerRadius = getInnerRadius(radius);
         int16_t innerCircleWidth = 9;
@@ -145,8 +143,8 @@ private:
         int16_t bannerWidth = getBannerWidth(diameter);
         _ddsGraphicalUtility->fillIteration(tftlcd, centerX - (bannerWidth / 2), getBannerTop(centerY), getBannerHeight(diameter), bannerWidth, TFT_WHITE);
 
-        _x = lineLeft + (lineWidth / 2);
-        _y = lineY - (diameter * 0.03);
+        *cannonX = lineLeft + (lineWidth / 2);
+        *cannonY = lineY - (diameter * 0.03);
     }
 
     void drawCannon(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, unsigned int colour)
@@ -159,7 +157,7 @@ private:
         tftlcd->drawRect(shapeLeft, shapeY, shapeWidth, shapeHeight, DISPLAY_RING_COLOR);
 
         shapeHeight = width * 0.13;
-        _ddsGraphicalUtility->fillArc(tftlcd, x, shapeY, 270, 60, shapeHeight, shapeHeight, shapeHeight, colour);
+        _ddsGraphicalUtility->fillQuarterCircle(tftlcd, x, shapeY, shapeHeight, 3, 0, colour);
         _ddsGraphicalUtility->fillArc(tftlcd, x, shapeY, 270, 60, shapeHeight, shapeHeight, 1, DISPLAY_RING_COLOR);
         shapeLeft = x - shapeHeight;
         tftlcd->drawFastHLine(shapeLeft, shapeY, shapeHeight * 2, DISPLAY_RING_COLOR);
@@ -198,7 +196,7 @@ private:
         shapeY = shapeY + shapeHeight;
         tftlcd->fillTriangle(shapeLeft, shapeY, shapeLeft + shapeWidth, shapeY, shapeLeft, shapeY + shapeOffset, colour);
         tftlcd->drawLine(shapeLeft, shapeY + shapeOffset, shapeLeft + shapeWidth, shapeY, DISPLAY_RING_COLOR);
-    };
+    }
 };
 
 CannonPoweringUpDDS::CannonPoweringUpDDS(MCUFRIEND_kbv *tftlcd) : BasicGridDDS(tftlcd) { _tftlcd = tftlcd; };

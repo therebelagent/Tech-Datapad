@@ -127,3 +127,56 @@ void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16
         topX = topX + gridLineHeight;
     } while (topX <= (centerX + radius));
 }
+
+/**************************************************************************/
+/*!
+    @brief  Quarter-circle drawer with fill, used for circles and roundrects
+    @param  x0       Center-point x coordinate
+    @param  y0       Center-point y coordinate
+    @param  r        Radius of circle
+    @param  corners  Mask bits indicating which quarters we're doing
+    @param  delta    Offset from center-point, used for round-rects
+    @param  color    16-bit 5-6-5 Color to fill with
+*/
+/**************************************************************************/
+void DDSGraphicalUtility::fillQuarterCircle(MCUFRIEND_kbv *tftlcd, int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour)
+{
+    int16_t f = 1 - r;
+    int16_t ddF_x = 1;
+    int16_t ddF_y = -2 * r;
+    int16_t x = 0;
+    int16_t y = r;
+    int16_t px = x;
+    int16_t py = y;
+
+    delta++;
+    while (x < y)
+    {
+        if (f >= 0)
+        {
+            y--;
+            ddF_y += 2;
+            f += ddF_y;
+        }
+        x++;
+        ddF_x += 2;
+        f += ddF_x;
+        tftlcd->drawFastVLine(x0, y0 - r, r, colour);
+        if (x < (y + 1))
+        {
+            if (quarter & 1)
+                tftlcd->drawFastVLine(x0 + x, y0 - y, (2 * y + delta) / 2, colour);
+            if (quarter & 2)
+                tftlcd->drawFastVLine(x0 - x, y0 - y, (2 * y + delta) / 2, colour);
+        }
+        if (y != py)
+        {
+            if (quarter & 1)
+                tftlcd->drawFastVLine(x0 + py, y0 - px, (2 * px + delta) / 2, colour);
+            if (quarter & 2)
+                tftlcd->drawFastVLine(x0 - py, y0 - px, (2 * px + delta) / 2, colour);
+            py = y;
+        }
+        px = x;
+    }
+}

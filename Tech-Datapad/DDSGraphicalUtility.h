@@ -14,6 +14,7 @@ public:
     void printCenteredText(MCUFRIEND_kbv *tftlcd, String text, const GFXfont *gfxFont, int16_t x, int16_t y, uint16_t *width, uint16_t *height, unsigned int colour);
     void fillTriangle(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false);
     void drawGrid(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius);
+    void fillQuarterCircle(MCUFRIEND_kbv *tftlcd, int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour);
 };
 
 #endif

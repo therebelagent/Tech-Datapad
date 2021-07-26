@@ -53,7 +53,6 @@ private:
             }
             linesCounter++;
         }
-
         _ddsGraphicalUtility->drawGrid(tftlcd, centerX - 1, centerY, radius);
     }
 
