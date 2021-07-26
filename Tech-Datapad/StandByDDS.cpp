@@ -13,8 +13,6 @@ public:
         DDSGraphicalUtility *ddsGraphicalUtility = new DDSGraphicalUtility();
         ddsGraphicalUtility->drawInnerCircle(tftlcd, centerX, centerY, radius, GRID_OUTTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
     }
-
-private:
 };
 
 StandByDDS::StandByDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; };

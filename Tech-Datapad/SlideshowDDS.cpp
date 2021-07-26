@@ -1,8 +1,8 @@
 #include "SlideshowDDS.h"
 #include "StandByDDS.h"
-//#include "ExplosiveChargesDDS.h"
+#include "ExplosiveChargesDDS.h"
 #include "EnemyTargetsDDS.h"
-//#include "CannonPoweringUpDDS.h"
+#include "CannonPoweringUpDDS.h"
 
 SlideshowDDS::SlideshowDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd)
 {
@@ -19,18 +19,18 @@ void SlideshowDDS::show()
         currentDatapadDisplaySequence = 2;
         break;
     case 2:
-        datapadDisplaySequence = new EnemyTargetsDDS(_tftlcd);
-        currentDatapadDisplaySequence = 1;
-        break;
-        /*case 3:
         datapadDisplaySequence = new CannonPoweringUpDDS(_tftlcd);
-        currentDatapadDisplaySequence = 1;
-        break;*/
-        /*case 4:
+        currentDatapadDisplaySequence = 3;
+        break;
+    case 3:
+        datapadDisplaySequence = new EnemyTargetsDDS(_tftlcd);
+        currentDatapadDisplaySequence = 4;
+        break;
+    case 4:
         datapadDisplaySequence = new ExplosiveChargesDDS(_tftlcd);
         datapadDisplaySequence->reset();
         currentDatapadDisplaySequence = 1;
-        break;*/
+        break;
     }
     datapadDisplaySequence->show();
 }

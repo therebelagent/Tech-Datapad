@@ -1,8 +1,8 @@
 #include <MCUFRIEND_kbv.h>
 #include <TouchScreen.h>
 #include "DatapadDisplaySequence.h"
-#include "SlideshowDDS.h"
 #include "TouchScreenConstants.h"
+#include "SlideshowDDS.h"
 
 MCUFRIEND_kbv tftlcd;
 TouchScreen touchScreen = TouchScreen(XP, YP, XM, YM, 300);

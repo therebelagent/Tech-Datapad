@@ -1,9 +1,9 @@
 #ifndef BasicGridDDS_h
 #define BasicGridDDS_h
 
-#include "StandByDDS.h"
+#include "DatapadDisplaySequence.h""
 
-class BasicGridDDS : public StandByDDS
+class BasicGridDDS : public DatapadDisplaySequence
 {
 public:
     BasicGridDDS(MCUFRIEND_kbv *tftlcd);

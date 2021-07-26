@@ -12,14 +12,16 @@ public:
         int16_t radius = centerX - 1;
         DDSGraphicalUtility *ddsGraphicalUtility = new DDSGraphicalUtility();
         ddsGraphicalUtility->drawGrid(tftlcd, centerX - 1, centerY, radius);
+        ddsGraphicalUtility->drawInnerCircle(tftlcd, centerX, centerY, radius, GRID_OUTTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
     }
 };
 
-BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv *tftlcd) : StandByDDS(tftlcd) { _tftlcd = tftlcd; };
+BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; };
 
 void BasicGridDDS::show()
 {
-    StandByDDS::show();
+    reset();
+    DatapadDisplaySequence::show();
     BasicGridDDSHelper *basicGridDDSHelper = new BasicGridDDSHelper();
     basicGridDDSHelper->drawBasicGrid(_tftlcd);
 };

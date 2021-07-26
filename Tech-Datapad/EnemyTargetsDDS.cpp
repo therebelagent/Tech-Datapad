@@ -28,14 +28,12 @@ private:
     void drawSonarAnimation(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t topY, int16_t *friendlyTargetTriangleBaseWidth, int16_t *friendlyTargetTriangleHeight)
     {
         int16_t innerCircleRadius = radius * B_INNER_CIRCLE_RELATIVE_DIAMETER;
-        int16_t innerCircleCenterY = topY - (radius * B_INNER_CIRCLE_RELATIVE_BOTTOM_DISTANCE) - innerCircleRadius;
+        int16_t gaugeY = topY - (radius * B_INNER_CIRCLE_RELATIVE_BOTTOM_DISTANCE) - innerCircleRadius;
         int16_t gaugeLenght = (2 * radius) * 0.65;
         *friendlyTargetTriangleBaseWidth = (innerCircleRadius * 2) * 0.25;
         *friendlyTargetTriangleHeight = (innerCircleRadius * 2) * 0.33;
-        int16_t friendlyTargetTriangleY = innerCircleCenterY - 5;
+        int16_t friendlyTargetTriangleY = gaugeY - 5;
         _ddsGraphicalUtility->fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, *friendlyTargetTriangleBaseWidth, *friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
-        delay(1000);
-
         int16_t angle = 95;
         int16_t degress = 190;
         int16_t angleJump = 2;
@@ -45,8 +43,8 @@ private:
         {
             float x1 = gaugeLenght * sin(angle * M_PI / 180);
             float y1 = gaugeLenght * cos(angle * M_PI / 180);
-            tftlcd->drawLine(centerX, innerCircleCenterY, centerX + x1, innerCircleCenterY - y1, DISPLAY_RING_COLOR);
-            tftlcd->drawLine(centerX, innerCircleCenterY, centerX + x1, innerCircleCenterY - y1, DISPLAY_BACK_COLOR);
+            tftlcd->drawLine(centerX, gaugeY, centerX + x1, gaugeY - y1, DISPLAY_RING_COLOR);
+            tftlcd->drawLine(centerX, gaugeY, centerX + x1, gaugeY - y1, DISPLAY_BACK_COLOR);
             _ddsGraphicalUtility->fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, *friendlyTargetTriangleBaseWidth, *friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
             angle = angle - angleJump;
             if (angle < 0)
@@ -94,8 +92,7 @@ private:
         _ddsGraphicalUtility->fillArc(tftlcd, x, y, 33, 4, rx, ry, width, DISPLAY_RING_COLOR);
         rx = radius - 6;
         ry = radius - 6;
-        width = 1;
-        _ddsGraphicalUtility->fillArc(tftlcd, x, y, 165, 10, rx, ry, width, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility->fillArc(tftlcd, x, y, 165, 10, rx, ry, 2, DISPLAY_RING_COLOR);
         int16_t topY = y + radius;
         tftlcd->fillCircle(x, topY - 19, 3, DISPLAY_RING_COLOR);
         tftlcd->fillCircle(x + 14, topY - 16, 2, DISPLAY_RING_COLOR);
@@ -104,7 +101,7 @@ private:
         tftlcd->fillCircle(x - 14, topY - 16, 2, DISPLAY_RING_COLOR);
         tftlcd->fillCircle(x - 28, topY - 16, 2, DISPLAY_RING_COLOR);
         tftlcd->fillCircle(x - 42, topY - 16, 2, DISPLAY_RING_COLOR);
-        _ddsGraphicalUtility->drawFastHorizontalLine(tftlcd, x - 39, topY - 11, 78, width, DISPLAY_RING_COLOR);
+        tftlcd->drawFastHLine(x - 39, topY - 12, 78, DISPLAY_RING_COLOR);
         int height = 12;
         _ddsGraphicalUtility->drawFastVerticalLine(tftlcd, x, topY - 19, height, 3, DISPLAY_RING_COLOR);
     }
