@@ -14,8 +14,10 @@ public:
         int16_t radius = centerX - 1;
         int16_t cannonX, cannonY;
         drawFixedScreenDetails(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
-        drawPoweredDownCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        drawDepletedCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
         delay(1500);
+        drawPoweredDownCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        delay(100);
         drawPoweredUpCannonAnimation(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
     }
 
@@ -32,19 +34,24 @@ private:
 
     int16_t getBannerTop(int16_t y) { return y - 80; }
 
-    void drawPoweredDownCannon(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    void drawDepletedCannon(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
     {
         int16_t diameter = radius * 2;
-        drawTopBanner(tftlcd, POWERED_CANNON_DOWN_BANNER, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
+        drawTopBanner(tftlcd, DEPLETED_CANNON_BANNER, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
     }
 
+    void drawPoweredDownCannon(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    {
+        drawTopBanner(tftlcd, POWERED_CANNON_DOWN_BANNER, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
+    }
+
     void drawPoweredUpCannonAnimation(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
     {
         int16_t diameter = radius * 2;
-        drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 30);
+        drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 40);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawTopBanner(tftlcd, POWERED_UP_CANNON_BANNER, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
