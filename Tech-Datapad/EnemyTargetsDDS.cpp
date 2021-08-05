@@ -154,7 +154,7 @@ private:
     }
 };
 
-EnemyTargetsDDS::EnemyTargetsDDS(MCUFRIEND_kbv *tftlcd) : BasicGridDDS(tftlcd) { _tftlcd = tftlcd; };
+EnemyTargetsDDS::EnemyTargetsDDS(MCUFRIEND_kbv *tftlcd) : BasicGridDDS(tftlcd) { _tftlcd = tftlcd; }
 
 void EnemyTargetsDDS::show()
 {

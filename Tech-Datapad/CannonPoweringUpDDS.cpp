@@ -206,11 +206,11 @@ private:
     }
 };
 
-CannonPoweringUpDDS::CannonPoweringUpDDS(MCUFRIEND_kbv *tftlcd) : BasicGridDDS(tftlcd) { _tftlcd = tftlcd; };
+CannonPoweringUpDDS::CannonPoweringUpDDS(MCUFRIEND_kbv *tftlcd) : BasicGridDDS(tftlcd) { _tftlcd = tftlcd; }
 
 void CannonPoweringUpDDS::show()
 {
     BasicGridDDS::show();
     CannonPoweringUpDDSHelper *cannonPoweringUpDDSHelper = new CannonPoweringUpDDSHelper();
     cannonPoweringUpDDSHelper->drawCannonPoweringUp(_tftlcd);
-};
+}

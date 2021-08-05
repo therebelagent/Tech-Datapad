@@ -16,7 +16,7 @@ public:
     }
 };
 
-BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; };
+BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; }
 
 void BasicGridDDS::show()
 {
@@ -24,4 +24,4 @@ void BasicGridDDS::show()
     DatapadDisplaySequence::show();
     BasicGridDDSHelper *basicGridDDSHelper = new BasicGridDDSHelper();
     basicGridDDSHelper->drawBasicGrid(_tftlcd);
-};
+}

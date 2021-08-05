@@ -15,11 +15,11 @@ public:
     }
 };
 
-StandByDDS::StandByDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; };
+StandByDDS::StandByDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; }
 
 void StandByDDS::show()
 {
     reset();
     StandByDDSHelper *standByDDSHelper = new StandByDDSHelper();
     standByDDSHelper->drawStandByFrame(_tftlcd);
-};
+}

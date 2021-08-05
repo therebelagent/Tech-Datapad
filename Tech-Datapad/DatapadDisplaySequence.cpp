@@ -1,7 +1,7 @@
 #include "DatapadDisplaySequence.h"
 #include "DatapadDisplaySequenceConstants.h"
 
-DatapadDisplaySequence::DatapadDisplaySequence(MCUFRIEND_kbv *tftlcd) { _tftlcd = tftlcd; };
+DatapadDisplaySequence::DatapadDisplaySequence(MCUFRIEND_kbv *tftlcd) { _tftlcd = tftlcd; }
 
 void DatapadDisplaySequence::show(){};
 

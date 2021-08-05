@@ -25,8 +25,8 @@ void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv *tftlcd, int x, int y, int start
     byte seg = 3; // Segments are 3 degrees wide = 120 segments for 360 degrees
     byte inc = 3; // Draw segments every 3 degrees, increase to 6 for segmented ring
     // Calculate first pair of coordinates for segment start
-    float sx = cos((start_angle - 90) * DEG2RAD);
-    float sy = sin((start_angle - 90) * DEG2RAD);
+    float sx = cos((start_angle - 90) * DEG_TO_RAD);
+    float sy = sin((start_angle - 90) * DEG_TO_RAD);
     uint16_t x0 = sx * (rx - w) + x;
     uint16_t y0 = sy * (ry - w) + y;
     uint16_t x1 = sx * rx + x;
@@ -35,8 +35,8 @@ void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv *tftlcd, int x, int y, int start
     for (int i = start_angle; i < start_angle + seg * seg_count; i += inc)
     {
         // Calculate pair of coordinates for segment end
-        float sx2 = cos((i + seg - 90) * DEG2RAD);
-        float sy2 = sin((i + seg - 90) * DEG2RAD);
+        float sx2 = cos((i + seg - 90) * DEG_TO_RAD);
+        float sy2 = sin((i + seg - 90) * DEG_TO_RAD);
         int x2 = sx2 * (rx - w) + x;
         int y2 = sy2 * (ry - w) + y;
         int x3 = sx2 * rx + x;

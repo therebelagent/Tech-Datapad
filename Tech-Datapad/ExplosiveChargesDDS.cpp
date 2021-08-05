@@ -76,7 +76,7 @@ private:
     }
 };
 
-ExplosiveChargesDDS::ExplosiveChargesDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; };
+ExplosiveChargesDDS::ExplosiveChargesDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; }
 
 void ExplosiveChargesDDS::show()
 {
