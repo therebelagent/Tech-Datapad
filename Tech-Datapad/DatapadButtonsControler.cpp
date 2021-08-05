@@ -3,30 +3,26 @@
 
 DatapadButtonsControler::DatapadButtonsControler(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin)
 {
-    _smallWhiteButtonPin = smallWhiteButtonPin;
-    _redButtonPin = redButtonPin;
-    _whiteButtonPin = whiteButtonPin;
-    _yellowButtonPin = yellowButtonPin;
-    pinMode(_smallWhiteButtonPin, OUTPUT);
-    pinMode(_redButtonPin, OUTPUT);
-    pinMode(_whiteButtonPin, OUTPUT);
-    pinMode(_yellowButtonPin, OUTPUT);
+    _smallWhiteDatapadLED = new DatapadLED(smallWhiteButtonPin);
+    _redDatapadLED = new DatapadLED(redButtonPin);
+    _whiteDatapadLED = new DatapadLED(whiteButtonPin);
+    _yellowDatapadLED = new DatapadLED(yellowButtonPin);
 }
 
-uint8_t DatapadButtonsControler::getSmallWhiteButtonPin() { return _smallWhiteButtonPin; }
+DatapadLED *DatapadButtonsControler::getSmallWhiteDatapadLED() { return _smallWhiteDatapadLED; }
 
-uint8_t DatapadButtonsControler::getRedButtonPin() { return _redButtonPin; }
+DatapadLED *DatapadButtonsControler::getRedDatapadLED() { return _redDatapadLED; }
 
-uint8_t DatapadButtonsControler::getWhiteButtonPin() { return _whiteButtonPin; }
+DatapadLED *DatapadButtonsControler::getWhiteDatapadLED() { return _whiteDatapadLED; }
 
-uint8_t DatapadButtonsControler::getYellowButtonPin() { return _yellowButtonPin; }
+DatapadLED *DatapadButtonsControler::getYellowDatapadLED() { return _yellowDatapadLED; }
 
 void DatapadButtonsControler::turnOnOffButtons(){};
 
 void DatapadButtonsControler::reset()
 {
-    digitalWrite(_smallWhiteButtonPin, LOW);
-    digitalWrite(_redButtonPin, LOW);
-    digitalWrite(_whiteButtonPin, LOW);
-    digitalWrite(_yellowButtonPin, LOW);
+    _smallWhiteDatapadLED->turnOff();
+    _redDatapadLED->turnOff();
+    _whiteDatapadLED->turnOff();
+    _yellowDatapadLED->turnOff();
 }

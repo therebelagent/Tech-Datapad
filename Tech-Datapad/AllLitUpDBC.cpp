@@ -5,8 +5,8 @@ AllLitUpDBC::AllLitUpDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint
 
 void AllLitUpDBC::turnOnOffButtons()
 {
-    digitalWrite(DatapadButtonsControler::getSmallWhiteButtonPin(), HIGH);
-    digitalWrite(DatapadButtonsControler::getRedButtonPin(), HIGH);
-    digitalWrite(DatapadButtonsControler::getWhiteButtonPin(), HIGH);
-    digitalWrite(DatapadButtonsControler::getYellowButtonPin(), HIGH);
+    getSmallWhiteDatapadLED()->turnOn();
+    getRedDatapadLED()->turnOn();
+    getWhiteDatapadLED()->turnOn();
+    getYellowDatapadLED()->turnOn();
 }
