@@ -7,11 +7,11 @@ class DatapadActionSetup
 {
 public:
     DatapadActionSetup(MCUFRIEND_kbv *tftlcd, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
-    virtual MCUFRIEND_kbv getTftlcd();
-    virtual uint8_t getSmallWhiteButtonPin();
-    virtual uint8_t getRedButtonPin();
-    virtual uint8_t getWhiteButtonPin();
-    virtual uint8_t getYellowButtonPin();
+    MCUFRIEND_kbv getTftlcd();
+    uint8_t getSmallWhiteButtonPin();
+    uint8_t getRedButtonPin();
+    uint8_t getWhiteButtonPin();
+    uint8_t getYellowButtonPin();
 
 private:
     MCUFRIEND_kbv *_tftlcd;

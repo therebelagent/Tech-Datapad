@@ -9,7 +9,7 @@ class DatapadDisplaySequence
 public:
     DatapadDisplaySequence(MCUFRIEND_kbv *tftlcd);
     virtual void show();
-    virtual void reset();
+    void reset();
 
 private:
     MCUFRIEND_kbv *_tftlcd;

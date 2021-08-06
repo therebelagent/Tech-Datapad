@@ -7,7 +7,7 @@ class ExplosiveChargesDA : public DatapadAction
 {
 public:
     ExplosiveChargesDA(DatapadDisplaySequence *datapadDisplaySequence, DatapadButtonsControler *datapadButtonsControler);
-    virtual void play();
+    void play();
 
 private:
     DatapadDisplaySequence *_datapadDisplaySequence;

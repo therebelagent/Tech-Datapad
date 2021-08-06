@@ -8,12 +8,12 @@ class DatapadButtonsControler
 {
 public:
     DatapadButtonsControler(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
-    virtual DatapadLED *getSmallWhiteDatapadLED();
-    virtual DatapadLED *getRedDatapadLED();
-    virtual DatapadLED *getWhiteDatapadLED();
-    virtual DatapadLED *getYellowDatapadLED();
+    DatapadLED *getSmallWhiteDatapadLED();
+    DatapadLED *getRedDatapadLED();
+    DatapadLED *getWhiteDatapadLED();
+    DatapadLED *getYellowDatapadLED();
     virtual void turnOnOffButtons();
-    virtual void reset();
+    void reset();
 
 private:
     DatapadLED *_smallWhiteDatapadLED, *_redDatapadLED, *_whiteDatapadLED, *_yellowDatapadLED;
