@@ -4,5 +4,5 @@ StandByDBC::StandByDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_
 
 void StandByDBC::turnOnOffButtons()
 {
-    DatapadButtonsControler::reset();
+    reset();
 }

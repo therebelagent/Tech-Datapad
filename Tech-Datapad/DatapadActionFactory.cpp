@@ -3,12 +3,12 @@
 #include "ExplosiveChargesDDS.h"
 #include "EnemyTargetsDDS.h"
 #include "CannonPoweringUpDDS.h"
-
 #include "StandByDBC.h"
 #include "AllLitUpDBC.h"
 #include "ExplosiveChargesDBC.h"
+#include "ExplosiveChargesDA.h"
 
-DatapadActionFactory::DatapadActionFactory(){};
+DatapadActionFactory::DatapadActionFactory(){}
 
 DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadActionType, DatapadActionSetup *datapadActionSetup)
 {
@@ -26,8 +26,8 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
         datapadAction = new DatapadAction(new EnemyTargetsDDS(&datapadActionSetup->getTftlcd()), new StandByDBC(datapadActionSetup->getSmallWhiteButtonPin(), datapadActionSetup->getRedButtonPin(), datapadActionSetup->getWhiteButtonPin(), datapadActionSetup->getYellowButtonPin()));
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = new DatapadAction(new ExplosiveChargesDDS(&datapadActionSetup->getTftlcd()), new ExplosiveChargesDBC(datapadActionSetup->getSmallWhiteButtonPin(), datapadActionSetup->getRedButtonPin(), datapadActionSetup->getWhiteButtonPin(), datapadActionSetup->getYellowButtonPin()));
+        datapadAction = new ExplosiveChargesDA(new ExplosiveChargesDDS(&datapadActionSetup->getTftlcd()), new ExplosiveChargesDBC(datapadActionSetup->getSmallWhiteButtonPin(), datapadActionSetup->getRedButtonPin(), datapadActionSetup->getWhiteButtonPin(), datapadActionSetup->getYellowButtonPin()));
         break;
     }
     return datapadAction;
-};
+}

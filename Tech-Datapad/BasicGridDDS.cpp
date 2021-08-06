@@ -21,7 +21,6 @@ BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlc
 void BasicGridDDS::show()
 {
     reset();
-    DatapadDisplaySequence::show();
     BasicGridDDSHelper *basicGridDDSHelper = new BasicGridDDSHelper();
     basicGridDDSHelper->drawBasicGrid(_tftlcd);
 }

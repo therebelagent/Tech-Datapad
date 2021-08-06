@@ -8,7 +8,7 @@ class DatapadAction
 {
 public:
     DatapadAction(DatapadDisplaySequence *datapadDisplaySequence, DatapadButtonsControler *datapadButtonsControler);
-    void play();
+    virtual void play();
     void reset();
 
 private:

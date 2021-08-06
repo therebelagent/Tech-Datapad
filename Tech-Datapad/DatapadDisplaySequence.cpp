@@ -3,8 +3,6 @@
 
 DatapadDisplaySequence::DatapadDisplaySequence(MCUFRIEND_kbv *tftlcd) { _tftlcd = tftlcd; }
 
-void DatapadDisplaySequence::show(){};
-
 void DatapadDisplaySequence::reset()
 {
     int16_t height = (((_tftlcd->width() / 2) + 12) * 2);
