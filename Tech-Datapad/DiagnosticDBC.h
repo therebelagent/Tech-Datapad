@@ -5,15 +5,15 @@
 //  2021 v 1.0.
 //
 
-#ifndef ExplosiveChargesDBC_h
-#define ExplosiveChargesDBC_h
+#ifndef DiagnosticDBC_h
+#define DiagnosticDBC_h
 
 #include "DatapadButtonsControler.h"
 
-class ExplosiveChargesDBC : public DatapadButtonsControler
+class DiagnosticDBC : public DatapadButtonsControler
 {
 public:
-    ExplosiveChargesDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
+    DiagnosticDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
     void turnOnOffButtons();
 };
 

@@ -1,3 +1,10 @@
+//
+//  The Bad Batch Tech's Datapad firmware for Arduino Mega 2560.
+//  Created by Diego J. Arévalo.
+//  https://github.com/therebelagent/Tech-Datapad
+//  2021 v 1.0.
+//
+
 #include "DatapadSlideshowAction.h"
 #include "DatapadActionFactory.h"
 
@@ -11,24 +18,28 @@ void DatapadSlideshowAction::play()
     DatapadActionFactory datapadActionFactory = DatapadActionFactory();
     DatapadAction *datapadAction;
 
-    switch (_currentDatapadDisplaySequence)
+    switch (_currentDatapadActionType)
     {
-    case 1:
+    case DatapadActionType::Diagnostic:
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::Diagnostic, _datapadActionSetup);
+        _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
+        break;
+    case DatapadActionType::StandBy:
         datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::StandBy, _datapadActionSetup);
-        _currentDatapadDisplaySequence = 2;
+        _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
         break;
-    case 2:
+    case DatapadActionType::CannonPoweringUp:
         datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::CannonPoweringUp, _datapadActionSetup);
-        _currentDatapadDisplaySequence = 3;
+        _currentDatapadActionType = DatapadActionType::EnemyTargets;
         break;
-    case 3:
+    case DatapadActionType::EnemyTargets:
         datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::EnemyTargets, _datapadActionSetup);
-        _currentDatapadDisplaySequence = 4;
+        _currentDatapadActionType = DatapadActionType::ExplosiveCharges;
         break;
-    case 4:
+    case DatapadActionType::ExplosiveCharges:
         datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::ExplosiveCharges, _datapadActionSetup);
         datapadAction->reset();
-        _currentDatapadDisplaySequence = 1;
+        _currentDatapadActionType = DatapadActionType::StandBy;
         break;
     }
     datapadAction->play();
