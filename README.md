@@ -1,8 +1,8 @@
 # The Bad Batch Tech's Datapad
 The Bad Batch Tech's Datapad firmware for Arduino Mega 2560.
 ## Folders
-- Tech-Datapad (Source Code)
-- docs (Circuit Schematic & External Libraries)
+- Tech-Datapad (Source Code).
+- docs (Circuit Schematic & External Libraries).
 ## Circuit Schematic
 Bill of materials:
 1. Arduino MEGA 2560 Pro (Recommended).
@@ -14,5 +14,5 @@ Bill of materials:
 7. 5 [mm] LED Water Clear Ultrabright x 4.
 8. 5 [mm] LED Red.
 ## External Libraries
-- MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled
-- TouchScreen
+- MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled.
+- TouchScreen.
