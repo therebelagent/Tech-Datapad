@@ -7,7 +7,7 @@ https://cults3d.com/en/3d-model/gadget/the-bad-batch-tech-s-datapad
 
 ## Folders
 - Tech-Datapad (Source Code).
-- docs (Circuit Schematic & External Libraries).
+- docs (Circuit Schematic, Assembly Instructions Guide & External Libraries).
 ## Circuit Schematic
 Bill of materials:
 - Arduino MEGA 2560 Pro (Recommended).
@@ -19,6 +19,7 @@ Bill of materials:
 - 5 [mm] LED Water Clear Ultrabright x 4.
 - 5 [mm] LED Red.
 - 40pcs Dupont 10 [cm] Female To Female Jumper Wires Cable.
+## Assembly Instructions Guide
 ## External Libraries
 - MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled.
 - TouchScreen.
