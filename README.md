@@ -12,6 +12,7 @@ https://cults3d.com/en/3d-model/gadget/the-bad-batch-tech-s-datapad
 Tech's-Datapad-Visual-Assembly-Instructions-Guide-by-the.rebel.agent.pdf
 
 Bill of materials:
+- 3D Printed Parts & Glue.
 - M3 x 10 [mm] Button Head Screws x 4 (Fix Screen Frame to Case).
 - 3 x 12 [mm] Wood Screws x 4 (Fix TFT Shield Holder to Screen Frame).
 ## Circuit Schematic
