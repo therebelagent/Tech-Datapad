@@ -13,6 +13,7 @@ Bill of materials:
 6. 180 [ohms] Resistor x 5.
 7. 5 [mm] LED Water Clear Ultrabright x 4.
 8. 5 [mm] LED Red.
+9. 40pcs Dupont 10 [cm] Female To Female.
 ## External Libraries
 - MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled.
 - TouchScreen.
