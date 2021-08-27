@@ -15,6 +15,7 @@ Bill of materials:
 - 3D Printed Parts & Glue.
 - M3 x 10 [mm] Button Head Screws x 4 (Fix Screen Frame to Case).
 - 3 x 12 [mm] Wood Screws x 4 (Fix TFT Shield Holder to Screen Frame).
+- 4 [mm] x 1.5 [mm] Neodymium Magnet x 4. (To Attach Lid to Case) 
 ## Circuit Schematic
 Tech's-Datapad-Circuit-Schematic.png
 
