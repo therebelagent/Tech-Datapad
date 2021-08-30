@@ -8,8 +8,16 @@
 #ifndef DatapadSlideshowAction_h
 #define DatapadSlideshowAction_h
 
-#include "DatapadActionFactory.h"
 #include "DatapadActionSetup.h"
+
+enum class DatapadActionType
+{
+    Diagnostic = 0,
+    StandBy = 2,
+    CannonPoweringUp = 4,
+    EnemyTargets = 8,
+    ExplosiveCharges = 16
+};
 
 class DatapadSlideshowAction
 {

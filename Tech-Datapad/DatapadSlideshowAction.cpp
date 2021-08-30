@@ -6,7 +6,15 @@
 //
 
 #include "DatapadSlideshowAction.h"
-#include "DatapadActionFactory.h"
+#include "StandByDDS.h"
+#include "ExplosiveChargesDDS.h"
+#include "EnemyTargetsDDS.h"
+#include "CannonPoweringUpDDS.h"
+#include "DiagnosticDBC.h"
+#include "StandByDBC.h"
+#include "AllLitUpDBC.h"
+#include "ExplosiveChargesDBC.h"
+#include "ExplosiveChargesDA.h"
 
 DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup *datapadActionSetup)
 {
@@ -15,29 +23,27 @@ DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup *datapadAction
 
 void DatapadSlideshowAction::play()
 {
-    DatapadActionFactory datapadActionFactory = DatapadActionFactory();
     DatapadAction *datapadAction;
-
     switch (_currentDatapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::Diagnostic, _datapadActionSetup);
+        datapadAction = new ExplosiveChargesDA(new StandByDDS(&_datapadActionSetup->getTftlcd()), new DiagnosticDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
         _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
         break;
     case DatapadActionType::StandBy:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::StandBy, _datapadActionSetup);
+        datapadAction = new DatapadAction(new StandByDDS(&_datapadActionSetup->getTftlcd()), new StandByDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
         _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::CannonPoweringUp, _datapadActionSetup);
+        datapadAction = new DatapadAction(new CannonPoweringUpDDS(&_datapadActionSetup->getTftlcd()), new AllLitUpDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
         _currentDatapadActionType = DatapadActionType::EnemyTargets;
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::EnemyTargets, _datapadActionSetup);
+        datapadAction = new DatapadAction(new EnemyTargetsDDS(&_datapadActionSetup->getTftlcd()), new StandByDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
         _currentDatapadActionType = DatapadActionType::ExplosiveCharges;
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::ExplosiveCharges, _datapadActionSetup);
+        datapadAction = new ExplosiveChargesDA(new ExplosiveChargesDDS(&_datapadActionSetup->getTftlcd()), new ExplosiveChargesDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
         datapadAction->reset();
         _currentDatapadActionType = DatapadActionType::StandBy;
         break;
