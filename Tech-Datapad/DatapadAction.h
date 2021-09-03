@@ -14,13 +14,13 @@
 class DatapadAction
 {
 public:
-    DatapadAction(DatapadDisplaySequence *datapadDisplaySequence, DatapadButtonsControler *datapadButtonsControler);
+    DatapadAction(DatapadDisplaySequence &datapadDisplaySequence, DatapadButtonsControler &datapadButtonsControler);
     virtual void play();
     void reset();
 
 private:
-    DatapadDisplaySequence *_datapadDisplaySequence;
-    DatapadButtonsControler *_datapadButtonsControler;
+    DatapadDisplaySequence &_datapadDisplaySequence;
+    DatapadButtonsControler &_datapadButtonsControler;
 };
 
 #endif

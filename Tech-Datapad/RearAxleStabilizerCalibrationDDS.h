@@ -5,15 +5,15 @@
 //  2021 v 1.0.
 //
 
-#ifndef ExplosiveChargesDDS_h
-#define ExplosiveChargesDDS_h
+#ifndef RearAxleStabilizerCalibrationDDS_h
+#define RearAxleStabilizerCalibrationDDS_h
 
-#include "DatapadDisplaySequence.h"
+#include "StandByDDS.h"
 
-class ExplosiveChargesDDS : public DatapadDisplaySequence
+class RearAxleStabilizerCalibrationDDS : public StandByDDS
 {
 public:
-    ExplosiveChargesDDS(MCUFRIEND_kbv &tftlcd);
+    RearAxleStabilizerCalibrationDDS(MCUFRIEND_kbv &tftlcd);
     void show();
 
 private:

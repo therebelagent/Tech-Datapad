@@ -10,14 +10,14 @@
 
 #include "BasicGridDDS.h"
 
-class EnemyTargetsDDS: public BasicGridDDS
+class EnemyTargetsDDS : public BasicGridDDS
 {
 public:
-    EnemyTargetsDDS(MCUFRIEND_kbv *tftlcd);
+    EnemyTargetsDDS(MCUFRIEND_kbv &tftlcd);
     void show();
 
 private:
-    MCUFRIEND_kbv *_tftlcd;
+    MCUFRIEND_kbv &_tftlcd;
 };
 
 #endif

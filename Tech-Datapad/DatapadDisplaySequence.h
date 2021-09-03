@@ -14,12 +14,12 @@ class DatapadDisplaySequence
 {
 
 public:
-    DatapadDisplaySequence(MCUFRIEND_kbv *tftlcd);
+    DatapadDisplaySequence(MCUFRIEND_kbv &tftlcd);
     virtual void show();
     void reset();
 
 private:
-    MCUFRIEND_kbv *_tftlcd;
+    MCUFRIEND_kbv &_tftlcd;
 };
 
 #endif

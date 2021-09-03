@@ -6,47 +6,42 @@
 //
 
 #include "DatapadSlideshowAction.h"
-#include "StandByDDS.h"
-#include "ExplosiveChargesDDS.h"
-#include "EnemyTargetsDDS.h"
-#include "CannonPoweringUpDDS.h"
-#include "DiagnosticDBC.h"
-#include "StandByDBC.h"
-#include "AllLitUpDBC.h"
-#include "ExplosiveChargesDBC.h"
-#include "ExplosiveChargesDA.h"
+#include "DatapadActionFactory.h"
 
-DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup *datapadActionSetup)
-{
-    _datapadActionSetup = datapadActionSetup;
-}
+DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup &datapadActionSetup) : _datapadActionSetup(datapadActionSetup) {}
 
 void DatapadSlideshowAction::play()
 {
+    DatapadActionFactory datapadActionFactory;
     DatapadAction *datapadAction;
     switch (_currentDatapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = new ExplosiveChargesDA(new StandByDDS(&_datapadActionSetup->getTftlcd()), new DiagnosticDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
-        _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::Diagnostic, _datapadActionSetup);
+        _currentDatapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
         break;
     case DatapadActionType::StandBy:
-        datapadAction = new DatapadAction(new StandByDDS(&_datapadActionSetup->getTftlcd()), new StandByDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::StandBy, _datapadActionSetup);
+        _currentDatapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
+        break;
+    case DatapadActionType::RearAxleStabilizerCalibration:
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::RearAxleStabilizerCalibration, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = new DatapadAction(new CannonPoweringUpDDS(&_datapadActionSetup->getTftlcd()), new AllLitUpDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::CannonPoweringUp, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::EnemyTargets;
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = new DatapadAction(new EnemyTargetsDDS(&_datapadActionSetup->getTftlcd()), new StandByDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::EnemyTargets, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::ExplosiveCharges;
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = new ExplosiveChargesDA(new ExplosiveChargesDDS(&_datapadActionSetup->getTftlcd()), new ExplosiveChargesDBC(_datapadActionSetup->getSmallWhiteButtonPin(), _datapadActionSetup->getRedButtonPin(), _datapadActionSetup->getWhiteButtonPin(), _datapadActionSetup->getYellowButtonPin()));
+        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::ExplosiveCharges, _datapadActionSetup);
         datapadAction->reset();
         _currentDatapadActionType = DatapadActionType::StandBy;
         break;
     }
     datapadAction->play();
+    delete datapadAction;
 }

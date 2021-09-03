@@ -9,24 +9,15 @@
 #include "DDSGraphicalUtility.h"
 #include "DatapadDisplaySequenceConstants.h"
 
-class StandByDDSHelper
-{
-public:
-    void drawStandByFrame(MCUFRIEND_kbv *tftlcd)
-    {
-        int16_t centerX = tftlcd->width() / 2;
-        int16_t centerY = tftlcd->height() / 2;
-        int16_t radius = centerX - 1;
-        DDSGraphicalUtility *ddsGraphicalUtility = new DDSGraphicalUtility();
-        ddsGraphicalUtility->drawInnerCircle(tftlcd, centerX, centerY, radius, GRID_OUTTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
-    }
-};
-
-StandByDDS::StandByDDS(MCUFRIEND_kbv *tftlcd) : DatapadDisplaySequence(tftlcd) { _tftlcd = tftlcd; }
+StandByDDS::StandByDDS(MCUFRIEND_kbv &tftlcd) : DatapadDisplaySequence(tftlcd), _tftlcd(tftlcd) {}
 
 void StandByDDS::show()
 {
     reset();
-    StandByDDSHelper *standByDDSHelper = new StandByDDSHelper();
-    standByDDSHelper->drawStandByFrame(_tftlcd);
+    int16_t centerX = _tftlcd.width() / 2;
+    int16_t centerY = _tftlcd.height() / 2;
+    int16_t radius = centerX - 1;
+    _tftlcd.drawCircle(centerX, centerY, radius, TFT_WHITE);
+    DDSGraphicalUtility ddsGraphicalUtility;
+    ddsGraphicalUtility.drawInnerCircle(_tftlcd, centerX, centerY, radius - 1, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
 }

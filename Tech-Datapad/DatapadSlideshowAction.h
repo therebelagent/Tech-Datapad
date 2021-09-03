@@ -9,24 +9,16 @@
 #define DatapadSlideshowAction_h
 
 #include "DatapadActionSetup.h"
-
-enum class DatapadActionType
-{
-    Diagnostic = 0,
-    StandBy = 2,
-    CannonPoweringUp = 4,
-    EnemyTargets = 8,
-    ExplosiveCharges = 16
-};
+#include "DatapadActionFactory.h"
 
 class DatapadSlideshowAction
 {
 public:
-    DatapadSlideshowAction(DatapadActionSetup *datapadActionSetup);
+    DatapadSlideshowAction(DatapadActionSetup &datapadActionSetup);
     void play();
 
 private:
-    DatapadActionSetup *_datapadActionSetup;
+    DatapadActionSetup &_datapadActionSetup;
     DatapadActionType _currentDatapadActionType = DatapadActionType::Diagnostic;
 };
 

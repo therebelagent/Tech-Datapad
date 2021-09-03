@@ -13,12 +13,12 @@
 class ExplosiveChargesDA : public DatapadAction
 {
 public:
-    ExplosiveChargesDA(DatapadDisplaySequence *datapadDisplaySequence, DatapadButtonsControler *datapadButtonsControler);
+    ExplosiveChargesDA(DatapadDisplaySequence &datapadDisplaySequence, DatapadButtonsControler &datapadButtonsControler);
     void play();
 
 private:
-    DatapadDisplaySequence *_datapadDisplaySequence;
-    DatapadButtonsControler *_datapadButtonsControler;
+    DatapadDisplaySequence &_datapadDisplaySequence;
+    DatapadButtonsControler &_datapadButtonsControler;
 };
 
 #endif

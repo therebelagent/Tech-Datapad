@@ -8,11 +8,11 @@
 #include "DDSGraphicalUtility.h"
 #include "DatapadDisplaySequenceConstants.h"
 
-void DDSGraphicalUtility::drawInnerCircle(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t radius, int16_t offset, unsigned int colour)
+void DDSGraphicalUtility::drawInnerCircle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t radius, int16_t offset, unsigned int colour)
 {
     for (int16_t counter = 0; counter < offset; counter++)
     {
-        tftlcd->drawCircle(x, y, radius - counter, colour);
+        tftlcd.drawCircle(x, y, radius - counter, colour);
     }
 }
 
@@ -27,7 +27,7 @@ void DDSGraphicalUtility::drawInnerCircle(MCUFRIEND_kbv *tftlcd, int16_t x, int1
 // w  = width (thickness) of arc in pixels
 // colour = 16 bit colour value
 // Note if rx and ry are the same then an arc of a circle is drawn
-void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv *tftlcd, int x, int y, int start_angle, int seg_count, int rx, int ry, int w, unsigned int colour)
+void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv &tftlcd, int x, int y, int start_angle, int seg_count, int rx, int ry, int w, unsigned int colour)
 {
     byte seg = 3; // Segments are 3 degrees wide = 120 segments for 360 degrees
     byte inc = 3; // Draw segments every 3 degrees, increase to 6 for segmented ring
@@ -48,8 +48,8 @@ void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv *tftlcd, int x, int y, int start
         int y2 = sy2 * (ry - w) + y;
         int x3 = sx2 * rx + x;
         int y3 = sy2 * ry + y;
-        tftlcd->fillTriangle(x0, y0, x1, y1, x2, y2, colour);
-        tftlcd->fillTriangle(x1, y1, x2, y2, x3, y3, colour);
+        tftlcd.fillTriangle(x0, y0, x1, y1, x2, y2, colour);
+        tftlcd.fillTriangle(x1, y1, x2, y2, x3, y3, colour);
         // Copy segment end to sgement start for next segment
         x0 = x2;
         y0 = y2;
@@ -58,64 +58,64 @@ void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv *tftlcd, int x, int y, int start
     }
 }
 
-void DDSGraphicalUtility::drawFastVerticalLine(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
+void DDSGraphicalUtility::drawFastVerticalLine(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
 {
     int16_t left = x - (width / 2);
     for (int16_t counter = left; counter < left + width; counter++)
     {
-        tftlcd->drawFastVLine(counter, y, height, colour);
+        tftlcd.drawFastVLine(counter, y, height, colour);
     }
 }
 
-void DDSGraphicalUtility::drawFastHorizontalLine(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, unsigned int colour)
+void DDSGraphicalUtility::drawFastHorizontalLine(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, unsigned int colour)
 {
     int16_t top = y - (height / 2);
     for (int16_t counter = top; counter < top + height; counter++)
     {
-        tftlcd->drawFastHLine(x, counter, width, colour);
+        tftlcd.drawFastHLine(x, counter, width, colour);
     }
 }
 
-void DDSGraphicalUtility::fillIteration(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
+void DDSGraphicalUtility::fillIteration(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
 {
     int16_t newX, newWidth;
     int16_t triangleHeight = width * 0.07;
     newWidth = width - (triangleHeight * 2);
     newX = x + triangleHeight;
-    tftlcd->fillRect(newX, y, newWidth, height, colour);
+    tftlcd.fillRect(newX, y, newWidth, height, colour);
     int16_t triangleY1 = (y + height) - 1;
     int16_t triangleX2 = newX - triangleHeight;
     int16_t triangleY2 = (y + (height / 2)) - 1;
-    tftlcd->fillTriangle(newX, y, newX, triangleY1, triangleX2, triangleY2, colour);
+    tftlcd.fillTriangle(newX, y, newX, triangleY1, triangleX2, triangleY2, colour);
     newX = newX + newWidth;
     triangleX2 = newX + triangleHeight;
-    tftlcd->fillTriangle(newX, y, newX, triangleY1, triangleX2, triangleY2, colour);
+    tftlcd.fillTriangle(newX, y, newX, triangleY1, triangleX2, triangleY2, colour);
 }
 
-void DDSGraphicalUtility::printCenteredText(MCUFRIEND_kbv *tftlcd, String text, const GFXfont *gfxFont, int16_t x, int16_t y, uint16_t *width, uint16_t *height, unsigned int colour)
+void DDSGraphicalUtility::printCenteredText(MCUFRIEND_kbv &tftlcd, String text, const GFXfont *gfxFont, int16_t x, int16_t y, uint16_t *width, uint16_t *height, unsigned int colour)
 {
     int16_t x1, y1;
     uint16_t textWidth, textHeight;
-    tftlcd->setFont(gfxFont);
-    tftlcd->getTextBounds(text, 0, 0, &x1, &y1, &textWidth, &textHeight);
-    tftlcd->setCursor(x - (textWidth / 2), y + (textHeight / 2));
-    tftlcd->setTextColor(colour);
-    tftlcd->println(text);
+    tftlcd.setFont(gfxFont);
+    tftlcd.getTextBounds(text, 0, 0, &x1, &y1, &textWidth, &textHeight);
+    tftlcd.setCursor(x - (textWidth / 2), y + (textHeight / 2));
+    tftlcd.setTextColor(colour);
+    tftlcd.println(text);
     *width = textWidth;
     *height = textHeight;
 }
 
-void DDSGraphicalUtility::fillTriangle(MCUFRIEND_kbv *tftlcd, int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false)
+void DDSGraphicalUtility::fillTriangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false)
 {
     int16_t triangleX0 = x - (baseWidth / 2);
     int16_t triangleY0 = y + (height / 2);
     int16_t triangleX1 = triangleX0 + baseWidth;
     int16_t triangleX2 = triangleX0 + (baseWidth / 2);
     int16_t triangleY2 = inverted ? triangleY0 + height : triangleY0 - height;
-    tftlcd->fillTriangle(triangleX0, triangleY0, triangleX1, triangleY0, triangleX2, triangleY2, colour);
+    tftlcd.fillTriangle(triangleX0, triangleY0, triangleX1, triangleY0, triangleX2, triangleY2, colour);
 }
 
-void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16_t centerY, int16_t radius)
+void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius)
 {
     int16_t diameter = radius * 2;
     int16_t gridLineHeight = diameter / GRID_LINES;
@@ -123,14 +123,14 @@ void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16
     int16_t topY = centerY - radius + gridLineHeight;
     do
     {
-        tftlcd->drawFastHLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
+        tftlcd.drawFastHLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
         topY = topY + gridLineHeight;
     } while (topY <= (centerY + radius));
     topY = centerY - radius;
     topX = topX + gridLineHeight;
     do
     {
-        tftlcd->drawFastVLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
+        tftlcd.drawFastVLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
         topX = topX + gridLineHeight;
     } while (topX <= (centerX + radius));
 }
@@ -146,7 +146,7 @@ void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv *tftlcd, int16_t centerX, int16
     @param  color    16-bit 5-6-5 Color to fill with
 */
 /**************************************************************************/
-void DDSGraphicalUtility::fillQuarterCircle(MCUFRIEND_kbv *tftlcd, int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour)
+void DDSGraphicalUtility::fillQuarterCircle(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour)
 {
     int16_t f = 1 - r;
     int16_t ddF_x = 1;
@@ -168,22 +168,38 @@ void DDSGraphicalUtility::fillQuarterCircle(MCUFRIEND_kbv *tftlcd, int16_t x0, i
         x++;
         ddF_x += 2;
         f += ddF_x;
-        tftlcd->drawFastVLine(x0, y0 - r, r, colour);
+        tftlcd.drawFastVLine(x0, y0 - r, r, colour);
         if (x < (y + 1))
         {
             if (quarter & 1)
-                tftlcd->drawFastVLine(x0 + x, y0 - y, (2 * y + delta) / 2, colour);
+                tftlcd.drawFastVLine(x0 + x, y0 - y, (2 * y + delta) / 2, colour);
             if (quarter & 2)
-                tftlcd->drawFastVLine(x0 - x, y0 - y, (2 * y + delta) / 2, colour);
+                tftlcd.drawFastVLine(x0 - x, y0 - y, (2 * y + delta) / 2, colour);
         }
         if (y != py)
         {
             if (quarter & 1)
-                tftlcd->drawFastVLine(x0 + py, y0 - px, (2 * px + delta) / 2, colour);
+                tftlcd.drawFastVLine(x0 + py, y0 - px, (2 * px + delta) / 2, colour);
             if (quarter & 2)
-                tftlcd->drawFastVLine(x0 - py, y0 - px, (2 * px + delta) / 2, colour);
+                tftlcd.drawFastVLine(x0 - py, y0 - px, (2 * px + delta) / 2, colour);
             py = y;
         }
         px = x;
+    }
+}
+
+void DDSGraphicalUtility::drawRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineWidth, uint16_t colour)
+{
+    for (int16_t counter = 0; counter < lineWidth; counter++)
+    {
+        tftlcd.drawRect(x + counter, y + counter, width - 2 * counter, height - 2 * counter, colour);
+    }
+}
+
+void DDSGraphicalUtility::drawLine(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t lineWidth, uint16_t colour)
+{
+    for (int16_t counter = 0; counter < lineWidth; counter++)
+    {
+        tftlcd.drawLine(x0 + counter, y0, x1 + counter, y1, colour);
     }
 }
