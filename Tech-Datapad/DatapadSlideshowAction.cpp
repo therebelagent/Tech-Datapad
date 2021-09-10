@@ -13,31 +13,28 @@ DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup &datapadAction
 void DatapadSlideshowAction::play()
 {
     DatapadActionFactory datapadActionFactory;
-    DatapadAction *datapadAction;
+    DatapadAction *datapadAction = datapadActionFactory.getDatapadAction(_currentDatapadActionType, _datapadActionSetup);
     switch (_currentDatapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::Diagnostic, _datapadActionSetup);
-        _currentDatapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
+        _currentDatapadActionType = DatapadActionType::ForgingChainCodes;
         break;
     case DatapadActionType::StandBy:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::StandBy, _datapadActionSetup);
+        _currentDatapadActionType = DatapadActionType::ForgingChainCodes;
+        break;
+    case DatapadActionType::ForgingChainCodes:
         _currentDatapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
         break;
     case DatapadActionType::RearAxleStabilizerCalibration:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::RearAxleStabilizerCalibration, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::CannonPoweringUp, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::EnemyTargets;
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::EnemyTargets, _datapadActionSetup);
         _currentDatapadActionType = DatapadActionType::ExplosiveCharges;
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = datapadActionFactory.getDatapadAction(DatapadActionType::ExplosiveCharges, _datapadActionSetup);
         datapadAction->reset();
         _currentDatapadActionType = DatapadActionType::StandBy;
         break;

@@ -18,7 +18,9 @@ enum class DatapadActionType
     CannonPoweringUp = 4,
     EnemyTargets = 8,
     ExplosiveCharges = 16,
-    RearAxleStabilizerCalibration = 32
+    RearAxleStabilizerCalibration = 32,
+    ForgingChainCodes = 64
+
 };
 
 class DatapadActionFactory

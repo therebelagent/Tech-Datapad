@@ -12,13 +12,13 @@ DiagnosticDBC::DiagnosticDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, 
 
 void DiagnosticDBC::turnOnOffButtons()
 {
-    getSmallWhiteDatapadLED()->turnOn();
+    getSmallWhiteDatapadLED().turnOn();
     delay(500);
-    getRedDatapadLED()->turnOn();
+    getRedDatapadLED().turnOn();
     delay(500);
-    getWhiteDatapadLED()->turnOn();
+    getWhiteDatapadLED().turnOn();
     delay(500);
-    getYellowDatapadLED()->turnOn();
+    getYellowDatapadLED().turnOn();
     delay(500);
     reset();
 }

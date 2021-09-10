@@ -135,6 +135,32 @@ void DDSGraphicalUtility::drawGrid(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16
     } while (topX <= (centerX + radius));
 }
 
+void DDSGraphicalUtility::drawRoundFrame(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow)
+{
+    int16_t firstQuadrant = 332 + shift;
+    int16_t secondQuadrant = 62 + shift;
+    int16_t thirdQuadrant = 152 + shift;
+    int16_t fourhtQuadrant = 242 + shift;
+    int16_t innerRoundFrameHeight = 6;
+    int16_t innerRoundFrameRadius = radius - 5;
+    int16_t innerRoundFrameFillHeight = 3;
+    int16_t innerRoundFrameFillRadius = radius - 6;
+    drawInnerCircle(tftlcd, centerX, centerY, innerRoundFrameRadius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
+    fillArc(tftlcd, centerX, centerY, firstQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+    fillArc(tftlcd, centerX, centerY, secondQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+    fillArc(tftlcd, centerX, centerY, thirdQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+    fillArc(tftlcd, centerX, centerY, fourhtQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+    if (hollow)
+    {
+        fillArc(tftlcd, centerX, centerY, firstQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(tftlcd, centerX, centerY, secondQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(tftlcd, centerX, centerY, secondQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(tftlcd, centerX, centerY, thirdQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(tftlcd, centerX, centerY, fourhtQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(tftlcd, centerX, centerY, fourhtQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+    }
+}
+
 /**************************************************************************/
 /*!
     @brief  Quarter-circle drawer with fill, used for circles and roundrects

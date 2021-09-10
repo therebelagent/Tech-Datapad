@@ -108,60 +108,45 @@ private:
 
     void drawFixedScreenDetails(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     { //Round Frame.
-        int16_t innerRoundFrameHeight = 6;
-        int16_t innerRoundFrameRadius = radius - 5;
-        int16_t innerRoundFrameFillHeight = 3;
-        int16_t innerRoundFrameFillRadius = radius - 6;
-        DDSGraphicalUtility ddsGraphicalUtility;
-        ddsGraphicalUtility.drawInnerCircle(tftlcd, centerX, centerY, innerRoundFrameRadius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 332, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 333, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 62, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 63, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 93, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 152, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 153, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 242, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 243, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.fillArc(tftlcd, centerX, centerY, 273, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, 0, centerY, width, 8, DISPLAY_BACK_COLOR);
+        _ddsGraphicalUtility.drawRoundFrame(tftlcd, centerX, centerY, radius, 0, true);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, 0, centerY, width, 8, DISPLAY_BACK_COLOR);
         //Blue Bottom Details.
         int16_t blueDetailWidth = width * 0.41;
         int16_t blueDetailLeft = centerX - blueDetailWidth / 2;
         int16_t blueDetailTop = (centerY + radius) - (radius * 2) * 0.16;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueDetailLeft, blueDetailTop, blueDetailWidth, 2, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX, blueDetailTop, 5, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 8, blueDetailTop, 8, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 34, blueDetailTop, 30, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 44, blueDetailTop, 10, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 56, blueDetailTop, 7, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 8, blueDetailTop, 4, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 16, blueDetailTop, 26, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 27, blueDetailTop, 22, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 34, blueDetailTop, 30, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 44, blueDetailTop, 10, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 50, blueDetailTop, 4, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueDetailLeft, blueDetailTop, blueDetailWidth, 2, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX, blueDetailTop, 5, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 8, blueDetailTop, 8, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 34, blueDetailTop, 30, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 44, blueDetailTop, 10, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + 56, blueDetailTop, 7, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 8, blueDetailTop, 4, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 16, blueDetailTop, 26, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 27, blueDetailTop, 22, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 34, blueDetailTop, 30, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 44, blueDetailTop, 10, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 50, blueDetailTop, 4, 3, DISPLAY_RING_COLOR);
         //White Box.
         _whiteBoxWidth = width * 0.57;
         int16_t whiteBoxLeft = centerX - _whiteBoxWidth / 2;
         _whiteBoxHeight = width * 0.075;
         _whiteBoxTop = blueDetailTop - _whiteBoxHeight - 5;
-        ddsGraphicalUtility.drawRectangle(tftlcd, whiteBoxLeft, _whiteBoxTop, _whiteBoxWidth, _whiteBoxHeight, 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawRectangle(tftlcd, whiteBoxLeft, _whiteBoxTop, _whiteBoxWidth, _whiteBoxHeight, 2, TFT_WHITE);
         //Blue Right Details.
         int16_t blueBaseLineWidth = width * 0.69;
         int16_t blueBaseLineLeft = centerX - blueBaseLineWidth / 2;
         int16_t blueBaseLinetop = _whiteBoxTop - _whiteBoxHeight / 2;
         int16_t blueBaseLineHorizontalOffset = 5;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueBaseLineLeft, blueBaseLinetop, blueBaseLineWidth, 2, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueBaseLineLeft, blueBaseLinetop, blueBaseLineWidth, 2, DISPLAY_RING_COLOR);
         int16_t blueVerticalLineLeft = blueBaseLineLeft + blueBaseLineWidth - width * 0.27 - blueBaseLineHorizontalOffset;
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.52) * -1, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft + (width * 0.08), blueBaseLinetop - (width * 0.26), (width * 0.09), 4, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - (width * 0.45), (width * 0.21), 2, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - (width * 0.52), blueVerticalLineLeft + (width * 0.036), blueBaseLinetop - (width * 0.52) - 12, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.52) * -1, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft + (width * 0.08), blueBaseLinetop - (width * 0.26), (width * 0.09), 4, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - (width * 0.45), (width * 0.21), 2, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - (width * 0.52), blueVerticalLineLeft + (width * 0.036), blueBaseLinetop - (width * 0.52) - 12, 3, DISPLAY_RING_COLOR);
         blueVerticalLineLeft = blueVerticalLineLeft + (width * 0.04);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.61) * -1, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.61) * -1, 3, DISPLAY_RING_COLOR);
         blueVerticalLineLeft = blueBaseLineLeft + blueBaseLineWidth - blueBaseLineHorizontalOffset;
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.39) * -1, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop, (width * 0.39) * -1, 3, DISPLAY_RING_COLOR);
         //Small Inner Grid.
         int16_t smallGridHeight = (width * 0.14);
         int16_t smallGridLineHeight = (smallGridHeight / 5) + 1;
@@ -175,48 +160,48 @@ private:
         {
             tftlcd.drawFastVLine(blueVerticalLineLeft + smallGridLineWidth * counter, blueBaseLinetop, smallGridHeight * -1, DISPLAY_RING_COLOR);
         }
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - smallGridHeight, smallGridWidth, 2, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawLine(tftlcd, blueVerticalLineLeft - 1, blueBaseLinetop - (width * 0.39), blueVerticalLineLeft - (width * 0.06), blueBaseLinetop - (width * 0.45), 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft - (width * 0.044), blueBaseLinetop - smallGridLineHeight * 2, (width * 0.26) * -1, 3, DISPLAY_RING_COLOR);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft - (width * 0.07), blueBaseLinetop - smallGridLineHeight * 4, (width * 0.056) * -1, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, blueVerticalLineLeft, blueBaseLinetop - smallGridHeight, smallGridWidth, 2, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawLine(tftlcd, blueVerticalLineLeft - 1, blueBaseLinetop - (width * 0.39), blueVerticalLineLeft - (width * 0.06), blueBaseLinetop - (width * 0.45), 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft - (width * 0.044), blueBaseLinetop - smallGridLineHeight * 2, (width * 0.26) * -1, 3, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, blueVerticalLineLeft - (width * 0.07), blueBaseLinetop - smallGridLineHeight * 4, (width * 0.056) * -1, 3, DISPLAY_RING_COLOR);
         //Small White Details.
         int16_t whiteHorizontalLineLeft = centerX + (width * 0.11);
         int16_t whiteHorizontalLineTop = blueBaseLinetop - (smallGridLineHeight / 2) - 2;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.21), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.21), 2, TFT_WHITE);
         int16_t whiteVerticalLineWidth = width * 0.02;
         whiteHorizontalLineLeft = whiteHorizontalLineLeft + 7;
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.076) * -1, whiteVerticalLineWidth, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.076) * -1, whiteVerticalLineWidth, TFT_WHITE);
         whiteHorizontalLineLeft = whiteHorizontalLineLeft + (width * 0.04);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.044) * -1, whiteVerticalLineWidth, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.044) * -1, whiteVerticalLineWidth, TFT_WHITE);
         whiteHorizontalLineLeft = whiteHorizontalLineLeft + (width * 0.04);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.023) * -1, whiteVerticalLineWidth, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteHorizontalLineLeft, whiteHorizontalLineTop, (width * 0.023) * -1, whiteVerticalLineWidth, TFT_WHITE);
         //Vertical White Box Details.
         whiteHorizontalLineLeft = centerX + (width * 0.13);
         int16_t whiteBoxHeightTop = whiteHorizontalLineTop - (width * 0.40);
-        ddsGraphicalUtility.drawRectangle(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.039), (width * 0.25), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawRectangle(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.039), (width * 0.25), 2, TFT_WHITE);
         whiteHorizontalLineLeft = whiteHorizontalLineLeft + (width * 0.039);
         whiteBoxHeightTop = whiteBoxHeightTop + 5;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.033), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.033), 2, TFT_WHITE);
         whiteBoxHeightTop = whiteBoxHeightTop + 6;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.095), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.095), 2, TFT_WHITE);
         whiteBoxHeightTop = whiteBoxHeightTop + 8;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.033), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.033), 2, TFT_WHITE);
         whiteBoxHeightTop = whiteBoxHeightTop + 9;
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.013), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.013), 2, TFT_WHITE);
         //Vertical White Line.
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + (width * 0.35), whiteHorizontalLineTop, (width * 0.35) * -1, 3, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX + (width * 0.35), whiteHorizontalLineTop, (width * 0.35) * -1, 3, TFT_WHITE);
         //White U Details.
         int16_t whiteULeft = centerX + (width * 0.01);
         _whiteUTop = blueBaseLinetop - (width * 0.026);
         int16_t whiteUWidth = (width * 0.32);
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteULeft, _whiteUTop, (width * 0.23) * -1, 3, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteULeft, _whiteUTop, (width * 0.23) * -1, 3, TFT_WHITE);
         _whiteULeft = whiteULeft - whiteUWidth + 3;
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, _whiteULeft, _whiteUTop, (width * 0.23) * -1, 3, TFT_WHITE);
-        ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteULeft - whiteUWidth + 2, _whiteUTop, whiteUWidth, 3, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, _whiteULeft, _whiteUTop, (width * 0.23) * -1, 3, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteULeft - whiteUWidth + 2, _whiteUTop, whiteUWidth, 3, TFT_WHITE);
         whiteULeft = blueBaseLineLeft + 4;
         int16_t whiteUHeight = blueBaseLinetop - (width * 0.14) - 1;
-        ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteULeft, blueBaseLinetop - 1, (width * 0.14) * -1, 4, TFT_WHITE);
-        ddsGraphicalUtility.drawLine(tftlcd, whiteULeft - 1, whiteUHeight, whiteULeft + (width * 0.03), whiteUHeight - (width * 0.046), 3, TFT_WHITE);
+        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, whiteULeft, blueBaseLinetop - 1, (width * 0.14) * -1, 4, TFT_WHITE);
+        _ddsGraphicalUtility.drawLine(tftlcd, whiteULeft - 1, whiteUHeight, whiteULeft + (width * 0.03), whiteUHeight - (width * 0.046), 3, TFT_WHITE);
         //Dots.
         _dotX = centerX + (width * 0.13) + (width * 0.039) / 2;
         _redDotY = whiteHorizontalLineTop - (width * 0.49);

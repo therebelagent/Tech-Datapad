@@ -11,8 +11,8 @@ AllLitUpDBC::AllLitUpDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint
 
 void AllLitUpDBC::turnOnOffButtons()
 {
-    getSmallWhiteDatapadLED()->turnOn();
-    getRedDatapadLED()->turnOn();
-    getWhiteDatapadLED()->turnOn();
-    getYellowDatapadLED()->turnOn();
+    getSmallWhiteDatapadLED().turnOn();
+    getRedDatapadLED().turnOn();
+    getWhiteDatapadLED().turnOn();
+    getYellowDatapadLED().turnOn();
 }
