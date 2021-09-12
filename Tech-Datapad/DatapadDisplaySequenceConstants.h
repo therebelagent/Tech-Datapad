@@ -53,24 +53,131 @@
 //Forging Chain Codes DDS
 #define FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR 0xE6C8
 #define FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS 36
-#define FORGING_CHAIN_CODES_FIRST_PARAGRAPH_VALUES                                                                                                                                                                                                                                                                                                                                                                                                                                    \
-    {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 \
-        "This is where I wanna be", "You got me for a bargain", "This is where I wanna be", "1", "2", "it s the best option you ve got", "You make money, I make money", "Hey kid You ready for this", "That's the only way I know", "Allow me to decide for you", "You're a generation one", "", "Ok", "and I watch your back", "With the heat on you", "", "We move fast", "  Stay out of trouble", "  I'm angry at myself", "Ok", "Ok", "You're not a droid", "Omega, this is Rex" \
-    }
-#define FORGING_CHAIN_CODES_SECOND_PARAGRAPH_VALUES                                                                                                                                                                                                                                                                                                               \
-    {                                                                                                                                                                                                                                                                                                                                                             \
-        "Well, Take care trooper", "", "1", "Ok", "  Only if I can go with them", "  Here", "  I'm angry at myself", "Ok", "Ok", "", "", "", "", "", "", "", "You shouldn't be angry at him", "  Huh. Maybe you are different", "  Why are you giving it to us", "  you know how to reach us", "  I just told you you're in", "  If you're ever in a bind", "  2" \
-    }
-#define FORGING_CHAIN_CODES_THIRD_PARAGRAPH_VALUES                                                                                                                                                                                                                                                                                                                                                \
-    {                                                                                                                                                                                                                                                                                                                                                                                             \
-        "If this is where you want to be", "then this is where you'll stay", "In the end we all choose sides", "Yeah I guess I've been around", "I stunned him when he jumped", "From the lines on your face", "1", "2", "3", "We don't leave our own behind", "Let's blow something up Yeah", "You shouldn't be angry at him", "We don't leave our own behind", "Take it from me", "", "4", "Ok" \
-    }
-#define FORGING_CHAIN_CODES_FOURTH_PARAGRAPH_VALUES                                                                                                                                                                                                                                                                                                    \
-    {                                                                                                                                                                                                                                                                                                                                                  \
-        "Tech, you think you could forge", "some chain codes?", "I only learned of them moments", "ago but yes", "", "", "I left Kamino with you", "I know you re in", "I guess we're in", "", "", "This one we like", "Where's the Jedi?", "He can't help it", "He didn't make it", "", "", "In progress", "The encryption shouldn't be", "a problem" \
-    }
+#define FORGING_CHAIN_CODES_SENTENCE_BUFFER_SIZE 32
 
-#define FORGING_CHAIN_CODES_FIFTH_PARAGRAPH_VALUES                                                                                                                                                                                                                                                                                                                                                                                                                                          \
-    {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       \
-        "Everybody's talking about it", "What kind of evaluation?", "Hopefully not mental", "Clearly we'd never pass that", "", "", "Things are back to normal", "That's not going near my rack", "That's not her ugly side?", "What was that, goggles?", "", "", "", "Tech? What was the war like?", "Whoa! So many proton torpedoes", "Come here, beautiful", "But, what was it like?", "Hmm? I just told you", "", "", "It'd be weirder if you had", "Sorry, kid. This one’s all mine" \
-    }
+//Forging Chain Codes Paragraph 1.
+const char FCC_PARAGRAPH1_SENTENCE1[] PROGMEM = "This is where I wanna be";
+const char FCC_PARAGRAPH1_SENTENCE2[] PROGMEM = "You got me for a bargain";
+const char FCC_PARAGRAPH1_SENTENCE3[] PROGMEM = "This is where I wanna be";
+const char FCC_PARAGRAPH1_SENTENCE4[] PROGMEM = "1";
+const char FCC_PARAGRAPH1_SENTENCE5[] PROGMEM = "2";
+const char FCC_PARAGRAPH1_SENTENCE6[] PROGMEM = "it s the best option you ve got";
+const char FCC_PARAGRAPH1_SENTENCE7[] PROGMEM = "You make money, I make money";
+const char FCC_PARAGRAPH1_SENTENCE8[] PROGMEM = "Hey kid You ready for this";
+const char FCC_PARAGRAPH1_SENTENCE9[] PROGMEM = "That's the only way I know";
+const char FCC_PARAGRAPH1_SENTENCE10[] PROGMEM = "Allow me to decide for you";
+const char FCC_PARAGRAPH1_SENTENCE11[] PROGMEM = "You're a generation one";
+const char FCC_PARAGRAPH1_SENTENCE12[] PROGMEM = "";
+const char FCC_PARAGRAPH1_SENTENCE13[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH1_SENTENCE14[] PROGMEM = "and I watch your back";
+const char FCC_PARAGRAPH1_SENTENCE15[] PROGMEM = "With the heat on you";
+const char FCC_PARAGRAPH1_SENTENCE16[] PROGMEM = "";
+const char FCC_PARAGRAPH1_SENTENCE17[] PROGMEM = "We move fast";
+const char FCC_PARAGRAPH1_SENTENCE18[] PROGMEM = "  Stay out of trouble";
+const char FCC_PARAGRAPH1_SENTENCE19[] PROGMEM = "  I'm angry at myself";
+const char FCC_PARAGRAPH1_SENTENCE20[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH1_SENTENCE21[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH1_SENTENCE22[] PROGMEM = "You're not a droid";
+const char FCC_PARAGRAPH1_SENTENCE23[] PROGMEM = "Omega, this is Rex";
+
+const char *const forgingChainCodesParagraph1[] PROGMEM = {FCC_PARAGRAPH1_SENTENCE1, FCC_PARAGRAPH1_SENTENCE2, FCC_PARAGRAPH1_SENTENCE3, FCC_PARAGRAPH1_SENTENCE4, FCC_PARAGRAPH1_SENTENCE5, FCC_PARAGRAPH1_SENTENCE6, FCC_PARAGRAPH1_SENTENCE7, FCC_PARAGRAPH1_SENTENCE8, FCC_PARAGRAPH1_SENTENCE9, FCC_PARAGRAPH1_SENTENCE10, FCC_PARAGRAPH1_SENTENCE11, FCC_PARAGRAPH1_SENTENCE12, FCC_PARAGRAPH1_SENTENCE13, FCC_PARAGRAPH1_SENTENCE14, FCC_PARAGRAPH1_SENTENCE15, FCC_PARAGRAPH1_SENTENCE16, FCC_PARAGRAPH1_SENTENCE17, FCC_PARAGRAPH1_SENTENCE18, FCC_PARAGRAPH1_SENTENCE19, FCC_PARAGRAPH1_SENTENCE20, FCC_PARAGRAPH1_SENTENCE21, FCC_PARAGRAPH1_SENTENCE22, FCC_PARAGRAPH1_SENTENCE23};
+
+//Forging Chain Codes Paragraph 2.
+const char FCC_PARAGRAPH2_SENTENCE1[] PROGMEM = "Well, Take care trooper";
+const char FCC_PARAGRAPH2_SENTENCE2[] PROGMEM = "You got me for a bargain";
+const char FCC_PARAGRAPH2_SENTENCE3[] PROGMEM = "This is where I wanna be";
+const char FCC_PARAGRAPH2_SENTENCE4[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE5[] PROGMEM = "1";
+const char FCC_PARAGRAPH2_SENTENCE6[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH2_SENTENCE7[] PROGMEM = "  Only if I can go with them";
+const char FCC_PARAGRAPH2_SENTENCE8[] PROGMEM = "  Here";
+const char FCC_PARAGRAPH2_SENTENCE9[] PROGMEM = "  I'm angry at myself";
+const char FCC_PARAGRAPH2_SENTENCE10[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH2_SENTENCE11[] PROGMEM = "Ok";
+const char FCC_PARAGRAPH2_SENTENCE12[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE13[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE14[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE15[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE16[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE17[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE18[] PROGMEM = "";
+const char FCC_PARAGRAPH2_SENTENCE19[] PROGMEM = "You shouldn't be angry at him";
+const char FCC_PARAGRAPH2_SENTENCE20[] PROGMEM = "  Huh. Maybe you are different";
+const char FCC_PARAGRAPH2_SENTENCE21[] PROGMEM = "  Why are you giving it to us";
+const char FCC_PARAGRAPH2_SENTENCE22[] PROGMEM = "  you know how to reach us";
+const char FCC_PARAGRAPH2_SENTENCE23[] PROGMEM = "  I just told you you're in";
+const char FCC_PARAGRAPH2_SENTENCE24[] PROGMEM = "  If you're ever in a bind";
+const char FCC_PARAGRAPH2_SENTENCE25[] PROGMEM = "  2";
+
+const char *const forgingChainCodesParagraph2[] PROGMEM = {FCC_PARAGRAPH2_SENTENCE1, FCC_PARAGRAPH2_SENTENCE2, FCC_PARAGRAPH2_SENTENCE3, FCC_PARAGRAPH2_SENTENCE4, FCC_PARAGRAPH2_SENTENCE5, FCC_PARAGRAPH2_SENTENCE6, FCC_PARAGRAPH2_SENTENCE7, FCC_PARAGRAPH2_SENTENCE8, FCC_PARAGRAPH2_SENTENCE9, FCC_PARAGRAPH2_SENTENCE10, FCC_PARAGRAPH2_SENTENCE11, FCC_PARAGRAPH2_SENTENCE12, FCC_PARAGRAPH2_SENTENCE13, FCC_PARAGRAPH2_SENTENCE14, FCC_PARAGRAPH2_SENTENCE15, FCC_PARAGRAPH2_SENTENCE16, FCC_PARAGRAPH2_SENTENCE17, FCC_PARAGRAPH2_SENTENCE18, FCC_PARAGRAPH2_SENTENCE19, FCC_PARAGRAPH2_SENTENCE20, FCC_PARAGRAPH2_SENTENCE21, FCC_PARAGRAPH2_SENTENCE22, FCC_PARAGRAPH2_SENTENCE23, FCC_PARAGRAPH2_SENTENCE24, FCC_PARAGRAPH2_SENTENCE25};
+
+//Forging Chain Codes Paragraph 3.
+const char FCC_PARAGRAPH3_SENTENCE1[] PROGMEM = "If this is where you want to be";
+const char FCC_PARAGRAPH3_SENTENCE2[] PROGMEM = "then this is where you'll stay";
+const char FCC_PARAGRAPH3_SENTENCE3[] PROGMEM = "In the end we all choose sides";
+const char FCC_PARAGRAPH3_SENTENCE4[] PROGMEM = "Yeah I guess I've been around";
+const char FCC_PARAGRAPH3_SENTENCE5[] PROGMEM = "I stunned him when he jumped";
+const char FCC_PARAGRAPH3_SENTENCE6[] PROGMEM = "From the lines on your face";
+const char FCC_PARAGRAPH3_SENTENCE7[] PROGMEM = "1";
+const char FCC_PARAGRAPH3_SENTENCE8[] PROGMEM = "2";
+const char FCC_PARAGRAPH3_SENTENCE9[] PROGMEM = "3";
+const char FCC_PARAGRAPH3_SENTENCE10[] PROGMEM = "We don't leave our own behind";
+const char FCC_PARAGRAPH3_SENTENCE11[] PROGMEM = "Let's blow something up Yeah";
+const char FCC_PARAGRAPH3_SENTENCE12[] PROGMEM = "You shouldn't be angry at him";
+const char FCC_PARAGRAPH3_SENTENCE13[] PROGMEM = "We don't leave our own behind";
+const char FCC_PARAGRAPH3_SENTENCE14[] PROGMEM = "Take it from me";
+const char FCC_PARAGRAPH3_SENTENCE15[] PROGMEM = "";
+const char FCC_PARAGRAPH3_SENTENCE16[] PROGMEM = "4";
+const char FCC_PARAGRAPH3_SENTENCE17[] PROGMEM = "Ok";
+
+const char *const forgingChainCodesParagraph3[] PROGMEM = {FCC_PARAGRAPH3_SENTENCE1, FCC_PARAGRAPH3_SENTENCE2, FCC_PARAGRAPH3_SENTENCE3, FCC_PARAGRAPH3_SENTENCE4, FCC_PARAGRAPH3_SENTENCE5, FCC_PARAGRAPH3_SENTENCE6, FCC_PARAGRAPH3_SENTENCE7, FCC_PARAGRAPH3_SENTENCE8, FCC_PARAGRAPH3_SENTENCE9, FCC_PARAGRAPH3_SENTENCE10, FCC_PARAGRAPH3_SENTENCE11, FCC_PARAGRAPH3_SENTENCE12, FCC_PARAGRAPH3_SENTENCE13, FCC_PARAGRAPH3_SENTENCE14, FCC_PARAGRAPH3_SENTENCE15, FCC_PARAGRAPH3_SENTENCE16, FCC_PARAGRAPH3_SENTENCE17};
+
+//Forging Chain Codes Paragraph 4.
+const char FCC_PARAGRAPH4_SENTENCE1[] PROGMEM = "Tech, you think you could forge";
+const char FCC_PARAGRAPH4_SENTENCE2[] PROGMEM = "some chain codes?";
+const char FCC_PARAGRAPH4_SENTENCE3[] PROGMEM = "I only learned of them moments";
+const char FCC_PARAGRAPH4_SENTENCE4[] PROGMEM = "ago but yes";
+const char FCC_PARAGRAPH4_SENTENCE5[] PROGMEM = "";
+const char FCC_PARAGRAPH4_SENTENCE6[] PROGMEM = "";
+const char FCC_PARAGRAPH4_SENTENCE7[] PROGMEM = "I left Kamino with you";
+const char FCC_PARAGRAPH4_SENTENCE8[] PROGMEM = "I know you re in";
+const char FCC_PARAGRAPH4_SENTENCE9[] PROGMEM = "I guess we're in";
+const char FCC_PARAGRAPH4_SENTENCE10[] PROGMEM = "This one we like";
+const char FCC_PARAGRAPH4_SENTENCE11[] PROGMEM = "Where's the Jedi?";
+const char FCC_PARAGRAPH4_SENTENCE12[] PROGMEM = "He can't help it";
+const char FCC_PARAGRAPH4_SENTENCE13[] PROGMEM = "He didn't make it";
+const char FCC_PARAGRAPH4_SENTENCE14[] PROGMEM = "";
+const char FCC_PARAGRAPH4_SENTENCE15[] PROGMEM = "";
+const char FCC_PARAGRAPH4_SENTENCE16[] PROGMEM = "";
+const char FCC_PARAGRAPH4_SENTENCE17[] PROGMEM = "In progress";
+const char FCC_PARAGRAPH4_SENTENCE18[] PROGMEM = "The encryption shouldn't be";
+const char FCC_PARAGRAPH4_SENTENCE19[] PROGMEM = "a problem";
+const char FCC_PARAGRAPH4_SENTENCE20[] PROGMEM = "Ok";
+
+const char *const forgingChainCodesParagraph4[] PROGMEM = {FCC_PARAGRAPH4_SENTENCE1, FCC_PARAGRAPH4_SENTENCE2, FCC_PARAGRAPH4_SENTENCE3, FCC_PARAGRAPH4_SENTENCE4, FCC_PARAGRAPH4_SENTENCE5, FCC_PARAGRAPH4_SENTENCE6, FCC_PARAGRAPH4_SENTENCE7, FCC_PARAGRAPH4_SENTENCE8, FCC_PARAGRAPH4_SENTENCE9, FCC_PARAGRAPH4_SENTENCE10, FCC_PARAGRAPH4_SENTENCE11, FCC_PARAGRAPH4_SENTENCE12, FCC_PARAGRAPH4_SENTENCE13, FCC_PARAGRAPH4_SENTENCE14, FCC_PARAGRAPH4_SENTENCE15, FCC_PARAGRAPH4_SENTENCE16, FCC_PARAGRAPH4_SENTENCE17, FCC_PARAGRAPH4_SENTENCE18, FCC_PARAGRAPH4_SENTENCE19, FCC_PARAGRAPH4_SENTENCE20};
+
+//Forging Chain Codes Paragraph 5.
+const char FCC_PARAGRAPH5_SENTENCE1[] PROGMEM = "Everybody's talking about it";
+const char FCC_PARAGRAPH5_SENTENCE2[] PROGMEM = "What kind of evaluation?";
+const char FCC_PARAGRAPH5_SENTENCE3[] PROGMEM = "Hopefully not mental";
+const char FCC_PARAGRAPH5_SENTENCE4[] PROGMEM = "Clearly we'd never pass that";
+const char FCC_PARAGRAPH5_SENTENCE5[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE6[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE7[] PROGMEM = "Things are back to normal";
+const char FCC_PARAGRAPH5_SENTENCE8[] PROGMEM = "That's not going near my rack";
+const char FCC_PARAGRAPH5_SENTENCE9[] PROGMEM = "That's not her ugly side?";
+const char FCC_PARAGRAPH5_SENTENCE10[] PROGMEM = "What was that, goggles?";
+const char FCC_PARAGRAPH5_SENTENCE11[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE12[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE13[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE14[] PROGMEM = "Tech? What was the war like?";
+const char FCC_PARAGRAPH5_SENTENCE15[] PROGMEM = "Whoa! So many proton torpedoes";
+const char FCC_PARAGRAPH5_SENTENCE16[] PROGMEM = "Come here, beautiful";
+const char FCC_PARAGRAPH5_SENTENCE17[] PROGMEM = "But, what was it like?";
+const char FCC_PARAGRAPH5_SENTENCE18[] PROGMEM = "Hmm? I just told you";
+const char FCC_PARAGRAPH5_SENTENCE19[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE20[] PROGMEM = "";
+const char FCC_PARAGRAPH5_SENTENCE21[] PROGMEM = "It'd be weirder if you had";
+const char FCC_PARAGRAPH5_SENTENCE22[] PROGMEM = "Sorry, kid. This one’s all mine";
+
+const char *const forgingChainCodesParagraph5[] PROGMEM = {FCC_PARAGRAPH5_SENTENCE1, FCC_PARAGRAPH5_SENTENCE2, FCC_PARAGRAPH5_SENTENCE3, FCC_PARAGRAPH5_SENTENCE4, FCC_PARAGRAPH5_SENTENCE5, FCC_PARAGRAPH5_SENTENCE6, FCC_PARAGRAPH5_SENTENCE7, FCC_PARAGRAPH5_SENTENCE8, FCC_PARAGRAPH5_SENTENCE9, FCC_PARAGRAPH5_SENTENCE10, FCC_PARAGRAPH5_SENTENCE11, FCC_PARAGRAPH5_SENTENCE12, FCC_PARAGRAPH5_SENTENCE13, FCC_PARAGRAPH5_SENTENCE14, FCC_PARAGRAPH5_SENTENCE15, FCC_PARAGRAPH5_SENTENCE16, FCC_PARAGRAPH5_SENTENCE17, FCC_PARAGRAPH5_SENTENCE18, FCC_PARAGRAPH5_SENTENCE19, FCC_PARAGRAPH5_SENTENCE20, FCC_PARAGRAPH5_SENTENCE21, FCC_PARAGRAPH5_SENTENCE22};

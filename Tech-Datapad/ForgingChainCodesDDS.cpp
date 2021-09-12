@@ -13,41 +13,33 @@
 class TextPrinter
 {
 public:
-    TextPrinter(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour, const char *paragraph[], byte paragraphLength) : _tftlcd(tftlcd), _x(x), _y(y), _width(width), _height(height), _lineHeight(lineHeight), _lineVerticalGap(lineVerticalGap), _backColor(backColour)
-    {
-        if (paragraphLength > FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS)
-            paragraphLength = FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS;
-        _paragraphLength = paragraphLength;
-        for (int16_t counter = 0; counter < _paragraphLength; counter++)
-        {
-            _paragraph[counter] = paragraph[counter];
-            _paragraphPreviousTop[counter] = 0;
-        }
-    }
+    TextPrinter(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour) : _tftlcd(tftlcd), _x(x), _y(y), _width(width), _height(height), _lineHeight(lineHeight), _lineVerticalGap(lineVerticalGap), _backColor(backColour) {}
 
-    void print()
+    void print(const char *const paragraph[], byte paragraphSize)
     {
-        uint16_t lineWidth, lineHeight;
         int16_t lineTop = _y;
         int16_t x1, y1;
         reset();
-        for (int16_t line = 0; line <= _paragraphLength; line++)
+        paragraphSize = getParagraphSize(paragraphSize);
+        for (int16_t line = 0; line < paragraphSize; line++)
         {
-            print(_x, lineTop, _paragraph[line]);
+            strcpy_P(_buffer, (char *)pgm_read_word(&(paragraph[line])));
+            print(_x, lineTop, _buffer);
             lineTop += _lineHeight + _lineVerticalGap;
         }
     }
 
-    void scroll(int16_t steps = 1)
+    void scroll(const char *const paragraph[], byte paragraphSize, int16_t steps = 1)
     {
+        bool paragraphScrolled = false;
         int16_t currentLineTop = _y;
         int16_t previousTop;
-        bool paragraphScrolled = false;
         reset();
+        paragraphSize = getParagraphSize(paragraphSize);
         for (int16_t lineCounter = 1; lineCounter <= _height; lineCounter += steps)
         {
             int16_t lineTop = currentLineTop;
-            for (int16_t line = 0; line <= _paragraphLength; line++)
+            for (int16_t line = 0; line < paragraphSize; line++)
             {
                 previousTop = _paragraphPreviousTop[line];
                 if (previousTop > 0)
@@ -55,7 +47,7 @@ public:
                     _tftlcd.fillRect(_x, previousTop - _lineHeight, _width, _lineHeight + _lineVerticalGap, _backColor);
                 }
             }
-            for (int16_t line = 0; line <= _paragraphLength; line++)
+            for (int16_t line = 0; line < paragraphSize; line++)
             {
                 if (lineTop + _lineHeight + _lineVerticalGap > _y + _height)
                 {
@@ -64,7 +56,8 @@ public:
                         paragraphScrolled = true;
                     break;
                 }
-                print(_x, lineTop, _paragraph[line]);
+                strcpy_P(_buffer, (char *)pgm_read_word(&(paragraph[line])));
+                print(_x, lineTop, _buffer);
                 _paragraphPreviousTop[line] = lineTop;
                 lineTop += _lineHeight + _lineVerticalGap;
             }
@@ -78,21 +71,11 @@ public:
         _tftlcd.fillRect(_x, _y + _height - _lineHeight * 2, _width, -_lineHeight, _backColor);
     }
 
-    void clear()
-    {
-        for (int16_t line = 0; line <= _paragraphLength; line++)
-        {
-            _paragraph[line] = (char)0;
-            _paragraphPreviousTop[line] = 0;
-        }
-    }
-
 private:
     MCUFRIEND_kbv &_tftlcd;
-    int16_t _x, _y, _width, _height, _lineHeight, _lineVerticalGap, _backColor;
-    const char *_paragraph[FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS];
+    const int16_t _x, _y, _width, _height, _lineHeight, _lineVerticalGap, _backColor;
     int16_t _paragraphPreviousTop[FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS];
-    byte _paragraphLength;
+    char _buffer[FORGING_CHAIN_CODES_SENTENCE_BUFFER_SIZE];
 
     void print(int16_t x, int16_t y, const char *text)
     {
@@ -100,7 +83,22 @@ private:
         _tftlcd.print(text);
     }
 
-    void reset() { _tftlcd.fillRect(_x, _y - 3, _width, _height, _backColor); }
+    byte getParagraphSize(byte currentParagraphSize)
+    {
+        byte paragraphSize = currentParagraphSize;
+        if (currentParagraphSize > FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS)
+            paragraphSize = FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS;
+        return paragraphSize;
+    }
+
+    void reset()
+    {
+        for (int16_t line = 0; line < FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS; line++)
+        {
+            _paragraphPreviousTop[line] = 0;
+        }
+        _tftlcd.fillRect(_x, _y - 3, _width, _height, _backColor);
+    }
 };
 
 class ForgingChainCodesDDSHelper
@@ -123,26 +121,12 @@ public:
         int16_t lineVerticalGap = 2;
         int16_t lineHeight = 4;
         int16_t steps = 50;
-        const char *paragrahp1[] = FORGING_CHAIN_CODES_FIRST_PARAGRAPH_VALUES;
-        TextPrinter textPrinter1 = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR, paragrahp1, sizeof(paragrahp1) / sizeof(paragrahp1[0]));
-        textPrinter1.scroll(steps);
-        textPrinter1.clear();
-        const char *paragrahp2[] = FORGING_CHAIN_CODES_SECOND_PARAGRAPH_VALUES;
-        TextPrinter textPrinter2 = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR, paragrahp2, sizeof(paragrahp2) / sizeof(paragrahp2[0]));
-        textPrinter2.scroll(steps);
-        textPrinter2.clear();
-        const char *paragrahp3[] = FORGING_CHAIN_CODES_THIRD_PARAGRAPH_VALUES;
-        TextPrinter textPrinter3 = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR, paragrahp3, sizeof(paragrahp3) / sizeof(paragrahp3[0]));
-        textPrinter3.scroll(steps);
-        textPrinter3.clear();
-        const char *paragrahp4[] = FORGING_CHAIN_CODES_FOURTH_PARAGRAPH_VALUES;
-        TextPrinter textPrinter4 = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR, paragrahp4, sizeof(paragrahp4) / sizeof(paragrahp4[0]));
-        textPrinter4.scroll(steps);
-        textPrinter4.clear();
-        const char *paragrahp5[] = FORGING_CHAIN_CODES_FIFTH_PARAGRAPH_VALUES;
-        TextPrinter textPrinter5 = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR, paragrahp5, sizeof(paragrahp5) / sizeof(paragrahp5[0]));
-        textPrinter5.scroll(steps);
-        textPrinter5.clear();
+        TextPrinter textPrinter = TextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR);
+        textPrinter.scroll(forgingChainCodesParagraph1, sizeof(forgingChainCodesParagraph1) / sizeof(forgingChainCodesParagraph1[0]), steps);
+        textPrinter.scroll(forgingChainCodesParagraph2, sizeof(forgingChainCodesParagraph2) / sizeof(forgingChainCodesParagraph2[0]), steps);
+        textPrinter.scroll(forgingChainCodesParagraph3, sizeof(forgingChainCodesParagraph3) / sizeof(forgingChainCodesParagraph3[0]), steps);
+        textPrinter.scroll(forgingChainCodesParagraph4, sizeof(forgingChainCodesParagraph4) / sizeof(forgingChainCodesParagraph4[0]), steps);
+        textPrinter.scroll(forgingChainCodesParagraph5, sizeof(forgingChainCodesParagraph5) / sizeof(forgingChainCodesParagraph5[0]), steps);
     }
 
 private:
