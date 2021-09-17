@@ -229,3 +229,15 @@ void DDSGraphicalUtility::drawLine(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0
         tftlcd.drawLine(x0 + counter, y0, x1 + counter, y1, colour);
     }
 }
+
+void DDSGraphicalUtility::drawRoundedRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour)
+{
+    tftlcd.fillRoundRect(x, y, width, height, 5, colour);
+    tftlcd.drawRoundRect(x, y, width, height, 5, borderColour);
+}
+
+void DDSGraphicalUtility::fillRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour)
+{
+    tftlcd.fillRect(x, y, width, height, colour);
+    tftlcd.drawRect(x, y, width, height, borderColour);
+}

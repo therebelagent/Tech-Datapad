@@ -17,8 +17,8 @@ public:
     bool isTouching();
 
 private:
-    uint8_t _xm;
-    uint8_t _yp;
+    const uint8_t _xm;
+    const uint8_t _yp;
 };
 
 #endif

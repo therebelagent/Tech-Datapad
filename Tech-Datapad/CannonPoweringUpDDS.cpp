@@ -21,12 +21,12 @@ public:
         int16_t centerY = tftlcd.height() / 2;
         int16_t radius = centerX - 1;
         int16_t cannonX, cannonY;
-        drawFixedScreenDetails(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
-        drawDepletedCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        drawFixedScreenDetails(tftlcd, centerX, centerY, radius, cannonX, cannonY);
+        drawDepletedCannon(tftlcd, centerX, centerY, radius, cannonX, cannonY);
         delay(1500);
-        drawPoweredDownCannon(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        drawPoweredDownCannon(tftlcd, centerX, centerY, radius, cannonX, cannonY);
         delay(100);
-        drawPoweredUpCannonAnimation(tftlcd, centerX, centerY, radius, &cannonX, &cannonY);
+        drawPoweredUpCannonAnimation(tftlcd, centerX, centerY, radius, cannonX, cannonY);
     }
 
 private:
@@ -42,27 +42,27 @@ private:
 
     int16_t getBannerTop(int16_t y) { return y - 80; }
 
-    void drawDepletedCannon(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    void drawDepletedCannon(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t diameter = radius * 2;
         drawTopBanner(tftlcd, DEPLETED_CANNON_BANNER, &Aurebesh8pt7b, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
         drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
-        drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
+        drawCannon(tftlcd, cannonX, cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredDownCannon(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    void drawPoweredDownCannon(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         drawTopBanner(tftlcd, POWERED_CANNON_DOWN_BANNER, &Aurebesh8pt7b, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredUpCannonAnimation(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    void drawPoweredUpCannonAnimation(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t diameter = radius * 2;
         drawCannonPoweringProgressBar(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 40);
         drawSmallInnerCircle(tftlcd, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawTopBanner(tftlcd, POWERED_UP_CANNON_BANNER, &Aurebesh9pt7b, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
-        drawCannon(tftlcd, *cannonX, *cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
+        drawCannon(tftlcd, cannonX, cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
     }
 
     void drawCannonPoweringProgressBar(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour, int16_t pause = 0)
@@ -80,14 +80,14 @@ private:
         } while (angle >= 19);
     }
 
-    void drawSmallInnerCircle(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour)
+    void drawSmallInnerCircle(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
     {
         int16_t smallCircleCenterY = getSmallCircleCenterY(centerY, radius);
         int16_t smallCircleRadius = radius * 0.04;
         tftlcd.fillCircle(centerX, smallCircleCenterY, smallCircleRadius, colour);
     }
 
-    void drawTopBanner(MCUFRIEND_kbv &tftlcd, String text, const GFXfont *gfxFont, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour)
+    void drawTopBanner(MCUFRIEND_kbv &tftlcd, String text, const GFXfont *gfxFont, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
     {
         int16_t diameter = radius * 2;
         int16_t bannerWidth = getBannerWidth(diameter) - 4;
@@ -98,7 +98,7 @@ private:
         _ddsGraphicalUtility.printCenteredText(tftlcd, text, gfxFont, centerX, y + (bannerHeight / 2), 0, 0, TFT_WHITE);
     }
 
-    void drawFixedScreenDetails(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t *cannonX, int16_t *cannonY)
+    void drawFixedScreenDetails(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t innerRadius = getInnerRadius(radius);
         int16_t innerCircleWidth = 9;
@@ -158,11 +158,11 @@ private:
         int16_t bannerWidth = getBannerWidth(diameter);
         _ddsGraphicalUtility.fillIteration(tftlcd, centerX - (bannerWidth / 2), getBannerTop(centerY), getBannerHeight(diameter), bannerWidth, TFT_WHITE);
 
-        *cannonX = lineLeft + (lineWidth / 2);
-        *cannonY = lineY - (diameter * 0.03);
+        cannonX = lineLeft + (lineWidth / 2);
+        cannonY = lineY - (diameter * 0.03);
     }
 
-    void drawCannon(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, unsigned int colour)
+    void drawCannon(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t colour)
     {
         int16_t shapeWidth = width * 0.19;
         int16_t shapeHeight = height * 0.1;

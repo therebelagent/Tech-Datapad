@@ -17,9 +17,12 @@ void DatapadSlideshowAction::play()
     switch (_currentDatapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        _currentDatapadActionType = DatapadActionType::ForgingChainCodes;
+        _currentDatapadActionType = DatapadActionType::CommSignalTracker;
         break;
     case DatapadActionType::StandBy:
+        _currentDatapadActionType = DatapadActionType::CommSignalTracker;
+        break;
+    case DatapadActionType::CommSignalTracker:
         _currentDatapadActionType = DatapadActionType::ForgingChainCodes;
         break;
     case DatapadActionType::ForgingChainCodes:

@@ -24,7 +24,9 @@ public:
     void drawRoundFrame(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow);
     void fillQuarterCircle(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour);
     void drawRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineWidth, uint16_t colour);
+    void fillRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour);
     void drawLine(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t lineWidth, uint16_t colour);
+    void drawRoundedRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour);
 };
 
 #endif

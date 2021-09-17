@@ -24,7 +24,7 @@ public:
         drawHeaderText(tftlcd, centerX, centerY, radius);
         drawInnerArcs(tftlcd, centerX, centerY, radius);
         drawInnerCircles(tftlcd, centerX, radius, topY);
-        drawSonarAnimation(tftlcd, centerX, centerY, radius, topY, &friendlyTargetTriangleBaseWidth, &friendlyTargetTriangleHeight);
+        drawSonarAnimation(tftlcd, centerX, centerY, radius, topY, friendlyTargetTriangleBaseWidth, friendlyTargetTriangleHeight);
         drawInnerCircles(tftlcd, centerX, radius, topY);
         drawTargetsAnimation(tftlcd, centerX, radius, topY, friendlyTargetTriangleBaseWidth, friendlyTargetTriangleHeight);
     }
@@ -32,15 +32,15 @@ public:
 private:
     DDSGraphicalUtility _ddsGraphicalUtility;
 
-    void drawSonarAnimation(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t topY, int16_t *friendlyTargetTriangleBaseWidth, int16_t *friendlyTargetTriangleHeight)
+    void drawSonarAnimation(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t topY, int16_t &friendlyTargetTriangleBaseWidth, int16_t &friendlyTargetTriangleHeight)
     {
         int16_t innerCircleRadius = radius * B_INNER_CIRCLE_RELATIVE_DIAMETER;
         int16_t gaugeY = topY - (radius * B_INNER_CIRCLE_RELATIVE_BOTTOM_DISTANCE) - innerCircleRadius;
         int16_t gaugeLenght = (2 * radius) * 0.65;
-        *friendlyTargetTriangleBaseWidth = (innerCircleRadius * 2) * 0.25;
-        *friendlyTargetTriangleHeight = (innerCircleRadius * 2) * 0.33;
+        friendlyTargetTriangleBaseWidth = (innerCircleRadius * 2) * 0.25;
+        friendlyTargetTriangleHeight = (innerCircleRadius * 2) * 0.33;
         int16_t friendlyTargetTriangleY = gaugeY - 5;
-        _ddsGraphicalUtility.fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, *friendlyTargetTriangleBaseWidth, *friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
+        _ddsGraphicalUtility.fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, friendlyTargetTriangleBaseWidth, friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
         int16_t angle = 95;
         int16_t degress = 190;
         int16_t angleJump = 2;
@@ -52,7 +52,7 @@ private:
             float y1 = gaugeLenght * cos(angle * M_PI / 180);
             tftlcd.drawLine(centerX, gaugeY, centerX + x1, gaugeY - y1, DISPLAY_RING_COLOR);
             tftlcd.drawLine(centerX, gaugeY, centerX + x1, gaugeY - y1, DISPLAY_BACK_COLOR);
-            _ddsGraphicalUtility.fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, *friendlyTargetTriangleBaseWidth, *friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
+            _ddsGraphicalUtility.fillTriangle(tftlcd, centerX, friendlyTargetTriangleY, friendlyTargetTriangleBaseWidth, friendlyTargetTriangleHeight, DISPLAY_RING_COLOR);
             angle = angle - angleJump;
             if (angle < 0)
             {

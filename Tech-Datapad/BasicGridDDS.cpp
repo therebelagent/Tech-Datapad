@@ -7,7 +7,6 @@
 
 #include "BasicGridDDS.h"
 #include "DDSGraphicalUtility.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv &tftlcd) : StandByDDS(tftlcd), _tftlcd(tftlcd) {}
 

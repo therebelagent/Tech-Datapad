@@ -55,8 +55,10 @@ private:
 
     void drawCrosshair(MCUFRIEND_kbv &tftlcd, int16_t crosshairLenght, int16_t centerX, int16_t centerY, int16_t crosshairColor, int16_t centerColor)
     {
-        tftlcd.drawLine(centerX - crosshairLenght, centerY - crosshairLenght, centerX + crosshairLenght, centerY + crosshairLenght, crosshairColor);
-        tftlcd.drawLine(centerX - crosshairLenght, centerY + crosshairLenght, centerX + crosshairLenght, centerY - crosshairLenght, crosshairColor);
+        _ddsGraphicalUtility.drawLine(tftlcd, centerX - crosshairLenght, centerY - crosshairLenght, centerX + crosshairLenght, centerY + crosshairLenght, 2, crosshairColor);
+        //tftlcd.drawLine(centerX - crosshairLenght, centerY - crosshairLenght, centerX + crosshairLenght, centerY + crosshairLenght, crosshairColor);
+        _ddsGraphicalUtility.drawLine(tftlcd, centerX - crosshairLenght, centerY + crosshairLenght, centerX + crosshairLenght, centerY - crosshairLenght, 2, crosshairColor);
+        //tftlcd.drawLine(centerX - crosshairLenght, centerY + crosshairLenght, centerX + crosshairLenght, centerY - crosshairLenght, crosshairColor);
         tftlcd.fillCircle(centerX, centerY, crosshairLenght - BULLSEYE_OFFSET, centerColor);
     }
 

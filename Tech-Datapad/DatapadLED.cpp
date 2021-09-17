@@ -8,9 +8,8 @@
 #include "Arduino.h"
 #include "DatapadLED.h"
 
-DatapadLED::DatapadLED(uint8_t pin)
+DatapadLED::DatapadLED(uint8_t pin) : _pin(pin)
 {
-    _pin = pin;
     pinMode(_pin, OUTPUT);
 }
 

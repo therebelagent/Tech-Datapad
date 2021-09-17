@@ -12,6 +12,7 @@
 #include "CannonPoweringUpDDS.h"
 #include "RearAxleStabilizerCalibrationDDS.h"
 #include "ForgingChainCodesDDS.h"
+#include "CommSignalTrackerDDS.h"
 #include "DiagnosticDBC.h"
 #include "StandByDBC.h"
 #include "AllLitUpDBC.h"
@@ -45,6 +46,9 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
         break;
     case DatapadActionType::ForgingChainCodes:
         datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        break;
+    case DatapadActionType::CommSignalTracker:
+        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     }
     return datapadAction;

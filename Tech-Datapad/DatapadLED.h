@@ -16,7 +16,7 @@ public:
     void turnOff();
 
 private:
-    uint8_t _pin;
+    const uint8_t _pin;
 };
 
 #endif
