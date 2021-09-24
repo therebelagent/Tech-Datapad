@@ -10,38 +10,77 @@
 
 DatapadSlideshowAction::DatapadSlideshowAction(DatapadActionSetup &datapadActionSetup) : _datapadActionSetup(datapadActionSetup) {}
 
+void DatapadSlideshowAction::setup()
+{
+    _datapadActionSetup.getTftlcd().begin(_datapadActionSetup.getTftlcd().readID());
+    _datapadActionSetup.getTftlcd().setRotation(0);
+    _datapadActionSetup.getTftlcd().fillScreen(TFT_BLACK);
+    internalPlay(_datapadActionType);
+    setNextDatapadActionType();
+}
+
 void DatapadSlideshowAction::play()
 {
-    DatapadActionFactory datapadActionFactory;
-    DatapadAction *datapadAction = datapadActionFactory.getDatapadAction(_currentDatapadActionType, _datapadActionSetup);
-    switch (_currentDatapadActionType)
+    _played = true;
+    internalPlay(_datapadActionType);
+    setNextDatapadActionType();
+    _previousMillis = millis();
+}
+
+void DatapadSlideshowAction::reset()
+{
+    internalPlay(DatapadActionType::StandBy);
+}
+
+bool DatapadSlideshowAction::isInactive()
+{
+    bool result = false;
+    if (_played)
     {
-    case DatapadActionType::Diagnostic:
-        _currentDatapadActionType = DatapadActionType::CommSignalTracker;
-        break;
-    case DatapadActionType::StandBy:
-        _currentDatapadActionType = DatapadActionType::CommSignalTracker;
-        break;
-    case DatapadActionType::CommSignalTracker:
-        _currentDatapadActionType = DatapadActionType::ForgingChainCodes;
-        break;
-    case DatapadActionType::ForgingChainCodes:
-        _currentDatapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
-        break;
-    case DatapadActionType::RearAxleStabilizerCalibration:
-        _currentDatapadActionType = DatapadActionType::CannonPoweringUp;
-        break;
-    case DatapadActionType::CannonPoweringUp:
-        _currentDatapadActionType = DatapadActionType::EnemyTargets;
-        break;
-    case DatapadActionType::EnemyTargets:
-        _currentDatapadActionType = DatapadActionType::ExplosiveCharges;
-        break;
-    case DatapadActionType::ExplosiveCharges:
-        datapadAction->reset();
-        _currentDatapadActionType = DatapadActionType::StandBy;
-        break;
+        if (millis() - _previousMillis > _inactivityInterval)
+        {
+            _played = false;
+            result = true;
+        }
     }
+    return result;
+}
+
+void DatapadSlideshowAction::internalPlay(DatapadActionType datapadActionType)
+{
+    DatapadActionFactory datapadActionFactory;
+    DatapadAction *datapadAction = datapadActionFactory.getDatapadAction(datapadActionType, _datapadActionSetup);
     datapadAction->play();
     delete datapadAction;
+}
+
+void DatapadSlideshowAction::setNextDatapadActionType()
+{
+    switch (_datapadActionType)
+    {
+    case DatapadActionType::Diagnostic:
+        _datapadActionType = DatapadActionType::DoorLockHacking;
+        break;
+    case DatapadActionType::DoorLockHacking:
+        _datapadActionType = DatapadActionType::CommSignalTracker;
+        break;
+    case DatapadActionType::CommSignalTracker:
+        _datapadActionType = DatapadActionType::ForgingChainCodes;
+        break;
+    case DatapadActionType::ForgingChainCodes:
+        _datapadActionType = DatapadActionType::RearAxleStabilizerCalibration;
+        break;
+    case DatapadActionType::RearAxleStabilizerCalibration:
+        _datapadActionType = DatapadActionType::CannonPoweringUp;
+        break;
+    case DatapadActionType::CannonPoweringUp:
+        _datapadActionType = DatapadActionType::EnemyTargets;
+        break;
+    case DatapadActionType::EnemyTargets:
+        _datapadActionType = DatapadActionType::ExplosiveCharges;
+        break;
+    case DatapadActionType::ExplosiveCharges:
+        _datapadActionType = DatapadActionType::DoorLockHacking;
+        break;
+    }
 }

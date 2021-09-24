@@ -58,15 +58,6 @@ void DDSGraphicalUtility::fillArc(MCUFRIEND_kbv &tftlcd, int x, int y, int start
     }
 }
 
-void DDSGraphicalUtility::drawFastVerticalLine(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
-{
-    int16_t left = x - (width / 2);
-    for (int16_t counter = left; counter < left + width; counter++)
-    {
-        tftlcd.drawFastVLine(counter, y, height, colour);
-    }
-}
-
 void DDSGraphicalUtility::drawFastHorizontalLine(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, unsigned int colour)
 {
     int16_t top = y - (height / 2);
@@ -214,8 +205,30 @@ void DDSGraphicalUtility::fillQuarterCircle(MCUFRIEND_kbv &tftlcd, int16_t x0, i
     }
 }
 
+void DDSGraphicalUtility::drawRoundedRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour)
+{
+    tftlcd.fillRoundRect(x, y, width, height, 5, colour);
+    tftlcd.drawRoundRect(x, y, width, height, 5, borderColour);
+}
+
+void DDSGraphicalUtility::fillRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour)
+{
+    tftlcd.fillRect(x, y, width, height, colour);
+    tftlcd.drawRect(x, y, width, height, borderColour);
+}
+
+void DDSGraphicalUtility::drawFastVerticalLine(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t height, int16_t width, unsigned int colour)
+{
+    int16_t left = x - (width / 2);
+    for (int16_t counter = left; counter < left + width; counter++)
+    {
+        tftlcd.drawFastVLine(counter, y, height, colour);
+    }
+}
+
 void DDSGraphicalUtility::drawRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineWidth, uint16_t colour)
 {
+    x = x - (lineWidth / 2);
     for (int16_t counter = 0; counter < lineWidth; counter++)
     {
         tftlcd.drawRect(x + counter, y + counter, width - 2 * counter, height - 2 * counter, colour);
@@ -230,14 +243,21 @@ void DDSGraphicalUtility::drawLine(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0
     }
 }
 
-void DDSGraphicalUtility::drawRoundedRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour)
+void DDSGraphicalUtility::drawVerticalTrapezoid(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t baseWidth, int16_t topWidth, int16_t height, int16_t lineWidth, uint16_t colour, bool inverted = false)
 {
-    tftlcd.fillRoundRect(x, y, width, height, 5, colour);
-    tftlcd.drawRoundRect(x, y, width, height, 5, borderColour);
-}
-
-void DDSGraphicalUtility::fillRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour)
-{
-    tftlcd.fillRect(x, y, width, height, colour);
-    tftlcd.drawRect(x, y, width, height, borderColour);
+    int16_t x1, y1;
+    y1 = y + ((baseWidth - topWidth) / 2);
+    if (!inverted)
+    {
+        x1 = x + height - lineWidth;
+    }
+    else
+    {
+        x = x + height - lineWidth;
+        x1 = x - height + lineWidth;
+    }
+    drawFastVerticalLine(tftlcd, x, y, baseWidth, lineWidth, colour);
+    drawFastVerticalLine(tftlcd, x1, y1, topWidth, lineWidth, colour);
+    drawLine(tftlcd, x - (lineWidth / 2), y, x1 - (lineWidth / 2), y1, lineWidth, colour);
+    drawLine(tftlcd, x - (lineWidth / 2), y + baseWidth - 1, x1 - (lineWidth / 2), y1 + topWidth, lineWidth, colour);
 }

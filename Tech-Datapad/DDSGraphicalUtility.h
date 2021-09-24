@@ -27,6 +27,7 @@ public:
     void fillRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour);
     void drawLine(MCUFRIEND_kbv &tftlcd, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t lineWidth, uint16_t colour);
     void drawRoundedRectangle(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour);
+    void drawVerticalTrapezoid(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t baseWidth, int16_t topWidth, int16_t height, int16_t lineWidth, uint16_t colour, bool inverted = false);
 };
 
 #endif

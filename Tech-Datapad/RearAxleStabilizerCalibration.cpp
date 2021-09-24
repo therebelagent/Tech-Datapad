@@ -128,7 +128,7 @@ private:
         _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, centerX - 50, blueDetailTop, 4, 3, DISPLAY_RING_COLOR);
         //White Box.
         _whiteBoxWidth = width * 0.57;
-        int16_t whiteBoxLeft = centerX - _whiteBoxWidth / 2;
+        int16_t whiteBoxLeft = (centerX - _whiteBoxWidth / 2);
         _whiteBoxHeight = width * 0.075;
         _whiteBoxTop = blueDetailTop - _whiteBoxHeight - 5;
         _ddsGraphicalUtility.drawRectangle(tftlcd, whiteBoxLeft, _whiteBoxTop, _whiteBoxWidth, _whiteBoxHeight, 2, TFT_WHITE);
@@ -178,7 +178,7 @@ private:
         //Vertical White Box Details.
         whiteHorizontalLineLeft = centerX + (width * 0.13);
         int16_t whiteBoxHeightTop = whiteHorizontalLineTop - (width * 0.40);
-        _ddsGraphicalUtility.drawRectangle(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.039), (width * 0.25), 2, TFT_WHITE);
+        _ddsGraphicalUtility.drawRectangle(tftlcd, whiteHorizontalLineLeft + 2, whiteBoxHeightTop, (width * 0.039), (width * 0.25), 2, TFT_WHITE);
         whiteHorizontalLineLeft = whiteHorizontalLineLeft + (width * 0.039);
         whiteBoxHeightTop = whiteBoxHeightTop + 5;
         _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, whiteHorizontalLineLeft, whiteBoxHeightTop, (width * 0.033), 2, TFT_WHITE);

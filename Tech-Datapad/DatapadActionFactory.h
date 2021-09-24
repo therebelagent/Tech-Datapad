@@ -20,7 +20,8 @@ enum class DatapadActionType
     ExplosiveCharges = 16,
     RearAxleStabilizerCalibration = 32,
     ForgingChainCodes = 64,
-    CommSignalTracker = 128
+    CommSignalTracker = 128,
+    DoorLockHacking = 256
 
 };
 

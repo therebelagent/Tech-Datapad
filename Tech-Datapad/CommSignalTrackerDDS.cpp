@@ -260,6 +260,7 @@ CommSignalTrackerDDS::CommSignalTrackerDDS(MCUFRIEND_kbv &tftlcd) : DatapadDispl
 
 void CommSignalTrackerDDS::show()
 {
+    reset();
     CommSignalTrackerDDSHelper commSignalTrackerDDSHelper = CommSignalTrackerDDSHelper();
     commSignalTrackerDDSHelper.drawCommSignalTracker(_tftlcd);
 }

@@ -13,6 +13,7 @@
 #include "RearAxleStabilizerCalibrationDDS.h"
 #include "ForgingChainCodesDDS.h"
 #include "CommSignalTrackerDDS.h"
+#include "DoorLockHackingDDS.h"
 #include "DiagnosticDBC.h"
 #include "StandByDBC.h"
 #include "AllLitUpDBC.h"
@@ -49,6 +50,9 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
         break;
     case DatapadActionType::CommSignalTracker:
         datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        break;
+    case DatapadActionType::DoorLockHacking:
+        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getTftlcd()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     }
     return datapadAction;

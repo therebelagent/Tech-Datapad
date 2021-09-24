@@ -20,11 +20,7 @@ DatapadTouchScreen datapadTouchScreen = DatapadTouchScreen(XP, YP, XM, YM, 300);
 
 void setup()
 {
-    uint16_t ID = tftlcd.readID();
-    tftlcd.begin(ID);
-    tftlcd.setRotation(0);
-    tftlcd.fillScreen(TFT_BLACK);
-    datapadSlideshowAction.play();
+    datapadSlideshowAction.setup();
 }
 
 void loop()
@@ -32,5 +28,9 @@ void loop()
     if (datapadTouchScreen.isTouching())
     {
         datapadSlideshowAction.play();
+    }
+    else if (datapadSlideshowAction.isInactive())
+    {
+        datapadSlideshowAction.reset();
     }
 }

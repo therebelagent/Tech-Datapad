@@ -89,6 +89,7 @@ ExplosiveChargesDDS::ExplosiveChargesDDS(MCUFRIEND_kbv &tftlcd) : DatapadDisplay
 
 void ExplosiveChargesDDS::show()
 {
+    reset();
     ExplosiveChargesDDSHelper explosiveChargesDDSHelper;
     explosiveChargesDDSHelper.drawExplosiveChargesDisplaySecuence(_tftlcd);
 }
