@@ -13,11 +13,11 @@
 class DoorLockHackingDDS : public DatapadDisplaySequence
 {
 public:
-    DoorLockHackingDDS(MCUFRIEND_kbv &tftlcd);
+    DoorLockHackingDDS(DatapadTFTLCD &datapadTFTLCD);
     void show();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

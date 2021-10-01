@@ -8,18 +8,18 @@
 #ifndef DatapadDisplaySequence_h
 #define DatapadDisplaySequence_h
 
-#include <MCUFRIEND_kbv.h>
+#include "DatapadTFTLCD.h"
 
 class DatapadDisplaySequence
 {
 
 public:
-    DatapadDisplaySequence(MCUFRIEND_kbv &tftlcd);
+    DatapadDisplaySequence(DatapadTFTLCD &datapadTFTLCD);
     virtual void show();
     void reset();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

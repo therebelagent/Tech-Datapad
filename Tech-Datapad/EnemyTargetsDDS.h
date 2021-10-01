@@ -13,11 +13,11 @@
 class EnemyTargetsDDS : public BasicGridDDS
 {
 public:
-    EnemyTargetsDDS(MCUFRIEND_kbv &tftlcd);
+    EnemyTargetsDDS(DatapadTFTLCD &datapadTFTLCD);
     void show();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

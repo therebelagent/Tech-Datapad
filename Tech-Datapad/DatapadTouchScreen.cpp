@@ -5,13 +5,12 @@
 //  2021 v 1.0.
 //
 
+#include <TouchScreen.h>
 #include "Arduino.h"
 #include "DatapadTouchScreen.h"
 #include "TouchScreenConstants.h"
 
-DatapadTouchScreen::DatapadTouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rx) : _xm(xm), _yp(yp), TouchScreen(xp, yp, xm, ym, rx)
-{
-}
+DatapadTouchScreen::DatapadTouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rx) : _xm(xm), _yp(yp), TouchScreen(xp, yp, xm, ym, rx) {}
 
 bool DatapadTouchScreen::isTouching()
 {
@@ -22,7 +21,11 @@ bool DatapadTouchScreen::isTouching()
     pinMode(_yp, OUTPUT);
     if (point.z > MINPRESSURE && point.z < MAXPRESSURE)
     {
+        _datapadDisplayPoint.x = map(point.x, TS_MAXX, TS_MINX, 0, MAX_X_RESOLUTION);
+        _datapadDisplayPoint.y = map(point.y, TS_MAXY, TS_MINY, 0, MAX_Y_RESOLUTION);
         result = true;
     }
     return result;
 }
+
+DatapadDisplayPoint DatapadTouchScreen::getDatapadDisplayPoint() { return _datapadDisplayPoint; }

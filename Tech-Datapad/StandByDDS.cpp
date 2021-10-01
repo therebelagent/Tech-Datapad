@@ -6,18 +6,14 @@
 //
 
 #include "StandByDDS.h"
-#include "DDSGraphicalUtility.h"
 #include "DatapadDisplaySequenceConstants.h"
 
-StandByDDS::StandByDDS(MCUFRIEND_kbv &tftlcd) : DatapadDisplaySequence(tftlcd), _tftlcd(tftlcd) {}
+StandByDDS::StandByDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
 
 void StandByDDS::show()
 {
-    reset();
-    int16_t centerX = _tftlcd.width() / 2;
-    int16_t centerY = _tftlcd.height() / 2;
+    int16_t centerX = _datapadTFTLCD.width() / 2;
+    int16_t centerY = _datapadTFTLCD.height() / 2;
     int16_t radius = centerX - 1;
-    _tftlcd.drawCircle(centerX, centerY, radius, TFT_WHITE);
-    DDSGraphicalUtility ddsGraphicalUtility;
-    ddsGraphicalUtility.drawInnerCircle(_tftlcd, centerX, centerY, radius - 1, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
+    _datapadTFTLCD.drawInnerCircle(centerX, centerY, radius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
 }

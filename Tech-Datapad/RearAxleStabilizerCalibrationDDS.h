@@ -13,11 +13,11 @@
 class RearAxleStabilizerCalibrationDDS : public StandByDDS
 {
 public:
-    RearAxleStabilizerCalibrationDDS(MCUFRIEND_kbv &tftlcd);
+    RearAxleStabilizerCalibrationDDS(DatapadTFTLCD &datapadTFTLCD);
     void show();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

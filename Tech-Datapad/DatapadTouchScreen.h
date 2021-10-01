@@ -10,15 +10,23 @@
 
 #include "TouchScreen.h"
 
+struct DatapadDisplayPoint
+{
+    int16_t x;
+    int16_t y;
+};
+
 class DatapadTouchScreen : public TouchScreen
 {
 public:
     DatapadTouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rx);
     bool isTouching();
+    DatapadDisplayPoint getDatapadDisplayPoint();
 
 private:
     const uint8_t _xm;
     const uint8_t _yp;
+    DatapadDisplayPoint _datapadDisplayPoint;
 };
 
 #endif

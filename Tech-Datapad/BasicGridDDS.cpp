@@ -6,16 +6,14 @@
 //
 
 #include "BasicGridDDS.h"
-#include "DDSGraphicalUtility.h"
 
-BasicGridDDS::BasicGridDDS(MCUFRIEND_kbv &tftlcd) : StandByDDS(tftlcd), _tftlcd(tftlcd) {}
+BasicGridDDS::BasicGridDDS(DatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
 
 void BasicGridDDS::show()
 {
     StandByDDS::show();
-    int16_t centerX = _tftlcd.width() / 2;
-    int16_t centerY = _tftlcd.height() / 2;
+    int16_t centerX = _datapadTFTLCD.width() / 2;
+    int16_t centerY = _datapadTFTLCD.height() / 2;
     int16_t radius = centerX - 1;
-    DDSGraphicalUtility ddsGraphicalUtility;
-    ddsGraphicalUtility.drawGrid(_tftlcd, centerX - 1, centerY, radius);
+    _datapadTFTLCD.drawGrid(centerX - 1, centerY, radius);
 }

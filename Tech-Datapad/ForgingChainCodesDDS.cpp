@@ -6,24 +6,22 @@
 //
 
 #include "ForgingChainCodesDDS.h"
-#include "DDSGraphicalUtility.h"
 #include "DDSTextPrinter.h"
 #include "Fonts/Aurebesh3pt7b.h"
 
 class ForgingChainCodesDDSHelper
 {
 public:
-    void drawForgingChainCodes(MCUFRIEND_kbv &tftlcd)
+    void drawForgingChainCodes(DatapadTFTLCD &datapadTFTLCD)
     {
-        int16_t width = tftlcd.width();
+        int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
-        int16_t centerY = tftlcd.height() / 2;
+        int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t radius = centerX - 1;
-        drawFixedScreenDetails(tftlcd, centerX, centerY, radius, width);
+        drawFixedScreenDetails(datapadTFTLCD, centerX, centerY, radius, width);
         //Draw Window Scroll Animation.
-
-        tftlcd.setFont(&Aurebesh3pt7b);
-        tftlcd.setTextColor(DISPLAY_RING_COLOR);
+        datapadTFTLCD.setFont(&Aurebesh3pt7b);
+        datapadTFTLCD.setTextColor(DISPLAY_RING_COLOR);
         int16_t lineVerticalGap = 2;
         int16_t lineHeight = 4;
         int16_t windowsScrollLeft = _rectangularFrameLeft + 7;
@@ -31,7 +29,7 @@ public:
         int16_t windowScrollTop = _rectangularFrameTop - lineHeight;
         int16_t windowScrollHeight = _rectangularFrameHeight + 19;
         int16_t steps = 50;
-        DDSTextPrinter ddsTextPrinter = DDSTextPrinter(tftlcd, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR);
+        DDSTextPrinter ddsTextPrinter = DDSTextPrinter(datapadTFTLCD, windowsScrollLeft, windowScrollTop, windowScrollWidth, windowScrollHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR);
         ddsTextPrinter.scrollDown(forgingChainCodesParagraph1, sizeof(forgingChainCodesParagraph1) / sizeof(forgingChainCodesParagraph1[0]), steps);
         ddsTextPrinter.scrollDown(forgingChainCodesParagraph2, sizeof(forgingChainCodesParagraph2) / sizeof(forgingChainCodesParagraph2[0]), steps);
         ddsTextPrinter.scrollDown(forgingChainCodesParagraph3, sizeof(forgingChainCodesParagraph3) / sizeof(forgingChainCodesParagraph3[0]), steps);
@@ -42,19 +40,17 @@ public:
 private:
     int16_t _rectangularFrameHeight, _rectangularFrameTop, _rectangularFrameLeft, _rectangularFrameWidth;
 
-    DDSGraphicalUtility _ddsGraphicalUtility;
-
-    void drawFixedScreenDetails(MCUFRIEND_kbv &tftlcd, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Rounded Frame.
-        _ddsGraphicalUtility.drawRoundFrame(tftlcd, centerX, centerY, radius, 45, false);
+        datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 45, false);
         //Draw Fixed Rectangular Frame
         _rectangularFrameHeight = width * 0.62;
         _rectangularFrameTop = centerY - _rectangularFrameHeight / 2;
         _rectangularFrameWidth = width * 0.6;
         _rectangularFrameLeft = centerX - _rectangularFrameWidth / 2;
-        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, _rectangularFrameLeft + 1, _rectangularFrameTop, _rectangularFrameHeight, 3, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
-        _ddsGraphicalUtility.drawFastVerticalLine(tftlcd, _rectangularFrameLeft + _rectangularFrameWidth - 2, _rectangularFrameTop, _rectangularFrameHeight, 3, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
+        datapadTFTLCD.drawFastVerticalLine(_rectangularFrameLeft + 1, _rectangularFrameTop, _rectangularFrameHeight, 3, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
+        datapadTFTLCD.drawFastVerticalLine(_rectangularFrameLeft + _rectangularFrameWidth - 2, _rectangularFrameTop, _rectangularFrameHeight, 3, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
         //Draw External Dashed Bar.
         int16_t dashedBarHeight = width * 0.39;
         int16_t dashedBarTop = centerY - (dashedBarHeight / 2);
@@ -73,18 +69,18 @@ private:
             {
                 dashedBarLineWidth = width * 0.02;
             }
-            _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, leftDashedBarLeft, dashedBarTop, dashedBarLineWidth * -1, 2, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
-            _ddsGraphicalUtility.drawFastHorizontalLine(tftlcd, rightDashedBarLeft, dashedBarTop, dashedBarLineWidth, 2, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
+            datapadTFTLCD.drawFastHorizontalLine(leftDashedBarLeft, dashedBarTop, dashedBarLineWidth * -1, 2, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
+            datapadTFTLCD.drawFastHorizontalLine(rightDashedBarLeft, dashedBarTop, dashedBarLineWidth, 2, FORGING_CHAIN_CODES_RECTANGULAR_FRAME_COLOR);
             dashedBarTop = dashedBarTop + dashedBarLineHeight + 1;
         }
     }
 };
 
-ForgingChainCodesDDS::ForgingChainCodesDDS(MCUFRIEND_kbv &tftlcd) : StandByDDS(tftlcd), _tftlcd(tftlcd) {}
+ForgingChainCodesDDS::ForgingChainCodesDDS(DatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
 
 void ForgingChainCodesDDS::show()
 {
     StandByDDS::show();
     ForgingChainCodesDDSHelper forgingChainCodesDDSHelper;
-    forgingChainCodesDDSHelper.drawForgingChainCodes(_tftlcd);
+    forgingChainCodesDDSHelper.drawForgingChainCodes(_datapadTFTLCD);
 }

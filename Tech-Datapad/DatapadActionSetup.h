@@ -8,20 +8,20 @@
 #ifndef DatapadActionSetup_h
 #define DatapadActionSetup_h
 
-#include <MCUFRIEND_kbv.h>
+#include "DatapadTFTLCD.h"
 
 class DatapadActionSetup
 {
 public:
-    DatapadActionSetup(MCUFRIEND_kbv &tftlcd, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
-    MCUFRIEND_kbv &getTftlcd();
+    DatapadActionSetup(DatapadTFTLCD &datapadTFTLCD, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
+    DatapadTFTLCD &getDatapadTFTLCD();
     uint8_t getSmallWhiteButtonPin();
     uint8_t getRedButtonPin();
     uint8_t getWhiteButtonPin();
     uint8_t getYellowButtonPin();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
     const uint8_t _smallWhiteButtonPin, _redButtonPin, _whiteButtonPin, _yellowButtonPin;
 };
 

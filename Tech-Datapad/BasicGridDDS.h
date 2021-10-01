@@ -13,11 +13,11 @@
 class BasicGridDDS : public StandByDDS
 {
 public:
-    BasicGridDDS(MCUFRIEND_kbv &tftlcd);
+    BasicGridDDS(DatapadTFTLCD &datapadTFTLCD);
     void show();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

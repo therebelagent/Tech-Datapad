@@ -7,7 +7,7 @@
 
 #include "DDSTextPrinter.h"
 
-DDSTextPrinter::DDSTextPrinter(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour) : _tftlcd(tftlcd), _x(x), _y(y), _width(width), _height(height), _lineHeight(lineHeight), _lineVerticalGap(lineVerticalGap), _backColor(backColour) {}
+DDSTextPrinter::DDSTextPrinter(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _width(width), _height(height), _lineHeight(lineHeight), _lineVerticalGap(lineVerticalGap), _backColor(backColour) {}
 
 void DDSTextPrinter::print(const char *const paragraph[], byte paragraphSize)
 {
@@ -108,8 +108,8 @@ void DDSTextPrinter::scrollUp(const char *const paragraph[], byte paragraphSize,
 
 void DDSTextPrinter::internalPrint(int16_t x, int16_t y, const char *text)
 {
-    _tftlcd.setCursor(x, y);
-    _tftlcd.print(text);
+    _datapadTFTLCD.setCursor(x, y);
+    _datapadTFTLCD.print(text);
 }
 
 byte DDSTextPrinter::getParagraphSize(byte currentParagraphSize)
@@ -122,5 +122,5 @@ byte DDSTextPrinter::getParagraphSize(byte currentParagraphSize)
 
 void DDSTextPrinter::reset()
 {
-    _tftlcd.fillRect(_x, _y, _width, _height, _backColor);
+    _datapadTFTLCD.fillRect(_x, _y, _width, _height, _backColor);
 }

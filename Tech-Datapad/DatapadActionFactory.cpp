@@ -28,31 +28,31 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
     switch (datapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = new ExplosiveChargesDA(*new StandByDDS(datapadActionSetup.getTftlcd()), *new DiagnosticDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new ExplosiveChargesDA(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new DiagnosticDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::StandBy:
-        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getTftlcd()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getTftlcd()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getTftlcd()), *new ExplosiveChargesDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getDatapadTFTLCD()), *new ExplosiveChargesDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::RearAxleStabilizerCalibration:
-        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::ForgingChainCodes:
-        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::CommSignalTracker:
-        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getTftlcd()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::DoorLockHacking:
-        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getTftlcd()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     }
     return datapadAction;

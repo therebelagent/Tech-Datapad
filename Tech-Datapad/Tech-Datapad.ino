@@ -5,32 +5,32 @@
 //  2021 v 1.0.
 //
 
-#include <MCUFRIEND_kbv.h>
-#include <TouchScreen.h>
-#include "TouchScreenConstants.h"
-#include "DatapadTouchScreen.h"
+#include "DatapadTFTLCD.h"
 #include "DatapadActionSetup.h"
-#include "DatapadSlideshowAction.h"
+#include "DatapadNavigationMenu.h"
+#include "DatapadTouchScreen.h"
 #include "DatapadPinsConstants.h"
 
-MCUFRIEND_kbv tftlcd;
-DatapadActionSetup datapadActionSetup = DatapadActionSetup(tftlcd, SMALL_WHITE_BUTTON_PIN, RED_BUTTON_PIN, WHITE_BUTTON_PIN, YELLOW_BUTTON_PIN);
-DatapadSlideshowAction datapadSlideshowAction = DatapadSlideshowAction(datapadActionSetup);
-DatapadTouchScreen datapadTouchScreen = DatapadTouchScreen(XP, YP, XM, YM, 300);
+DatapadNavigationMenu *datapadNavigationMenu;
+DatapadTouchScreen *datapadTouchScreen;
 
 void setup()
 {
-    datapadSlideshowAction.setup();
+    DatapadTFTLCD datapadTFTLCD = DatapadTFTLCD();
+    DatapadActionSetup datapadActionSetup = DatapadActionSetup(datapadTFTLCD, SMALL_WHITE_BUTTON_PIN, RED_BUTTON_PIN, WHITE_BUTTON_PIN, YELLOW_BUTTON_PIN);
+    datapadNavigationMenu = new DatapadNavigationMenu(datapadActionSetup);
+    datapadNavigationMenu->setup();
+    datapadTouchScreen = new DatapadTouchScreen(XP, YP, XM, YM, 300);
 }
 
 void loop()
 {
-    if (datapadTouchScreen.isTouching())
+    if (datapadTouchScreen->isTouching())
     {
-        datapadSlideshowAction.play();
+        datapadNavigationMenu->clicked(datapadTouchScreen->getDatapadDisplayPoint());
     }
-    else if (datapadSlideshowAction.isInactive())
+    else if (datapadNavigationMenu->isInactive())
     {
-        datapadSlideshowAction.reset();
+        datapadNavigationMenu->reset();
     }
 }

@@ -5,7 +5,7 @@
 //  2021 v 1.0.
 //
 
-#include <MCUFRIEND_kbv.h>
+#include "DatapadTFTLCD.h"
 #include "DatapadDisplaySequenceConstants.h"
 
 #ifndef DDSTextPrinter_h
@@ -14,13 +14,13 @@
 class DDSTextPrinter
 {
 public:
-    DDSTextPrinter(MCUFRIEND_kbv &tftlcd, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour);
+    DDSTextPrinter(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour);
     void print(const char *const paragraph[], byte paragraphSize);
     void scrollDown(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
     void scrollUp(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
     const int16_t _x, _y, _width, _height, _lineHeight, _lineVerticalGap, _backColor;
     char _buffer[FORGING_CHAIN_CODES_SENTENCE_BUFFER_SIZE];
     void internalPrint(int16_t x, int16_t y, const char *text);

@@ -13,11 +13,11 @@
 class CannonPoweringUpDDS : public BasicGridDDS
 {
 public:
-    CannonPoweringUpDDS(MCUFRIEND_kbv &tftlcd);
+    CannonPoweringUpDDS(DatapadTFTLCD &datapadTFTLCD);
     void show();
 
 private:
-    MCUFRIEND_kbv &_tftlcd;
+    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif
