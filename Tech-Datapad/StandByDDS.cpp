@@ -6,7 +6,6 @@
 //
 
 #include "StandByDDS.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 StandByDDS::StandByDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
 

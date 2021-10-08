@@ -6,10 +6,12 @@
 //
 
 #include "DatapadTFTLCD.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 #ifndef DDSTextPrinter_h
 #define DDSTextPrinter_h
+
+const int16_t PARAGRAPH_MAX_ITEMS = 36;
+const int16_t SENTENCE_BUFFER_SIZE = 32;
 
 class DDSTextPrinter
 {
@@ -22,7 +24,7 @@ public:
 private:
     DatapadTFTLCD &_datapadTFTLCD;
     const int16_t _x, _y, _width, _height, _lineHeight, _lineVerticalGap, _backColor;
-    char _buffer[FORGING_CHAIN_CODES_SENTENCE_BUFFER_SIZE];
+    char _buffer[SENTENCE_BUFFER_SIZE];
     void internalPrint(int16_t x, int16_t y, const char *text);
     byte getParagraphSize(byte currentParagraphSize);
     void reset();

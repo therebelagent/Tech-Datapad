@@ -6,7 +6,6 @@
 //
 
 #include "RearAxleStabilizerCalibrationDDS.h"
-#include "DatapadDisplaySequenceConstants.h"
 #include "Fonts/Aurebesh6pt7b.h"
 #include "Fonts/Aurebesh10pt7b.h"
 
@@ -105,7 +104,7 @@ private:
 
     void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     { //Round Frame.
-        datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 0, true);
+        datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 0, true, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
         datapadTFTLCD.drawFastHorizontalLine(0, centerY, width, 8, DISPLAY_BACK_COLOR);
         //Blue Bottom Details.
         int16_t blueDetailWidth = width * 0.41;

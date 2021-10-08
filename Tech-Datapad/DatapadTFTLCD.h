@@ -43,8 +43,8 @@ public:
     virtual void printCenteredText(const char *text, const GFXfont *gfxFont, int16_t x, int16_t y, unsigned int colour);
     virtual void printCenteredText(const char *text, const GFXfont *gfxFont, int16_t x, int16_t y, uint16_t *width, uint16_t *height, unsigned int colour);
     virtual void fillTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false);
-    virtual void drawGrid(int16_t centerX, int16_t centerY, int16_t radius);
-    virtual void drawRoundFrame(int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow);
+    virtual void drawGrid(int16_t centerX, int16_t centerY, int16_t radius, int16_t gridLines, unsigned int color);
+    virtual void drawRoundFrame(int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow, int16_t offset, unsigned int color, unsigned int backColor);
     virtual void fillQuarterCircle(int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour);
     virtual void drawRectangle(int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineWidth, uint16_t colour);
     virtual void fillRectangle(int16_t x, int16_t y, int16_t width, int16_t height, int16_t borderColour, uint16_t colour);

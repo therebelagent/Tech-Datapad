@@ -6,7 +6,6 @@
 //
 
 #include "CommSignalTrackerDDS.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 class BlinkingDot
 {

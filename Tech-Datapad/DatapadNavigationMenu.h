@@ -10,7 +10,6 @@
 
 #include "DatapadActionSetup.h"
 #include "DatapadDisplayButton.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 class DatapadNavigationMenu
 {

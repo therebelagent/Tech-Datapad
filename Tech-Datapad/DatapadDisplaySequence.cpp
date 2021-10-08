@@ -6,7 +6,6 @@
 //
 
 #include "DatapadDisplaySequence.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 DatapadDisplaySequence::DatapadDisplaySequence(DatapadTFTLCD &datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
 

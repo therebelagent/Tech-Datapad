@@ -43,7 +43,7 @@ private:
     void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Rounded Frame.
-        datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 45, false);
+        datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 45, false, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
         //Draw Fixed Rectangular Frame
         _rectangularFrameHeight = width * 0.62;
         _rectangularFrameTop = centerY - _rectangularFrameHeight / 2;

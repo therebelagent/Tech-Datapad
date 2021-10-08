@@ -6,7 +6,6 @@
 //
 
 #include "DatapadTFTLCD.h"
-#include "DatapadDisplaySequenceConstants.h"
 
 DatapadTFTLCD::DatapadTFTLCD() { _tftlcd.begin(_tftlcd.readID()); }
 
@@ -159,27 +158,40 @@ void DatapadTFTLCD::fillTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_
     _tftlcd.fillTriangle(triangleX0, triangleY0, triangleX1, triangleY0, triangleX2, triangleY2, colour);
 }
 
-void DatapadTFTLCD::drawGrid(int16_t centerX, int16_t centerY, int16_t radius)
+void DatapadTFTLCD::drawGrid(int16_t centerX, int16_t centerY, int16_t radius, int16_t gridLines, unsigned int color)
 {
     int16_t diameter = radius * 2;
-    int16_t gridLineHeight = diameter / GRID_LINES;
+    int16_t gridLineHeight = (diameter / gridLines) + 1;
+    int16_t halfGridLines = gridLines / 2;
     int16_t topX = centerX - radius;
-    int16_t topY = centerY - radius + gridLineHeight;
-    do
+    int16_t topY = centerY - radius;
+    int16_t nextLinePosition = centerX;
+    for (int16_t line = 0; line <= halfGridLines; line++)
     {
-        _tftlcd.drawFastHLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
-        topY = topY + gridLineHeight;
-    } while (topY <= (centerY + radius));
-    topY = centerY - radius;
-    topX = topX + gridLineHeight;
-    do
+        _tftlcd.drawFastVLine(nextLinePosition, topY, diameter, color);
+        nextLinePosition += gridLineHeight;
+    }
+    nextLinePosition = centerX - gridLineHeight;
+    for (int16_t line = 0; line <= halfGridLines; line++)
     {
-        _tftlcd.drawFastVLine(topX, topY, diameter, DISPLAY_GRID_LINE_COLOR);
-        topX = topX + gridLineHeight;
-    } while (topX <= (centerX + radius));
+        _tftlcd.drawFastVLine(nextLinePosition, topY, diameter, color);
+        nextLinePosition -= gridLineHeight;
+    }
+    nextLinePosition = centerY;
+    for (int16_t line = 0; line <= halfGridLines; line++)
+    {
+        _tftlcd.drawFastHLine(topX, nextLinePosition, diameter, color);
+        nextLinePosition += gridLineHeight;
+    }
+    nextLinePosition = centerY - gridLineHeight;
+    for (int16_t line = 0; line <= halfGridLines; line++)
+    {
+        _tftlcd.drawFastHLine(topX, nextLinePosition, diameter, color);
+        nextLinePosition -= gridLineHeight;
+    }
 }
 
-void DatapadTFTLCD::drawRoundFrame(int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow)
+void DatapadTFTLCD::drawRoundFrame(int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow, int16_t offset, unsigned int color, unsigned int backColor)
 {
     int16_t firstQuadrant = 332 + shift;
     int16_t secondQuadrant = 62 + shift;
@@ -189,19 +201,19 @@ void DatapadTFTLCD::drawRoundFrame(int16_t centerX, int16_t centerY, int16_t rad
     int16_t innerRoundFrameRadius = radius - 5;
     int16_t innerRoundFrameFillHeight = 3;
     int16_t innerRoundFrameFillRadius = radius - 6;
-    drawInnerCircle(centerX, centerY, innerRoundFrameRadius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
-    fillArc(centerX, centerY, firstQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-    fillArc(centerX, centerY, secondQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-    fillArc(centerX, centerY, thirdQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-    fillArc(centerX, centerY, fourhtQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+    drawInnerCircle(centerX, centerY, innerRoundFrameRadius, offset, color);
+    fillArc(centerX, centerY, firstQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, color);
+    fillArc(centerX, centerY, secondQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, color);
+    fillArc(centerX, centerY, thirdQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, color);
+    fillArc(centerX, centerY, fourhtQuadrant, 19, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, color);
     if (hollow)
     {
-        fillArc(centerX, centerY, firstQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        fillArc(centerX, centerY, secondQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        fillArc(centerX, centerY, secondQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        fillArc(centerX, centerY, thirdQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        fillArc(centerX, centerY, fourhtQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
-        fillArc(centerX, centerY, fourhtQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, DISPLAY_BACK_COLOR);
+        fillArc(centerX, centerY, firstQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
+        fillArc(centerX, centerY, secondQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
+        fillArc(centerX, centerY, secondQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
+        fillArc(centerX, centerY, thirdQuadrant + 1, 18, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
+        fillArc(centerX, centerY, fourhtQuadrant + 1, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
+        fillArc(centerX, centerY, fourhtQuadrant + 31, 8, innerRoundFrameFillRadius, innerRoundFrameFillRadius, innerRoundFrameFillHeight, backColor);
     }
 }
 

@@ -6,7 +6,6 @@
 //
 
 #include "CannonPoweringUpDDS.h"
-#include "DatapadDisplaySequenceConstants.h"
 #include "Fonts/Aurebesh6pt7b.h"
 #include "Fonts/Aurebesh8pt7b.h"
 #include "Fonts/Aurebesh9pt7b.h"

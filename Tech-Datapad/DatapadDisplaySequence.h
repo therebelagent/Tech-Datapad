@@ -9,6 +9,7 @@
 #define DatapadDisplaySequence_h
 
 #include "DatapadTFTLCD.h"
+#include "DatapadDisplaySequenceConstants.h"
 
 class DatapadDisplaySequence
 {

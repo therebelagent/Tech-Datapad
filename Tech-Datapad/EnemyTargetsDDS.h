@@ -10,7 +10,7 @@
 
 #include "BasicGridDDS.h"
 
-class EnemyTargetsDDS : public BasicGridDDS
+class EnemyTargetsDDS : public DatapadDisplaySequence
 {
 public:
     EnemyTargetsDDS(DatapadTFTLCD &datapadTFTLCD);

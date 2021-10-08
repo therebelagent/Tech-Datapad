@@ -15,5 +15,5 @@ void BasicGridDDS::show()
     int16_t centerX = _datapadTFTLCD.width() / 2;
     int16_t centerY = _datapadTFTLCD.height() / 2;
     int16_t radius = centerX - 1;
-    _datapadTFTLCD.drawGrid(centerX - 1, centerY, radius);
+    _datapadTFTLCD.drawGrid(centerX, centerY, radius, DEFAULT_GRID_LINES, DISPLAY_GRID_LINE_COLOR);
 }

@@ -115,8 +115,8 @@ void DDSTextPrinter::internalPrint(int16_t x, int16_t y, const char *text)
 byte DDSTextPrinter::getParagraphSize(byte currentParagraphSize)
 {
     byte paragraphSize = currentParagraphSize;
-    if (currentParagraphSize > FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS)
-        paragraphSize = FORGING_CHAIN_CODES_PARAGRAPH_MAX_ITEMS;
+    if (currentParagraphSize > PARAGRAPH_MAX_ITEMS)
+        paragraphSize = PARAGRAPH_MAX_ITEMS;
     return paragraphSize;
 }
 
