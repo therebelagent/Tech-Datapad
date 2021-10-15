@@ -17,7 +17,7 @@ class DDSTextPrinter
 {
 public:
     DDSTextPrinter(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour);
-    void print(const char *const paragraph[], byte paragraphSize);
+    void print(const char *const paragraph[], byte paragraphSize, bool transparentBackground = false);
     void scrollDown(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
     void scrollUp(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
 

@@ -21,7 +21,8 @@ enum class DatapadActionType
     RearAxleStabilizerCalibration = 32,
     ForgingChainCodes = 64,
     CommSignalTracker = 128,
-    DoorLockHacking = 256
+    DoorLockHacking = 256,
+    SpiceDetector = 512
 
 };
 
