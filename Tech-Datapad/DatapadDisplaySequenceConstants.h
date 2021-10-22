@@ -7,7 +7,7 @@
 
 //Naviagation Menu
 #define DISPLAY_INACTIVY_INTERVAL 5 //Seconds
-#define NAVIGATION_MENU_BUTTONS_ITEMS 8
+#define NAVIGATION_MENU_BUTTONS_ITEMS 9
 #define NAVIGATION_MENU_BUTTON_COLOR DISPLAY_RING_COLOR
 #define NAVIGATION_MENU_BUTTON_BACK_COLOR 0x0004
 #define NAVIGATION_MENU_BUTTON_PRESS_COLOR TFT_DARKCYAN
@@ -20,6 +20,7 @@
 #define NAVIGATION_MENU_BUTTON_5_TEXT "et"
 #define NAVIGATION_MENU_BUTTON_6_TEXT "ec"
 #define NAVIGATION_MENU_BUTTON_7_TEXT "sd"
+#define NAVIGATION_MENU_BUTTON_8_TEXT "ca"
 
 //Basic Grid DDS
 #define DISPLAY_BACK_COLOR 0x0002
@@ -240,3 +241,34 @@ const char *const spiceDetectorParagraph[] PROGMEM = {
     FCC_PARAGRAPH4_SENTENCE13,
     FCC_PARAGRAPH2_SENTENCE8,
     FCC_PARAGRAPH1_SENTENCE13};
+
+//Create Analyzer DDS.
+
+#define CREATURE_ANALYZER_TITLE_A_TEXT "Infestation"
+#define CREATURE_ANALYZER_TITLE_B_TEXT "ptero-creatures"
+
+//Create Analyzer Paragraph 1.
+const char CA_PARAGRAPH1_SENTENCE1[] PROGMEM = "preferring";
+const char CA_PARAGRAPH1_SENTENCE2[] PROGMEM = "nocturnal";
+const char CA_PARAGRAPH1_SENTENCE3[] PROGMEM = "creatures";
+const char CA_PARAGRAPH1_SENTENCE4[] PROGMEM = "disturbed";
+const char CA_PARAGRAPH1_SENTENCE5[] PROGMEM = "registers";
+const char CA_PARAGRAPH1_SENTENCE6[] PROGMEM = "insectoid";
+
+const char *const creatureAnalyzerParagraph1[] PROGMEM = {
+    CA_PARAGRAPH1_SENTENCE1,
+    CA_PARAGRAPH1_SENTENCE2,
+    CA_PARAGRAPH1_SENTENCE3,
+    CA_PARAGRAPH1_SENTENCE4,
+    CA_PARAGRAPH1_SENTENCE5,
+    CA_PARAGRAPH1_SENTENCE6};
+
+//Create Analyzer Paragraph 2.
+const char CA_PARAGRAPH2_SENTENCE1[] PROGMEM = "ptero-creatures";
+const char CA_PARAGRAPH2_SENTENCE2[] PROGMEM = "we encountered";
+const char CA_PARAGRAPH2_SENTENCE3[] PROGMEM = "cavern are irlings";
+
+const char *const creatureAnalyzerParagraph2[] PROGMEM = {
+    CA_PARAGRAPH2_SENTENCE1,
+    CA_PARAGRAPH2_SENTENCE2,
+    CA_PARAGRAPH2_SENTENCE3};

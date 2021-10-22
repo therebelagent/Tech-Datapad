@@ -276,6 +276,7 @@ private:
             elapsed += millis() - previousMillis;
             previousMillis = millis();
         } while (elapsed < interval);
+        delete _sonarGauge;
     }
 };
 

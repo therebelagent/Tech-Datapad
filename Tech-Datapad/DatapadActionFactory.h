@@ -22,8 +22,8 @@ enum class DatapadActionType
     ForgingChainCodes = 64,
     CommSignalTracker = 128,
     DoorLockHacking = 256,
-    SpiceDetector = 512
-
+    SpiceDetector = 512,
+    LifeformAnalyzer = 1024
 };
 
 class DatapadActionFactory

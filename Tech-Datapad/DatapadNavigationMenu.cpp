@@ -27,7 +27,7 @@ public:
         int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t buttonSeparation = getButtonSeparation();
         int16_t buttonWidth = getButtonWidth(datapadTFTLCD.width());
-        int16_t totalWidth = (buttonWidth * 2) + (buttonSeparation * 3) + (buttonWidth / 2);
+        int16_t totalWidth = (buttonWidth * 3) + (buttonSeparation * 4);
         int16_t buttonLeft = centerX - (totalWidth / 2);
         int16_t buttonHeight = getButtonHeight(buttonWidth);
         int16_t totalHeight = (buttonHeight * 2) + (buttonSeparation * 2);
@@ -40,16 +40,19 @@ public:
         datapadDisplayButtons[2].initialize(&datapadTFTLCD, DatapadActionType::ForgingChainCodes, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_2_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
         nextButtonLeft += buttonWidth + buttonSeparation;
         datapadDisplayButtons[3].initialize(&datapadTFTLCD, DatapadActionType::RearAxleStabilizerCalibration, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_3_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
+        nextButtonLeft += buttonSeparation;
+        datapadDisplayButtons[4].initialize(&datapadTFTLCD, DatapadActionType::CannonPoweringUp, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_4_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
         //Calculate Second Row Of Buttons Positions.
+        totalWidth = (buttonWidth * 2) + (buttonSeparation * 3) + (buttonWidth / 2);
         buttonLeft = centerX - (totalWidth / 2);
         buttonTop += buttonSeparation + buttonHeight;
-        datapadDisplayButtons[4].initialize(&datapadTFTLCD, DatapadActionType::CannonPoweringUp, buttonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_4_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
+        datapadDisplayButtons[5].initialize(&datapadTFTLCD, DatapadActionType::EnemyTargets, buttonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_5_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
         nextButtonLeft = buttonLeft + buttonWidth + buttonSeparation;
-        datapadDisplayButtons[5].initialize(&datapadTFTLCD, DatapadActionType::EnemyTargets, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_5_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-        nextButtonLeft += buttonSeparation;
         datapadDisplayButtons[6].initialize(&datapadTFTLCD, DatapadActionType::ExplosiveCharges, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_6_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-        nextButtonLeft += buttonWidth + buttonSeparation;
+        nextButtonLeft += buttonSeparation;
         datapadDisplayButtons[7].initialize(&datapadTFTLCD, DatapadActionType::SpiceDetector, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_7_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
+        nextButtonLeft += buttonWidth + buttonSeparation;
+        datapadDisplayButtons[8].initialize(&datapadTFTLCD, DatapadActionType::LifeformAnalyzer, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_8_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
     }
 
     void refreshNavigationMenu(DatapadTFTLCD &datapadTFTLCD, const GFXfont *gfxFont, DatapadDisplayButton datapadDisplayButtons[])
@@ -60,7 +63,7 @@ public:
         int16_t width = datapadTFTLCD.width();
         int16_t bannerWidth = width * 0.48;
         int16_t bannerHeight = width * 0.09;
-        int16_t bannerTop = centerY - 133;
+        int16_t bannerTop = centerY - 131;
         datapadTFTLCD.drawBanner(centerX, bannerTop, bannerHeight, bannerWidth, TFT_DARKCYAN, NAVIGATION_MENU_BANNER_TEXT, gfxFont);
         //Draw Datapad Navigation Menu Buttons.
         int16_t buttonSeparation = getButtonSeparation();
@@ -73,13 +76,14 @@ public:
         datapadDisplayButtons[2].draw();
         datapadDisplayButtons[3].drawInverted();
         datapadDisplayButtons[4].draw();
-        datapadDisplayButtons[5].drawInverted();
-        datapadDisplayButtons[6].draw();
-        datapadDisplayButtons[7].drawInverted();
+        datapadDisplayButtons[5].draw();
+        datapadDisplayButtons[6].drawInverted();
+        datapadDisplayButtons[7].draw();
+        datapadDisplayButtons[8].drawInverted();
         datapadTFTLCD.drawFastHorizontalLine(0, buttonTop + buttonHeight + buttonSeparation + buttonSeparation, width, 2, DISPLAY_RING_COLOR);
     }
 
-    int16_t getButtonSeparation() { return 14; }
+    int16_t getButtonSeparation() { return 12; }
     int16_t getButtonWidth(int16_t width) { return width * 0.26; }
     int16_t getButtonHeight(int16_t buttonWidth) { return (sqrt(3) * buttonWidth) / 2; }
     int16_t getButtonTop(int16_t y) { return y - (getButtonSeparation() / 2); }

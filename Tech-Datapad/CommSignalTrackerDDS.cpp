@@ -6,62 +6,7 @@
 //
 
 #include "CommSignalTrackerDDS.h"
-
-class BlinkingDot
-{
-public:
-    BlinkingDot(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour), _backColor(backColour) {}
-    void update()
-    {
-        if (_previousMillis > 0)
-        {
-            _elapsed += millis() - _previousMillis;
-            if (_elapsed < 100)
-            {
-                _state = 0;
-            }
-            else if (_elapsed < 650)
-            {
-                _state = 1;
-            }
-            else if (_elapsed < 1500)
-            {
-                _state = 2;
-            }
-            else if (_elapsed < 2000)
-            {
-                _elapsed = 0;
-            }
-        }
-        _previousMillis = millis();
-        int16_t colour;
-        switch (_state)
-        {
-        case 0:
-            colour = LIGHT_ENEMY_TARGET_COLOR;
-            break;
-        case 1:
-            colour = _colour;
-            break;
-        case 2:
-            colour = _backColor;
-            break;
-        }
-        drawDot(colour);
-    }
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
-    const int16_t _x, _y, _radius;
-    const uint16_t _colour, _backColor;
-    int16_t _state = 0, _elapsed = 0;
-    unsigned long _previousMillis = 0;
-
-    void drawDot(uint16_t colour)
-    {
-        _datapadTFTLCD.fillCircle(_x, _y, _radius, colour);
-    }
-};
+#include "DDSBlinkingDot.h"
 
 class PulsingDot
 {
@@ -141,7 +86,7 @@ public:
         //Draw Center Circle.
         int16_t centerCircleRadius = (width * 0.25) / 2;
         int16_t centerCirleWidth = width * 0.015;
-        datapadTFTLCD.drawInnerCircle( centerX, centerY, centerCircleRadius, centerCirleWidth, TFT_DARKCYAN);
+        datapadTFTLCD.drawInnerCircle(centerX, centerY, centerCircleRadius, centerCirleWidth, TFT_DARKCYAN);
         //Draw Walls.
         drawWalls(datapadTFTLCD, centerX, centerY, width);
         //Draw Rounded Frame.
@@ -164,26 +109,26 @@ private:
         wallWidth = width * 0.34;
         int16_t wallLeft = centerX + (width * 0.15);
         wallTop = centerY - (width * 0.146) - wallHeight;
-        datapadTFTLCD.drawRoundedRectangle( wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
+        datapadTFTLCD.drawRoundedRectangle(wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
         //Draw Wall C.
         wallTop = wallTop + wallHeight;
         wallHeight = width * 0.677;
         wallWidth = width * 0.31;
         wallLeft = centerX + (width * 0.18);
-        datapadTFTLCD.fillRectangle( wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
-        datapadTFTLCD.drawFastHorizontalLine( wallLeft + 1, wallTop, wallWidth, 2, TFT_DARKCYAN);
+        datapadTFTLCD.fillRectangle(wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
+        datapadTFTLCD.drawFastHorizontalLine(wallLeft + 1, wallTop, wallWidth, 2, TFT_DARKCYAN);
         //Draw Wall D.
         wallHeight = width * 0.33;
         wallWidth = width * 0.15;
         wallLeft = centerX - (width * 0.063) - wallWidth;
         wallTop = centerY + (width * 0.19);
-        datapadTFTLCD.drawRoundedRectangle( wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
+        datapadTFTLCD.drawRoundedRectangle(wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
         //Draw Wall E.
         wallHeight = width * 0.44;
         wallWidth = width * 0.24;
         wallLeft = centerX - (width * 0.25) - wallWidth;
         wallTop = centerY + (width * 0.03);
-        datapadTFTLCD.drawRoundedRectangle( wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
+        datapadTFTLCD.drawRoundedRectangle(wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
     }
 
     void drawRoundFrame(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
@@ -196,19 +141,19 @@ private:
         int16_t innerRoundFrameHeight = ((radius * 2) * 0.04) - GRID_OUTER_FRAME_OFFSET;
         int16_t innerRoundFrameRadius = radius - 3;
         datapadTFTLCD.drawCircle(centerX, centerY, radius, TFT_WHITE);
-        datapadTFTLCD.drawInnerCircle( centerX, centerY, radius - 1, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, firstArc, 17, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, secondArc - 13, 3, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, secondArc - 23, 2, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight / 2, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, secondArc, 14, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, thirdArc, 20, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, fourhtArc, 14, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, fifthtArc - 10, 2, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight / 2, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, fifthtArc - 23, 3, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, fifthtArc, 17, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, 353, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, 359, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillArc( centerX, centerY, 5, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.drawInnerCircle(centerX, centerY, radius - 1, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, firstArc, 17, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, secondArc - 13, 3, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, secondArc - 23, 2, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight / 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, secondArc, 14, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, thirdArc, 20, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, fourhtArc, 14, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, fifthtArc - 10, 2, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight / 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, fifthtArc - 23, 3, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, fifthtArc, 17, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, 353, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, 359, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillArc(centerX, centerY, 5, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
     }
 
     void drawPulsingBlinkingDots(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width)
@@ -231,7 +176,7 @@ private:
         redDotY = y + (width * 0.21);
         PulsingDot pulsingDot6 = PulsingDot(datapadTFTLCD, redDotX, redDotY, redDotRadius, ENEMY_TARGET_COLOR);
         int16_t centerCommSinalBeepCircleRadius = (width * 0.088) / 2;
-        BlinkingDot blinkingDot = BlinkingDot(datapadTFTLCD, x, y, centerCommSinalBeepCircleRadius, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
+        DDSBlinkingDot ddsblinkingDot = DDSBlinkingDot(datapadTFTLCD, x, y, centerCommSinalBeepCircleRadius, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
         int16_t elapsed = 0;
         int16_t interval = 10000;
         unsigned long previousMillis = millis();
@@ -243,7 +188,7 @@ private:
             pulsingDot4.update();
             pulsingDot5.update();
             pulsingDot6.update();
-            blinkingDot.update();
+            ddsblinkingDot.update();
             elapsed += millis() - previousMillis;
             previousMillis = millis();
         } while (elapsed < interval);

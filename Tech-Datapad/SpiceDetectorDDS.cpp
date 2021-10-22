@@ -7,58 +7,9 @@
 
 #include "SpiceDetectorDDS.h"
 #include "DDSTextPrinter.h"
+#include "DDSProgressBar.h"
 #include "Fonts/Aurebesh2pt7b.h"
 #include "Fonts/Aurebesh6pt7b.h"
-
-class SpiceDetectorProgressBar
-{
-public:
-    SpiceDetectorProgressBar(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t color, int16_t backColor, float initialProgressLevel = 0) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _width(width), _height(height), _color(color), _backColor(backColor), _initialProgressLevel(initialProgressLevel)
-    {
-        if (initialProgressLevel > 100)
-            _initialProgressLevel = 100;
-    }
-    void show() { drawRectangle(); }
-    void update()
-    {
-        long increment = random(1, 3);
-        if (_raising)
-        {
-            _initialProgressLevel = _initialProgressLevel + increment;
-        }
-        else
-        {
-            _initialProgressLevel = _initialProgressLevel - increment;
-        }
-        if (_initialProgressLevel > 100)
-        {
-            _initialProgressLevel = 100;
-            _raising = false;
-        }
-        else if (_initialProgressLevel < 0)
-        {
-            _initialProgressLevel = 0;
-            _raising = true;
-        }
-        drawRectangle();
-    }
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
-    int16_t _x, _y, _width, _height;
-    int16_t _color, _backColor;
-    float _initialProgressLevel = 0;
-    bool _raising = true;
-
-    void drawRectangle()
-    {
-        int16_t activeRectangleHeight = _height * (_initialProgressLevel / 100);
-        int16_t inactiveRectangleHeight = _height - activeRectangleHeight;
-        int16_t activeRectangleTop = _y + _height - activeRectangleHeight;
-        _datapadTFTLCD.fillRect(_x, _y, _width, inactiveRectangleHeight, _backColor);
-        _datapadTFTLCD.fillRect(_x, activeRectangleTop, _width, activeRectangleHeight, _color);
-    }
-};
 
 class SpiceDetectorDDSHelper
 {
@@ -131,40 +82,45 @@ public:
         int16_t progressBarSeparation = width * 0.013;
         int16_t progressBarLeft = rectangleLineLeft + progressBarSeparation;
         int16_t progressBarTop = rectangleTop + rectangleHeight - progressBarHeight - 4;
-        _spiceDetectorProgressBar0 = new SpiceDetectorProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(90, 100));
+        randomSeed(millis());
+        _progressBar0 = new DDSProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(80, 100), random(1, 2));
         progressBarLeft = +progressBarLeft + progressBarWidth + progressBarSeparation;
-        _spiceDetectorProgressBar1 = new SpiceDetectorProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(45, 55));
+        _progressBar1 = new DDSProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(35, 55), random(1, 3));
         progressBarLeft = +progressBarLeft + progressBarWidth + progressBarSeparation;
-        _spiceDetectorProgressBar2 = new SpiceDetectorProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(65, 75));
+        _progressBar2 = new DDSProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, PROGRESS_BAR_COLOR, DISPLAY_BACK_COLOR, random(55, 75), random(1, 2));
         progressBarLeft = +progressBarLeft + progressBarWidth + progressBarSeparation;
-        _spiceDetectorProgressBar3 = new SpiceDetectorProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, TFT_WHITE, DISPLAY_BACK_COLOR, random(15, 25));
+        _progressBar3 = new DDSProgressBar(datapadTFTLCD, progressBarLeft, progressBarTop, progressBarWidth, progressBarHeight, TFT_WHITE, DISPLAY_BACK_COLOR, random(15, 35), random(1, 3));
         //Draw Rectangle Solid Background.
         datapadTFTLCD.fillRect(rectangleLineLeft + 2, rectangleTop + 2, (rectangleWidth - windowScrollWidth) - 9, rectangleHeight - 4, DISPLAY_BACK_COLOR);
     }
 
     void RunProgressBarAnimations()
     {
-        _spiceDetectorProgressBar0->show();
-        _spiceDetectorProgressBar1->show();
-        _spiceDetectorProgressBar2->show();
-        _spiceDetectorProgressBar3->show();
+        _progressBar0->show();
+        _progressBar1->show();
+        _progressBar2->show();
+        _progressBar3->show();
         //Run Progress Bars Animations.
         int16_t elapsed = 0;
-        int16_t interval = 7500;
+        int16_t interval = 5000;
         unsigned long previousMillis = millis();
         do
         {
-            _spiceDetectorProgressBar0->update();
-            _spiceDetectorProgressBar1->update();
-            _spiceDetectorProgressBar2->update();
-            _spiceDetectorProgressBar3->update();
+            _progressBar0->update();
+            _progressBar1->update();
+            _progressBar2->update();
+            _progressBar3->update();
             elapsed += millis() - previousMillis;
             previousMillis = millis();
         } while (elapsed < interval);
+        delete _progressBar0;
+        delete _progressBar1;
+        delete _progressBar2;
+        delete _progressBar3;
     }
 
 private:
-    SpiceDetectorProgressBar *_spiceDetectorProgressBar0, *_spiceDetectorProgressBar1, *_spiceDetectorProgressBar2, *_spiceDetectorProgressBar3;
+    DDSProgressBar *_progressBar0, *_progressBar1, *_progressBar2, *_progressBar3;
 };
 
 SpiceDetectorDDS::SpiceDetectorDDS(DatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}

@@ -339,3 +339,25 @@ void DatapadTFTLCD::drawBanner(int16_t x, int16_t y, int16_t height, int16_t wid
     fillIterationShape(bannerLeft, y, height, width, color);
     printCenteredText(text, gfxFont, x, y + (height / 2), TFT_WHITE);
 }
+
+void DatapadTFTLCD::drawRGBBitmapFar(uint16_t windowX, uint16_t windowY, uint16_t imageWidth, uint16_t imageHeight, uint32_t imagePtr)
+{
+    uint16_t x, y;
+    uint32_t linePtr, pixelPtr;
+    // linePtr points to each beginning of line in the source image bitmap.
+    linePtr = imagePtr;
+    _tftlcd.startWrite();
+    for (y = windowY; y < windowY + imageHeight; y++)
+    {
+        // pixelPtr points to each pixel to be painted.
+        pixelPtr = linePtr;
+        for (x = windowX; x < windowX + imageWidth; x++)
+        {
+            _tftlcd.writePixel(x, y, pgm_read_word_far(pixelPtr));
+            pixelPtr += sizeof(uint16_t); // Next word (2 bytes)
+        }
+        // Increment linePtr to point to the next line in the source image bitmap.
+        linePtr += imageWidth * sizeof(uint16_t);
+    }
+    _tftlcd.endWrite();
+}

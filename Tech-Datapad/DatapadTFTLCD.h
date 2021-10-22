@@ -34,6 +34,7 @@ public:
     virtual void print(const char str[]);
     virtual int16_t width(void);
     virtual int16_t height(void);
+    virtual void drawRGBBitmapFar(uint16_t windowX, uint16_t windowY, uint16_t imageWidth, uint16_t imageHeight, uint32_t imagePtr);
     //Methods extracted from DDSGraphicalUtility
     virtual void drawInnerCircle(int16_t x, int16_t y, int16_t radius, int16_t offset, unsigned int colour);
     virtual void fillArc(int x, int y, int start_angle, int seg_count, int rx, int ry, int w, unsigned int colour);
