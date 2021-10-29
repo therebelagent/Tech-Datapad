@@ -20,7 +20,7 @@
 #define NAVIGATION_MENU_BUTTON_5_TEXT "et"
 #define NAVIGATION_MENU_BUTTON_6_TEXT "ec"
 #define NAVIGATION_MENU_BUTTON_7_TEXT "sd"
-#define NAVIGATION_MENU_BUTTON_8_TEXT "ca"
+#define NAVIGATION_MENU_BUTTON_8_TEXT "la"
 
 //Basic Grid DDS
 #define DISPLAY_BACK_COLOR 0x0002
@@ -242,33 +242,51 @@ const char *const spiceDetectorParagraph[] PROGMEM = {
     FCC_PARAGRAPH2_SENTENCE8,
     FCC_PARAGRAPH1_SENTENCE13};
 
-//Create Analyzer DDS.
+//Lifeform Analyzer DDS.
 
-#define CREATURE_ANALYZER_TITLE_A_TEXT "Infestation"
-#define CREATURE_ANALYZER_TITLE_B_TEXT "ptero-creatures"
+#define LIFEFORM_ANALYZER_CREATURE_NAME_TEXT "gleg"
+#define LIFEFORM_ANALYZER_CREATURE_NAME_L0_COLOR 0xa000
+#define LIFEFORM_ANALYZER_CREATURE_NAME_L1_COLOR 0xe800
+#define LIFEFORM_ANALYZER_CREATURE_NAME_L2_COLOR 0xd800
+#define LIFEFORM_ANALYZER_CREATURE_NAME_L3_COLOR TFT_RED
+#define LIFEFORM_ANALYZER_CREATURE_NAME_L4_COLOR 0xf820
+#define LIFEFORM_ANALYZER_TITLE_A_TEXT "Infestation"
+#define LIFEFORM_ANALYZER_TITLE_B_TEXT "ptero-creatures"
 
-//Create Analyzer Paragraph 1.
-const char CA_PARAGRAPH1_SENTENCE1[] PROGMEM = "preferring";
-const char CA_PARAGRAPH1_SENTENCE2[] PROGMEM = "nocturnal";
-const char CA_PARAGRAPH1_SENTENCE3[] PROGMEM = "creatures";
-const char CA_PARAGRAPH1_SENTENCE4[] PROGMEM = "disturbed";
-const char CA_PARAGRAPH1_SENTENCE5[] PROGMEM = "registers";
-const char CA_PARAGRAPH1_SENTENCE6[] PROGMEM = "insectoid";
+//Lifeform Analyzer Paragraph 1.
+const char LA_PARAGRAPH1_SENTENCE1[] PROGMEM = "preferring";
+const char LA_PARAGRAPH1_SENTENCE2[] PROGMEM = "nocturnal";
+const char LA_PARAGRAPH1_SENTENCE3[] PROGMEM = "creatures";
+const char LA_PARAGRAPH1_SENTENCE4[] PROGMEM = "disturbed";
+const char LA_PARAGRAPH1_SENTENCE5[] PROGMEM = "registers";
+const char LA_PARAGRAPH1_SENTENCE6[] PROGMEM = "insectoid";
 
-const char *const creatureAnalyzerParagraph1[] PROGMEM = {
-    CA_PARAGRAPH1_SENTENCE1,
-    CA_PARAGRAPH1_SENTENCE2,
-    CA_PARAGRAPH1_SENTENCE3,
-    CA_PARAGRAPH1_SENTENCE4,
-    CA_PARAGRAPH1_SENTENCE5,
-    CA_PARAGRAPH1_SENTENCE6};
+const char *const lifeformAnalyzerParagraph1[] PROGMEM = {
+    LA_PARAGRAPH1_SENTENCE1,
+    LA_PARAGRAPH1_SENTENCE2,
+    LA_PARAGRAPH1_SENTENCE3,
+    LA_PARAGRAPH1_SENTENCE4,
+    LA_PARAGRAPH1_SENTENCE5,
+    LA_PARAGRAPH1_SENTENCE6};
 
-//Create Analyzer Paragraph 2.
-const char CA_PARAGRAPH2_SENTENCE1[] PROGMEM = "ptero-creatures";
-const char CA_PARAGRAPH2_SENTENCE2[] PROGMEM = "we encountered";
-const char CA_PARAGRAPH2_SENTENCE3[] PROGMEM = "cavern are irlings";
+//Lifeform Analyzer Paragraph 2.
+const char LA_PARAGRAPH2_SENTENCE1[] PROGMEM = "ptero-creatures";
+const char LA_PARAGRAPH2_SENTENCE2[] PROGMEM = "we encountered";
+const char LA_PARAGRAPH2_SENTENCE3[] PROGMEM = "cavern are irlings";
 
-const char *const creatureAnalyzerParagraph2[] PROGMEM = {
-    CA_PARAGRAPH2_SENTENCE1,
-    CA_PARAGRAPH2_SENTENCE2,
-    CA_PARAGRAPH2_SENTENCE3};
+const char *const lifeformAnalyzerParagraph2[] PROGMEM = {
+    LA_PARAGRAPH2_SENTENCE1,
+    LA_PARAGRAPH2_SENTENCE2,
+    LA_PARAGRAPH2_SENTENCE3};
+
+//Lifeform Analyzer Paragraph 3.
+const char LA_PARAGRAPH3_SENTENCE1[] PROGMEM = "They are nocturnal";
+const char LA_PARAGRAPH3_SENTENCE2[] PROGMEM = "creatures,";
+const char LA_PARAGRAPH3_SENTENCE3[] PROGMEM = "preferring dark envs";
+const char LA_PARAGRAPH3_SENTENCE4[] PROGMEM = "such as caverns";
+
+const char *const lifeformAnalyzerParagraph3[] PROGMEM = {
+    LA_PARAGRAPH3_SENTENCE1,
+    LA_PARAGRAPH3_SENTENCE2,
+    LA_PARAGRAPH3_SENTENCE3,
+    LA_PARAGRAPH3_SENTENCE4};

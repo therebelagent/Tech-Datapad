@@ -5,16 +5,18 @@
 //  2021 v 1.0.
 //
 
-#ifndef LifeformAnalyzerDDS_h
-#define LifeformAnalyzerDDS_h
+#include "DDSImage.h"
 
-#include "DatapadDisplaySequence.h""
+#ifndef DDSIrlingBImage_h
+#define DDSIrlingBImage_h
 
-class LifeformAnalyzerDDS : public DatapadDisplaySequence
+class DDSIrlingBImage : DDSImage
 {
 public:
-    LifeformAnalyzerDDS(DatapadTFTLCD &datapadTFTLCD);
-    void show();
+    DDSIrlingBImage(DatapadTFTLCD &datapadTFTLCD);
+    void drawImage(int16_t x, int16_t y);
+    int16_t width();
+    int16_t height();
 
 private:
     DatapadTFTLCD &_datapadTFTLCD;

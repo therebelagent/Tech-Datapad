@@ -5,16 +5,16 @@
 //  2021 v 1.0.
 //
 
-#ifndef LifeformAnalyzerDDS_h
-#define LifeformAnalyzerDDS_h
+#include "DatapadTFTLCD.h"
 
-#include "DatapadDisplaySequence.h""
+#ifndef DDSImagePainter_h
+#define DDSImagePainter_h
 
-class LifeformAnalyzerDDS : public DatapadDisplaySequence
+class DDSImagePainter
 {
 public:
-    LifeformAnalyzerDDS(DatapadTFTLCD &datapadTFTLCD);
-    void show();
+    DDSImagePainter(DatapadTFTLCD datapadTFTLCD);
+    void drawArrayJpeg(const uint8_t arrayname[], uint32_t array_size, int x, int y);
 
 private:
     DatapadTFTLCD &_datapadTFTLCD;

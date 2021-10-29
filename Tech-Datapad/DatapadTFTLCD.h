@@ -53,6 +53,8 @@ public:
     virtual void drawRoundedRectangle(int16_t x, int16_t y, int16_t width, int16_t height, uint16_t borderColour, uint16_t colour);
     virtual void drawVerticalTrapezoid(int16_t x, int16_t y, int16_t baseWidth, int16_t topWidth, int16_t height, int16_t lineWidth, uint16_t colour, bool inverted = false);
     virtual void drawBanner(int16_t x, int16_t y, int16_t height, int16_t width, unsigned int color, const char *text, const GFXfont *gfxFont);
+    virtual void setAddrWindow(int16_t x, int16_t y, int16_t x1, int16_t y1);
+    virtual void pushColors(uint16_t *block, int16_t n, bool first);
 
 private:
     MCUFRIEND_kbv _tftlcd;

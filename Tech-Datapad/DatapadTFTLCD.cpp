@@ -361,3 +361,7 @@ void DatapadTFTLCD::drawRGBBitmapFar(uint16_t windowX, uint16_t windowY, uint16_
     }
     _tftlcd.endWrite();
 }
+
+void DatapadTFTLCD::setAddrWindow(int16_t x, int16_t y, int16_t x1, int16_t y1) { _tftlcd.setAddrWindow(x, y, x1, y1); }
+
+void DatapadTFTLCD::pushColors(uint16_t *block, int16_t n, bool first) { _tftlcd.pushColors(block, n, first); }
