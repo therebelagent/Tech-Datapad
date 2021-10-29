@@ -32,3 +32,4 @@ Bill of materials:
 ## External Libraries
 - MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled.
 - TouchScreen.
+- JPEGDecoder.
