@@ -21,7 +21,7 @@ private:
     DatapadTFTLCD &_datapadTFTLCD;
     int16_t _x, _y, _width, _height;
     int16_t _color, _backColor;
-    float _initialProgressLevel = 0, _increment = 1;
+    float _progressLevel = 0, _increment = 1;
     bool _raising = true;
     void drawRectangle();
 };

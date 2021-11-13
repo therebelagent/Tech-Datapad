@@ -35,6 +35,7 @@ public:
     virtual int16_t width(void);
     virtual int16_t height(void);
     virtual void drawRGBBitmapFar(uint16_t windowX, uint16_t windowY, uint16_t imageWidth, uint16_t imageHeight, uint32_t imagePtr);
+    virtual uint16_t readPixel(int16_t x, int16_t y);
     //Methods extracted from DDSGraphicalUtility
     virtual void drawInnerCircle(int16_t x, int16_t y, int16_t radius, int16_t offset, unsigned int colour);
     virtual void fillArc(int x, int y, int start_angle, int seg_count, int rx, int ry, int w, unsigned int colour);
@@ -44,6 +45,7 @@ public:
     virtual void printCenteredText(const char *text, const GFXfont *gfxFont, int16_t x, int16_t y, unsigned int colour);
     virtual void printCenteredText(const char *text, const GFXfont *gfxFont, int16_t x, int16_t y, uint16_t *width, uint16_t *height, unsigned int colour);
     virtual void fillTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false);
+    virtual void fillVerticalTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false);
     virtual void drawGrid(int16_t centerX, int16_t centerY, int16_t radius, int16_t gridLines, unsigned int color);
     virtual void drawRoundFrame(int16_t centerX, int16_t centerY, int16_t radius, int16_t shift, bool hollow, int16_t offset, unsigned int color, unsigned int backColor);
     virtual void fillQuarterCircle(int16_t x0, int16_t y0, int16_t r, uint8_t quarter, int16_t delta, uint16_t colour);
@@ -55,6 +57,7 @@ public:
     virtual void drawBanner(int16_t x, int16_t y, int16_t height, int16_t width, unsigned int color, const char *text, const GFXfont *gfxFont);
     virtual void setAddrWindow(int16_t x, int16_t y, int16_t x1, int16_t y1);
     virtual void pushColors(uint16_t *block, int16_t n, bool first);
+    virtual void fillArrow(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false);
 
 private:
     MCUFRIEND_kbv _tftlcd;

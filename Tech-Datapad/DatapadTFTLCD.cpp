@@ -150,12 +150,25 @@ void DatapadTFTLCD::printCenteredText(const char *text, const GFXfont *gfxFont, 
 
 void DatapadTFTLCD::fillTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false)
 {
-    int16_t triangleX0 = x - (baseWidth / 2);
+    int16_t halfBaseWidth = baseWidth / 2;
+    int16_t triangleX0 = x - halfBaseWidth;
     int16_t triangleY0 = y + (height / 2);
     int16_t triangleX1 = triangleX0 + baseWidth;
-    int16_t triangleX2 = triangleX0 + (baseWidth / 2);
+    int16_t triangleX2 = triangleX0 + halfBaseWidth;
     int16_t triangleY2 = inverted ? triangleY0 + height : triangleY0 - height;
     _tftlcd.fillTriangle(triangleX0, triangleY0, triangleX1, triangleY0, triangleX2, triangleY2, colour);
+}
+
+void DatapadTFTLCD::fillVerticalTriangle(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false)
+{
+    int16_t halfBaseWidth = baseWidth / 2;
+    int16_t triangleX0 = x - halfBaseWidth;
+    int16_t triangleY0 = y;
+    int16_t triangleX1 = x;
+    int16_t triangleY1 = inverted ? triangleY0 + height : triangleY0 - height;
+    int16_t triangleX2 = triangleX0 + baseWidth;
+    int16_t triangleY2 = triangleY0;
+    _tftlcd.fillTriangle(triangleX0, triangleY0, triangleX1, triangleY1, triangleX2, triangleY2, colour);
 }
 
 void DatapadTFTLCD::drawGrid(int16_t centerX, int16_t centerY, int16_t radius, int16_t gridLines, unsigned int color)
@@ -365,3 +378,17 @@ void DatapadTFTLCD::drawRGBBitmapFar(uint16_t windowX, uint16_t windowY, uint16_
 void DatapadTFTLCD::setAddrWindow(int16_t x, int16_t y, int16_t x1, int16_t y1) { _tftlcd.setAddrWindow(x, y, x1, y1); }
 
 void DatapadTFTLCD::pushColors(uint16_t *block, int16_t n, bool first) { _tftlcd.pushColors(block, n, first); }
+
+void DatapadTFTLCD::fillArrow(int16_t x, int16_t y, int16_t baseWidth, int16_t height, int16_t colour, boolean inverted = false)
+{
+    int16_t halfBaseWidth = baseWidth / 2;
+    int16_t triangleX0 = x;
+    int16_t triangleY0 = y - halfBaseWidth;
+    int16_t triangleX1 = inverted ? triangleX0 - height : triangleX0 + height;
+    int16_t triangleY1 = y;
+    int16_t triangleX2 = triangleX0;
+    int16_t triangleY2 = triangleY1 + halfBaseWidth;
+    _tftlcd.fillTriangle(triangleX0, triangleY0, triangleX1, triangleY1, triangleX2, triangleY2, colour);
+}
+
+uint16_t DatapadTFTLCD::readPixel(int16_t x, int16_t y) { return _tftlcd.readPixel(x, y); }

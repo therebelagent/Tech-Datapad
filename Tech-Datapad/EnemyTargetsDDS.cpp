@@ -284,7 +284,6 @@ EnemyTargetsDDS::EnemyTargetsDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplayS
 
 void EnemyTargetsDDS::show()
 {
-    reset();
     EnemyTargetsDDSHelper enemyTargetsDDSHelper;
     enemyTargetsDDSHelper.drawEnemyTargets(_datapadTFTLCD);
 }

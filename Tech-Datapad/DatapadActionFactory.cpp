@@ -16,6 +16,7 @@
 #include "DoorLockHackingDDS.h"
 #include "SpiceDetectorDDS.h"
 #include "LifeformAnalyzerDDS.h"
+#include "InhibitorChipDetectorDDS.h"
 #include "DiagnosticDBC.h"
 #include "StandByDBC.h"
 #include "AllLitUpDBC.h"
@@ -61,6 +62,9 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
         break;
     case DatapadActionType::LifeformAnalyzer:
         datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        break;
+    case DatapadActionType::InhibitorChipDetector:
+        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     }
     return datapadAction;

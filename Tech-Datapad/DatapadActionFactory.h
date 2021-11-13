@@ -23,7 +23,8 @@ enum class DatapadActionType
     CommSignalTracker = 128,
     DoorLockHacking = 256,
     SpiceDetector = 512,
-    LifeformAnalyzer = 1024
+    LifeformAnalyzer = 1024,
+    InhibitorChipDetector = 2048
 };
 
 class DatapadActionFactory
