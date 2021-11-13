@@ -46,16 +46,12 @@ public:
         buttonLeft = centerX - (totalWidth / 2) + (buttonWidth / 2);
         buttonTop += buttonSeparation + buttonHeight;
         datapadDisplayButtons[5].initialize(&datapadTFTLCD, DatapadActionType::EnemyTargets, buttonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_5_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-
         nextButtonLeft = buttonLeft + buttonSeparation;
         datapadDisplayButtons[6].initialize(&datapadTFTLCD, DatapadActionType::ExplosiveCharges, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_6_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-
         nextButtonLeft += buttonWidth + buttonSeparation;
         datapadDisplayButtons[7].initialize(&datapadTFTLCD, DatapadActionType::SpiceDetector, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_7_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-
         nextButtonLeft += buttonSeparation;
         datapadDisplayButtons[8].initialize(&datapadTFTLCD, DatapadActionType::LifeformAnalyzer, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_8_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
-
         nextButtonLeft += buttonWidth + buttonSeparation;
         datapadDisplayButtons[9].initialize(&datapadTFTLCD, DatapadActionType::InhibitorChipDetector, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_9_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
     }

@@ -202,12 +202,12 @@ private:
         datapadTFTLCD.drawLine(bottomUnderscoreLineLeft + bottomLineWidth, bottomUnderscoreLineTop, bottomLineLeft, bottomLineTop, 2, DISPLAY_RING_COLOR);
         datapadTFTLCD.drawLine(bottomUnderscoreLineLeft, bottomUnderscoreLineTop, bottomUnderscoreLineLeft - 3, bottomLineTop, 2, DISPLAY_RING_COLOR);
         int16_t bottomUnderscoreLineWidth = width * 0.05;
-        datapadTFTLCD.fillRect(bottomUnderscoreLineLeft - bottomUnderscoreLineWidth, bottomLineTop, bottomUnderscoreLineWidth, 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillRect(bottomUnderscoreLineLeft - bottomUnderscoreLineWidth - 2, bottomLineTop, bottomUnderscoreLineWidth, 2, DISPLAY_RING_COLOR);
         bottomUnderscoreLineLeft = bottomLineLeft + bottomLineWidth + 3;
         datapadTFTLCD.fillRect(bottomUnderscoreLineLeft, bottomUnderscoreLineTop, bottomLineWidth, 2, DISPLAY_RING_COLOR);
-        datapadTFTLCD.drawLine(bottomLineLeft + bottomLineWidth, bottomLineTop, bottomUnderscoreLineLeft, bottomUnderscoreLineTop, 2, DISPLAY_RING_COLOR);
-        datapadTFTLCD.drawLine(bottomUnderscoreLineLeft + bottomLineWidth, bottomUnderscoreLineTop, bottomUnderscoreLineLeft + bottomLineWidth + 3, bottomLineTop, 2, DISPLAY_RING_COLOR);
-        datapadTFTLCD.fillRect(bottomUnderscoreLineLeft + bottomLineWidth + 3, bottomLineTop, bottomUnderscoreLineWidth, 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.drawLine(bottomLineLeft + bottomLineWidth - 2, bottomLineTop, bottomUnderscoreLineLeft - 2, bottomUnderscoreLineTop, 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.drawLine(bottomUnderscoreLineLeft + bottomLineWidth, bottomUnderscoreLineTop, bottomUnderscoreLineLeft + bottomLineWidth + 2, bottomLineTop, 2, DISPLAY_RING_COLOR);
+        datapadTFTLCD.fillRect(bottomUnderscoreLineLeft + bottomLineWidth + 2, bottomLineTop, bottomUnderscoreLineWidth, 2, DISPLAY_RING_COLOR);
         bottomLineTop = centerY + (width * 0.47);
         bottomLineWidth = width * 0.17;
         bottomLineLeft = centerX - (bottomLineWidth / 2);
@@ -216,7 +216,7 @@ private:
         bottomLineWidth = width * 0.21;
         bottomLineLeft = centerX - (bottomLineWidth / 2);
         datapadTFTLCD.fillRect(bottomLineLeft, bottomLineTop, bottomLineWidth, 2, DISPLAY_RING_COLOR);
-        bottomLineTop = bottomLineTop - 2;
+        bottomLineTop = bottomLineTop - 1;
         bottomLineWidth = width * 0.25;
         bottomLineLeft = centerX - (bottomLineWidth / 2);
         datapadTFTLCD.fillRect(bottomLineLeft, bottomLineTop, bottomLineWidth, 2, DISPLAY_RING_COLOR);

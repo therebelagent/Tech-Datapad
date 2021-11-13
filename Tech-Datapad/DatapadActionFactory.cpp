@@ -64,7 +64,7 @@ DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadA
         datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     case DatapadActionType::InhibitorChipDetector:
-        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
         break;
     }
     return datapadAction;
