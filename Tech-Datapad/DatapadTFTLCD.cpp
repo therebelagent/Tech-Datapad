@@ -185,7 +185,7 @@ void DatapadTFTLCD::drawGrid(int16_t centerX, int16_t centerY, int16_t radius, i
         nextLinePosition += gridLineHeight;
     }
     nextLinePosition = centerX - gridLineHeight;
-    for (int16_t line = 0; line <= halfGridLines; line++)
+    for (int16_t line = 0; line < halfGridLines; line++)
     {
         _tftlcd.drawFastVLine(nextLinePosition, topY, diameter, color);
         nextLinePosition -= gridLineHeight;
@@ -197,7 +197,7 @@ void DatapadTFTLCD::drawGrid(int16_t centerX, int16_t centerY, int16_t radius, i
         nextLinePosition += gridLineHeight;
     }
     nextLinePosition = centerY - gridLineHeight;
-    for (int16_t line = 0; line <= halfGridLines; line++)
+    for (int16_t line = 0; line < halfGridLines; line++)
     {
         _tftlcd.drawFastHLine(topX, nextLinePosition, diameter, color);
         nextLinePosition -= gridLineHeight;
