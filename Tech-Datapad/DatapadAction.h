@@ -8,19 +8,14 @@
 #ifndef DatapadAction_h
 #define DatapadAction_h
 
-#include "DatapadDisplaySequence.h"
-#include "DatapadButtonsControler.h"
+#include "IDatapadAction.h"
 
-class DatapadAction
+class DatapadAction : public IDatapadAction
 {
 public:
-    DatapadAction(DatapadDisplaySequence &datapadDisplaySequence, DatapadButtonsControler &datapadButtonsControler);
+    DatapadAction(IDatapadDisplaySequence &datapadDisplaySequence, IDatapadButtonsControler &datapadButtonsControler);
     virtual void play();
     void reset();
-
-private:
-    DatapadDisplaySequence &_datapadDisplaySequence;
-    DatapadButtonsControler &_datapadButtonsControler;
 };
 
 #endif

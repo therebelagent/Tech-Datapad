@@ -19,7 +19,7 @@
 class CreatureAnalyzerDDSHelper
 {
 public:
-    void drawCreatureAnalyzer(DatapadTFTLCD &datapadTFTLCD)
+    void drawCreatureAnalyzer(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -37,7 +37,7 @@ private:
     int16_t _dotRadius, _dotTop, _dotALeft, _dotBLeft;
     int16_t _lineWidth = 2;
 
-    void drawIrlingAScreenAnalyzer(DatapadTFTLCD datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t width)
+    void drawIrlingAScreenAnalyzer(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t width)
     {
         //Draw Irling A.
         DDSIrlingAImage ddsIrlingAImage = DDSIrlingAImage(datapadTFTLCD);
@@ -57,7 +57,7 @@ private:
         nonBlockingDelay(750);
     }
 
-    void drawIrlingAFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawIrlingAFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Blue Inner Boxes.
         int16_t blueBoxTop = centerY - (width * 0.295);
@@ -124,20 +124,20 @@ private:
         datapadTFTLCD.drawLine(lineX0Left, lineY0Top, lineX1Left, lineY1Top, _lineWidth, TFT_WHITE);
     }
 
-    void swapDotColors(DatapadTFTLCD datapadTFTLCD)
+    void swapDotColors(IDatapadTFTLCD &datapadTFTLCD)
     {
         datapadTFTLCD.fillCircle(_dotALeft, _dotTop, _dotRadius, LIFEFORM_ANALYZER_CREATURE_NAME_L0_COLOR);
         datapadTFTLCD.fillCircle(_dotBLeft, _dotTop, _dotRadius, TFT_WHITE);
     }
 
-    void remarkCreatureNameBanner(DatapadTFTLCD datapadTFTLCD, uint16_t color, boolean drawRemark)
+    void remarkCreatureNameBanner(IDatapadTFTLCD &datapadTFTLCD, uint16_t color, boolean drawRemark)
     {
         if (drawRemark)
             datapadTFTLCD.drawRectangle(_innerBoxLeft, _innerBoxTop, _innerBoxWidth, _innerBoxHeight, _lineWidth, LIFEFORM_ANALYZER_CREATURE_NAME_L0_COLOR);
         datapadTFTLCD.printCenteredText(LIFEFORM_ANALYZER_CREATURE_NAME_TEXT, &Aurebesh10pt7b, _innerBoxLeft + (_innerBoxWidth / 2), _innerBoxTop + (_innerBoxHeight / 2), color);
     }
 
-    void drawIrlingBScreenAnalyzer(DatapadTFTLCD datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t width)
+    void drawIrlingBScreenAnalyzer(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t width)
     {
         //Draw Irling B.
         DDSIrlingBImage ddsIrlingBImage = DDSIrlingBImage(datapadTFTLCD);
@@ -173,7 +173,7 @@ private:
         delete _ddsBlinkingDot;
     }
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Round Frame.
         datapadTFTLCD.drawInnerCircle(centerX, centerY, radius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
@@ -185,7 +185,7 @@ private:
         drawBothRoudedFrameDetails(datapadTFTLCD, centerX, centerY, width);
     }
 
-    void drawBothRoudedFrameDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
+    void drawBothRoudedFrameDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
     {
         int16_t roundedFrameDetailHeight = width * 0.39;
         int16_t roundedFrameDetailTop = centerY - roundedFrameDetailHeight;
@@ -194,7 +194,7 @@ private:
         drawRoudedFrameDetail(datapadTFTLCD, centerX, roundedFrameDetailTop, width, true);
     }
 
-    void drawIrlingBFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
+    void drawIrlingBFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
     {
         int16_t lineWidth = _lineWidth;
         //Draw Red Dot.
@@ -263,7 +263,7 @@ private:
         _progressBar4 = new DDSProgressBar(datapadTFTLCD, lineLeft, lineTop - progressBarHeight, lineWidth, progressBarHeight, LIFEFORM_ANALYZER_CREATURE_NAME_L0_COLOR, DISPLAY_BACK_COLOR, random(45, 75), 0.40);
     }
 
-    void drawRoudedFrameDetail(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t y, int16_t width, bool inverted)
+    void drawRoudedFrameDetail(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t y, int16_t width, bool inverted)
     {
         int16_t halfLineWidth = _lineWidth / 2;
         int16_t mutiplier = 1;
@@ -350,7 +350,7 @@ private:
     }
 };
 
-LifeformAnalyzerDDS::LifeformAnalyzerDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+LifeformAnalyzerDDS::LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void LifeformAnalyzerDDS::show()
 {

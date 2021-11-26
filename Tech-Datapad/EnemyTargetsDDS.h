@@ -13,11 +13,8 @@
 class EnemyTargetsDDS : public DatapadDisplaySequence
 {
 public:
-    EnemyTargetsDDS(DatapadTFTLCD &datapadTFTLCD);
+    EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

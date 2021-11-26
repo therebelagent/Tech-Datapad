@@ -13,11 +13,8 @@
 class ForgingChainCodesDDS : public StandByDDS
 {
 public:
-    ForgingChainCodesDDS(DatapadTFTLCD &datapadTFTLCD);
+    ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

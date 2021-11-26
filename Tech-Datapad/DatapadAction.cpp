@@ -7,7 +7,7 @@
 
 #include "DatapadAction.h"
 
-DatapadAction::DatapadAction(DatapadDisplaySequence &datapadDisplaySequence, DatapadButtonsControler &datapadButtonsControler) : _datapadDisplaySequence(datapadDisplaySequence), _datapadButtonsControler(datapadButtonsControler){}
+DatapadAction::DatapadAction(IDatapadDisplaySequence &datapadDisplaySequence, IDatapadButtonsControler &datapadButtonsControler) : IDatapadAction(datapadDisplaySequence, datapadButtonsControler) {}
 
 void DatapadAction::play()
 {

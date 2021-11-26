@@ -7,7 +7,7 @@
 
 #include "DatapadDisplaySequence.h"
 
-DatapadDisplaySequence::DatapadDisplaySequence(DatapadTFTLCD &datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
+DatapadDisplaySequence::DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD) : IDatapadDisplaySequence(datapadTFTLCD) {}
 
 void DatapadDisplaySequence::reset()
 {

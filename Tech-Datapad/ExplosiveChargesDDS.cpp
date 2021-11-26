@@ -10,7 +10,7 @@
 class ExplosiveChargesDDSHelper
 {
 public:
-    void drawExplosiveChargesDisplaySecuence(DatapadTFTLCD &datapadTFTLCD)
+    void drawExplosiveChargesDisplaySecuence(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t centerX = datapadTFTLCD.width() / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
@@ -23,7 +23,7 @@ public:
     }
 
 private:
-    void drawFirstPhaseTargetDisplay(DatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
+    void drawFirstPhaseTargetDisplay(IDatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
     {
         datapadTFTLCD.fillCircle(centerX, centerY, radius, LIGHT_BLUE_CIRCLE_COLOR);
         drawBullseye(datapadTFTLCD, radius, centerX, centerY);
@@ -34,13 +34,13 @@ private:
         drawWhiteVerticalArrows(datapadTFTLCD, radius, centerX, centerY);
     }
 
-    void drawSecondPhaseTargetDisplay(DatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
+    void drawSecondPhaseTargetDisplay(IDatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
     {
         datapadTFTLCD.fillCircle(centerX, centerY, radius * BULLSEYE_SECOND_CIRCLE_RELATIVE_DIAMETER, BLUE_INNER_CIRCLE_COLOR);
         datapadTFTLCD.fillCircle(centerX, centerY, radius * BULLSEYE_THIRD_CIRCLE_RELATIVE_DIAMETER, DARK_GREEN_BULLSEYE_CIRCLE_COLOR);
     }
 
-    void drawThirdPhaseTargetDisplay(DatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
+    void drawThirdPhaseTargetDisplay(IDatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
     {
         datapadTFTLCD.fillCircle(centerX, centerY, radius * BULLSEYE_SECOND_CIRCLE_RELATIVE_DIAMETER, DISPLAY_RING_COLOR);
         datapadTFTLCD.fillCircle(centerX, centerY, radius * BULLSEYE_THIRD_CIRCLE_RELATIVE_DIAMETER, DISPLAY_RING_COLOR);
@@ -49,14 +49,14 @@ private:
         drawCrosshair(datapadTFTLCD, radius * BULLSEYE_THIRD_CIRCLE_RELATIVE_DIAMETER, centerX, centerY, DARK_GREEN_BULLSEYE_CIRCLE_COLOR, DISPLAY_RING_COLOR);
     }
 
-    void drawCrosshair(DatapadTFTLCD &datapadTFTLCD, int16_t crosshairLenght, int16_t centerX, int16_t centerY, int16_t crosshairColor, int16_t centerColor)
+    void drawCrosshair(IDatapadTFTLCD &datapadTFTLCD, int16_t crosshairLenght, int16_t centerX, int16_t centerY, int16_t crosshairColor, int16_t centerColor)
     {
         datapadTFTLCD.drawLine(centerX - crosshairLenght, centerY - crosshairLenght, centerX + crosshairLenght, centerY + crosshairLenght, 2, crosshairColor);
         datapadTFTLCD.drawLine(centerX - crosshairLenght, centerY + crosshairLenght, centerX + crosshairLenght, centerY - crosshairLenght, 2, crosshairColor);
         datapadTFTLCD.fillCircle(centerX, centerY, crosshairLenght - BULLSEYE_OFFSET, centerColor);
     }
 
-    void drawBullseye(DatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
+    void drawBullseye(IDatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
     {
         int16_t innerCircleRadius = radius * BULLSEYE_BORDER_CIRCLE_RELATIVE_DIAMETER;
         datapadTFTLCD.drawInnerCircle(centerX, centerY, innerCircleRadius, BULLSEYE_OFFSET, DARK_GREEN_BULLSEYE_CIRCLE_COLOR);
@@ -68,7 +68,7 @@ private:
         datapadTFTLCD.drawInnerCircle(centerX, centerY, innerCircleRadius, BULLSEYE_OFFSET, DARK_GREEN_BULLSEYE_CIRCLE_COLOR);
     }
 
-    void drawWhiteVerticalArrows(DatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
+    void drawWhiteVerticalArrows(IDatapadTFTLCD &datapadTFTLCD, int16_t radius, int16_t centerX, int16_t centerY)
     {
         int16_t diameter = radius * 2;
         int16_t triangleBaseWidth = diameter * 0.06;
@@ -79,7 +79,7 @@ private:
     }
 };
 
-ExplosiveChargesDDS::ExplosiveChargesDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+ExplosiveChargesDDS::ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void ExplosiveChargesDDS::show()
 {

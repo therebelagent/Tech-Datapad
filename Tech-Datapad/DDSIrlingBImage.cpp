@@ -9,7 +9,7 @@
 #include "DDSImagePainter.h"
 #include "DDSIrlingBRepository.h"
 
-DDSIrlingBImage::DDSIrlingBImage(DatapadTFTLCD &datapadTFTLCD) :  _datapadTFTLCD(datapadTFTLCD) {}
+DDSIrlingBImage::DDSIrlingBImage(IDatapadTFTLCD &datapadTFTLCD) : IDDSImage(datapadTFTLCD) {}
 
 void DDSIrlingBImage::drawImage(int16_t x, int16_t y)
 {

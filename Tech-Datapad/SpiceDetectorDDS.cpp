@@ -14,7 +14,7 @@
 class SpiceDetectorDDSHelper
 {
 public:
-    void drawSpiceDetectorDDS(DatapadTFTLCD &datapadTFTLCD)
+    void drawSpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -24,7 +24,7 @@ public:
         RunProgressBarAnimations();
     }
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Inner Arcs.
         int16_t innerRadius = radius * 0.95;
@@ -123,7 +123,7 @@ private:
     DDSProgressBar *_progressBar0, *_progressBar1, *_progressBar2, *_progressBar3;
 };
 
-SpiceDetectorDDS::SpiceDetectorDDS(DatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+SpiceDetectorDDS::SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD) {}
 
 void SpiceDetectorDDS::show()
 {

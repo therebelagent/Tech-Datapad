@@ -12,7 +12,7 @@
 class ForgingChainCodesDDSHelper
 {
 public:
-    void drawForgingChainCodes(DatapadTFTLCD &datapadTFTLCD)
+    void drawForgingChainCodes(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -40,7 +40,7 @@ public:
 private:
     int16_t _rectangularFrameHeight, _rectangularFrameTop, _rectangularFrameLeft, _rectangularFrameWidth;
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Rounded Frame.
         datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 45, false, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
@@ -76,7 +76,7 @@ private:
     }
 };
 
-ForgingChainCodesDDS::ForgingChainCodesDDS(DatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+ForgingChainCodesDDS::ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD) {}
 
 void ForgingChainCodesDDS::show()
 {

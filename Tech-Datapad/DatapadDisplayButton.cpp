@@ -10,14 +10,14 @@
 class DatapadDisplayButtonHelper
 {
 public:
-    void drawTriangle(DatapadTFTLCD *datapadTFTLCD, DatapadDisplayPoint aDatapadDisplayPoint, DatapadDisplayPoint bDatapadDisplayPoint, DatapadDisplayPoint cDatapadDisplayPoint, int16_t height, const char *text, uint16_t color, uint16_t backColor, int16_t textY, const GFXfont *gfxFont = NULL)
+    void drawTriangle(IDatapadTFTLCD *datapadTFTLCD, DatapadDisplayPoint aDatapadDisplayPoint, DatapadDisplayPoint bDatapadDisplayPoint, DatapadDisplayPoint cDatapadDisplayPoint, int16_t height, const char *text, uint16_t color, uint16_t backColor, int16_t textY, const GFXfont *gfxFont = NULL)
     {
         datapadTFTLCD->fillTriangle(aDatapadDisplayPoint.x, aDatapadDisplayPoint.y, bDatapadDisplayPoint.x, bDatapadDisplayPoint.y, cDatapadDisplayPoint.x, cDatapadDisplayPoint.y, backColor);
         datapadTFTLCD->drawTriangle(aDatapadDisplayPoint.x, aDatapadDisplayPoint.y, bDatapadDisplayPoint.x, bDatapadDisplayPoint.y, cDatapadDisplayPoint.x, cDatapadDisplayPoint.y, color);
         datapadTFTLCD->printCenteredText(text, gfxFont, bDatapadDisplayPoint.x, textY, color);
     }
 
-    void drawFilledTriangle(DatapadTFTLCD *datapadTFTLCD, DatapadDisplayPoint aDatapadDisplayPoint, DatapadDisplayPoint bDatapadDisplayPoint, DatapadDisplayPoint cDatapadDisplayPoint, int16_t height, const char *text, uint16_t color, uint16_t textColor, int16_t textY, const GFXfont *gfxFont = NULL)
+    void drawFilledTriangle(IDatapadTFTLCD *datapadTFTLCD, DatapadDisplayPoint aDatapadDisplayPoint, DatapadDisplayPoint bDatapadDisplayPoint, DatapadDisplayPoint cDatapadDisplayPoint, int16_t height, const char *text, uint16_t color, uint16_t textColor, int16_t textY, const GFXfont *gfxFont = NULL)
     {
         datapadTFTLCD->fillTriangle(aDatapadDisplayPoint.x, aDatapadDisplayPoint.y, bDatapadDisplayPoint.x, bDatapadDisplayPoint.y, cDatapadDisplayPoint.x, cDatapadDisplayPoint.y, color);
         datapadTFTLCD->printCenteredText(text, gfxFont, bDatapadDisplayPoint.x, textY, textColor);
@@ -38,7 +38,7 @@ public:
 
 DatapadDisplayButton::DatapadDisplayButton() {}
 
-void DatapadDisplayButton::initialize(DatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL)
+void DatapadDisplayButton::initialize(IDatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL)
 {
     _datapadTFTLCD = datapadTFTLCD;
     _datapadActionType = datapadActionType;

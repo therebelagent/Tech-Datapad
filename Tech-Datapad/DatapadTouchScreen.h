@@ -8,15 +8,10 @@
 #ifndef DatapadTouchScreen_h
 #define DatapadTouchScreen_h
 
-#include "TouchScreen.h"
+#include <TouchScreen.h>
+#include "IDatapadTouchScreen.h"
 
-struct DatapadDisplayPoint
-{
-    int16_t x;
-    int16_t y;
-};
-
-class DatapadTouchScreen : public TouchScreen
+class DatapadTouchScreen : public IDatapadTouchScreen, TouchScreen
 {
 public:
     DatapadTouchScreen(uint8_t xp, uint8_t yp, uint8_t xm, uint8_t ym, uint16_t rx);
@@ -24,9 +19,7 @@ public:
     DatapadDisplayPoint getDatapadDisplayPoint();
 
 private:
-    const uint8_t _xm;
-    const uint8_t _yp;
-    DatapadDisplayPoint _datapadDisplayPoint;
+    const uint8_t _xm, _yp;
 };
 
 #endif

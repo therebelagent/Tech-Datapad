@@ -12,7 +12,7 @@
 class RearAxleStabilizerCalibrationProgressBar
 {
 public:
-    RearAxleStabilizerCalibrationProgressBar(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height) : _datapadTFTLCD(datapadTFTLCD)
+    RearAxleStabilizerCalibrationProgressBar(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height) : _datapadTFTLCD(datapadTFTLCD)
     {
         _x = x;
         _nextSegmentTop = y;
@@ -37,7 +37,7 @@ public:
     }
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     int16_t _x, _width;
     int16_t _smallSegmentHeight, _regularSegmentHeight, _bigSegmentHeight;
     int16_t _nextSegmentTop, _currentSegment;
@@ -78,7 +78,7 @@ private:
 class RearAxleStabilizerCalibrationDDSHelper
 {
 public:
-    void drawRearAxleStabilizerCalibration(DatapadTFTLCD &datapadTFTLCD)
+    void drawRearAxleStabilizerCalibration(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -102,7 +102,7 @@ private:
     int16_t _dotX, _redDotY, _whiteDotY, _dotRadius;
     int16_t _whiteULeft, _whiteUTop;
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     { //Round Frame.
         datapadTFTLCD.drawRoundFrame(centerX, centerY, radius, 0, true, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
         datapadTFTLCD.drawFastHorizontalLine(0, centerY, width, 8, DISPLAY_BACK_COLOR);
@@ -207,7 +207,7 @@ private:
         datapadTFTLCD.fillCircle(_dotX, _whiteDotY, _dotRadius, TFT_WHITE);
     }
 
-    void drawProgressBarAnimation(DatapadTFTLCD &datapadTFTLCD, int16_t width)
+    void drawProgressBarAnimation(IDatapadTFTLCD &datapadTFTLCD, int16_t width)
     {
         int16_t progressBarLeft = _whiteULeft + 2;
         int16_t progressBarWidth = width * 0.093;
@@ -229,19 +229,19 @@ private:
         }
     }
 
-    void drawSwappedDots(DatapadTFTLCD &datapadTFTLCD)
+    void drawSwappedDots(IDatapadTFTLCD &datapadTFTLCD)
     {
         datapadTFTLCD.fillCircle(_dotX, _redDotY, _dotRadius, TFT_WHITE);
         datapadTFTLCD.fillCircle(_dotX, _whiteDotY, _dotRadius, TFT_RED);
     }
 
-    void drawGreenDots(DatapadTFTLCD &datapadTFTLCD)
+    void drawGreenDots(IDatapadTFTLCD &datapadTFTLCD)
     {
         datapadTFTLCD.fillCircle(_dotX, _redDotY, _dotRadius, CANNON_POWERED_UP_COLOR);
         datapadTFTLCD.fillCircle(_dotX, _whiteDotY, _dotRadius, CANNON_POWERED_UP_COLOR);
     }
 
-    void drawRepairingBanner(DatapadTFTLCD &datapadTFTLCD, int16_t centerX)
+    void drawRepairingBanner(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX)
     {
         int16_t textLeft = centerX - _whiteBoxWidth / 5;
         datapadTFTLCD.printCenteredText(REAR_AXLE_STABILIZER_CALIBRATION_REPAIRING, &Aurebesh6pt7b, textLeft, (_whiteBoxTop + _whiteBoxHeight / 2) - 1, TFT_RED);
@@ -249,13 +249,13 @@ private:
         datapadTFTLCD.printCenteredText(REAR_AXLE_STABILIZER_CALIBRATION_REPAIRING, &Aurebesh6pt7b, textLeft, (_whiteBoxTop + _whiteBoxHeight / 2) - 1, DISPLAY_BACK_COLOR);
     }
 
-    void drawCompleteBanner(DatapadTFTLCD &datapadTFTLCD, int16_t centerX)
+    void drawCompleteBanner(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX)
     {
         datapadTFTLCD.printCenteredText(REAR_AXLE_STABILIZER_CALIBRATION_COMPLETE, &Aurebesh10pt7b, centerX, (_whiteBoxTop + _whiteBoxHeight / 2) - 1, CANNON_POWERED_UP_COLOR);
     }
 };
 
-RearAxleStabilizerCalibrationDDS::RearAxleStabilizerCalibrationDDS(DatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+RearAxleStabilizerCalibrationDDS::RearAxleStabilizerCalibrationDDS(IDatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD) {}
 
 void RearAxleStabilizerCalibrationDDS::show()
 {

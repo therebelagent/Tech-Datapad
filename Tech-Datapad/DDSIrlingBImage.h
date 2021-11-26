@@ -5,21 +5,18 @@
 //  2021 v 1.0.
 //
 
-#include "DDSImage.h"
+#include "IDDSImage.h"
 
 #ifndef DDSIrlingBImage_h
 #define DDSIrlingBImage_h
 
-class DDSIrlingBImage : DDSImage
+class DDSIrlingBImage : public IDDSImage
 {
 public:
-    DDSIrlingBImage(DatapadTFTLCD &datapadTFTLCD);
+    DDSIrlingBImage(IDatapadTFTLCD &datapadTFTLCD);
     void drawImage(int16_t x, int16_t y);
     int16_t width();
     int16_t height();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

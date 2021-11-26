@@ -13,11 +13,8 @@
 class CommSignalTrackerDDS : public DatapadDisplaySequence
 {
 public:
-    CommSignalTrackerDDS(DatapadTFTLCD &datapadTFTLCD);
+    CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

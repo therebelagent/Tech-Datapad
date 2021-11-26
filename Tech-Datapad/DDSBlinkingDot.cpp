@@ -6,9 +6,8 @@
 //
 
 #include "DDSBlinkingDot.h"
-#include "DatapadDisplaySequenceConstants.h"
 
-DDSBlinkingDot::DDSBlinkingDot(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour), _backColor(backColour) {}
+DDSBlinkingDot::DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour), _backColor(backColour) {}
 
 void DDSBlinkingDot::update()
 {

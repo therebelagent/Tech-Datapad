@@ -8,15 +8,14 @@
 #ifndef DatapadLED_h
 #define DatapadLED_h
 
-class DatapadLED
+#include "IDatapadLED.h"
+
+class DatapadLED : public IDatapadLED
 {
 public:
     DatapadLED(uint8_t pin);
     void turnOn();
     void turnOff();
-
-private:
-    const uint8_t _pin;
 };
 
 #endif

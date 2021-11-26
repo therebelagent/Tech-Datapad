@@ -25,46 +25,50 @@
 
 DatapadActionFactory::DatapadActionFactory() {}
 
-DatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadActionType, DatapadActionSetup &datapadActionSetup)
+IDatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapadActionType, IDatapadActionSetup &datapadActionSetup)
 {
-    DatapadAction *datapadAction;
+    IDatapadAction *datapadAction;
+    DatapadLED smallWhiteDatapadLED = DatapadLED(datapadActionSetup.getSmallWhiteButtonPin());
+    DatapadLED redDatapadLED = DatapadLED(datapadActionSetup.getRedButtonPin());
+    DatapadLED whiteDatapadLED = DatapadLED(datapadActionSetup.getWhiteButtonPin());
+    DatapadLED yellowDatapadLED = DatapadLED(datapadActionSetup.getYellowButtonPin());
     switch (datapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = new ExplosiveChargesDA(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new DiagnosticDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new ExplosiveChargesDA(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new DiagnosticDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::StandBy:
-        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getDatapadTFTLCD()), *new ExplosiveChargesDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getDatapadTFTLCD()), *new ExplosiveChargesDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::RearAxleStabilizerCalibration:
-        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::ForgingChainCodes:
-        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::CommSignalTracker:
-        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::DoorLockHacking:
-        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::SpiceDetector:
-        datapadAction = new DatapadAction(*new SpiceDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new SpiceDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::LifeformAnalyzer:
-        datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     case DatapadActionType::InhibitorChipDetector:
-        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(datapadActionSetup.getSmallWhiteButtonPin(), datapadActionSetup.getRedButtonPin(), datapadActionSetup.getWhiteButtonPin(), datapadActionSetup.getYellowButtonPin()));
+        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
         break;
     }
     return datapadAction;

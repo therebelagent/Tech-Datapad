@@ -13,11 +13,8 @@
 class ExplosiveChargesDDS : public DatapadDisplaySequence
 {
 public:
-    ExplosiveChargesDDS(DatapadTFTLCD &datapadTFTLCD);
+    ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

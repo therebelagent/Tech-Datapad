@@ -7,28 +7,24 @@
 
 #include "DatapadButtonsControler.h"
 
-DatapadButtonsControler::DatapadButtonsControler(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin)
-    : _smallWhiteDatapadLED(DatapadLED(smallWhiteButtonPin)),
-      _redDatapadLED(DatapadLED(redButtonPin)),
-      _whiteDatapadLED(DatapadLED(whiteButtonPin)),
-      _yellowDatapadLED(DatapadLED(yellowButtonPin)) {}
+DatapadButtonsControler::DatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED) : IDatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED){}
 
-DatapadLED &DatapadButtonsControler::getSmallWhiteDatapadLED()
+IDatapadLED &DatapadButtonsControler::getSmallWhiteDatapadLED()
 {
     return _smallWhiteDatapadLED;
 }
 
-DatapadLED &DatapadButtonsControler::getRedDatapadLED()
+IDatapadLED &DatapadButtonsControler::getRedDatapadLED()
 {
     return _redDatapadLED;
 }
 
-DatapadLED &DatapadButtonsControler::getWhiteDatapadLED()
+IDatapadLED &DatapadButtonsControler::getWhiteDatapadLED()
 {
     return _whiteDatapadLED;
 }
 
-DatapadLED &DatapadButtonsControler::getYellowDatapadLED()
+IDatapadLED &DatapadButtonsControler::getYellowDatapadLED()
 {
     return _yellowDatapadLED;
 }

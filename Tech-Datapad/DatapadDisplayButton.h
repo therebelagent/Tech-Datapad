@@ -17,7 +17,7 @@ class DatapadDisplayButton
 
 public:
     DatapadDisplayButton();
-    virtual void initialize(DatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL);
+    virtual void initialize(IDatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL);
     virtual void draw();
     virtual void drawInverted();
     virtual bool contains(DatapadDisplayPoint datapadDisplayPoint);
@@ -25,7 +25,7 @@ public:
     virtual DatapadActionType getDatapadActionType();
 
 private:
-    DatapadTFTLCD *_datapadTFTLCD;
+    IDatapadTFTLCD *_datapadTFTLCD;
     DatapadActionType _datapadActionType;
     int16_t _x, _y, _width, _height, _textY;
     DatapadDisplayPoint _aDatapadDisplayPoint, _bDatapadDisplayPoint, _cDatapadDisplayPoint;

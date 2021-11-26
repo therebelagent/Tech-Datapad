@@ -13,11 +13,8 @@
 class SpiceDetectorDDS : public BasicGridDDS
 {
 public:
-    SpiceDetectorDDS(DatapadTFTLCD &datapadTFTLCD);
+    SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

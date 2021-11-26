@@ -13,11 +13,8 @@
 class StandByDDS : public DatapadDisplaySequence
 {
 public:
-    StandByDDS(DatapadTFTLCD &datapadTFTLCD);
+    StandByDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

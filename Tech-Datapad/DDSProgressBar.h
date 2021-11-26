@@ -5,7 +5,7 @@
 //  2021 v 1.0.
 //
 
-#include "DatapadTFTLCD.h"
+#include "IDatapadTFTLCD.h"
 
 #ifndef DDSProgressBar_h
 #define DDSProgressBar_h
@@ -13,12 +13,12 @@
 class DDSProgressBar
 {
 public:
-    DDSProgressBar(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t color, int16_t backColor, float initialProgressLevel, float increment = 1);
+    DDSProgressBar(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t color, int16_t backColor, float initialProgressLevel, float increment = 1);
     void show();
     void update();
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     int16_t _x, _y, _width, _height;
     int16_t _color, _backColor;
     float _progressLevel = 0, _increment = 1;

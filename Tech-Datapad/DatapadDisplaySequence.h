@@ -8,19 +8,15 @@
 #ifndef DatapadDisplaySequence_h
 #define DatapadDisplaySequence_h
 
-#include "DatapadTFTLCD.h"
-#include "DatapadDisplaySequenceConstants.h"
+#include "IDatapadDisplaySequence.h"
 
-class DatapadDisplaySequence
+class DatapadDisplaySequence : public IDatapadDisplaySequence
 {
 
 public:
-    DatapadDisplaySequence(DatapadTFTLCD &datapadTFTLCD);
-    virtual void show();
+    DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD);
+    void show();
     void reset();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

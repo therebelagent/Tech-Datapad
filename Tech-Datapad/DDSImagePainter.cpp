@@ -11,7 +11,7 @@
 // Return the minimum of two values a and b
 #define minimum(a, b) (((a) < (b)) ? (a) : (b))
 
-DDSImagePainter::DDSImagePainter(DatapadTFTLCD datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
+DDSImagePainter::DDSImagePainter(IDatapadTFTLCD &datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
 
 void DDSImagePainter::drawArrayJpeg(const uint8_t arrayname[], uint32_t array_size, int x, int y)
 {

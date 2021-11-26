@@ -13,11 +13,8 @@
 class DoorLockHackingDDS : public DatapadDisplaySequence
 {
 public:
-    DoorLockHackingDDS(DatapadTFTLCD &datapadTFTLCD);
+    DoorLockHackingDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

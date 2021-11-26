@@ -5,21 +5,18 @@
 //  2021 v 1.0.
 //
 
-#include "DDSImage.h"
+#include "IDDSImage.h"
 
 #ifndef DDSHeadScanImage_h
 #define DDSHeadScanImage_h
 
-class DDSHeadScanImage : DDSImage
+class DDSHeadScanImage : IDDSImage
 {
 public:
-    DDSHeadScanImage(DatapadTFTLCD &datapadTFTLCD);
+    DDSHeadScanImage(IDatapadTFTLCD &datapadTFTLCD);
     void drawImage(int16_t x, int16_t y);
     int16_t width();
     int16_t height();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

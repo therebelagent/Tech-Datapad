@@ -8,21 +8,17 @@
 #ifndef DatapadActionSetup_h
 #define DatapadActionSetup_h
 
-#include "DatapadTFTLCD.h"
+#include "IDatapadActionSetup.h"
 
-class DatapadActionSetup
+class DatapadActionSetup : public IDatapadActionSetup
 {
 public:
-    DatapadActionSetup(DatapadTFTLCD &datapadTFTLCD, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
-    DatapadTFTLCD &getDatapadTFTLCD();
+    DatapadActionSetup(IDatapadTFTLCD &datapadTFTLCD, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
+    IDatapadTFTLCD &getDatapadTFTLCD();
     uint8_t getSmallWhiteButtonPin();
     uint8_t getRedButtonPin();
     uint8_t getWhiteButtonPin();
     uint8_t getYellowButtonPin();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
-    const uint8_t _smallWhiteButtonPin, _redButtonPin, _whiteButtonPin, _yellowButtonPin;
 };
 
 #endif

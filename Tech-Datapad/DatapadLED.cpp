@@ -8,7 +8,7 @@
 #include "Arduino.h"
 #include "DatapadLED.h"
 
-DatapadLED::DatapadLED(uint8_t pin) : _pin(pin)
+DatapadLED::DatapadLED(uint8_t pin) : IDatapadLED(pin)
 {
     pinMode(_pin, OUTPUT);
 }

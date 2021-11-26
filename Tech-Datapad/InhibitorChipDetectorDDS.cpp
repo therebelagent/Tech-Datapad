@@ -13,7 +13,7 @@
 class ForeignBodyTracker
 {
 public:
-    ForeignBodyTracker(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y) {}
+    ForeignBodyTracker(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y) {}
 
     void draw()
     {
@@ -94,7 +94,7 @@ public:
     }
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     int16_t _x, _y, _circleRadius, _progressLevel = 100, _increment = 10, _elapsed = 0, _baseCircleRadius = 0;
     unsigned long _previousMillis = 0;
     bool _raising = true;
@@ -138,7 +138,7 @@ private:
 class InhibitorChipDetectorDDSHelper
 {
 public:
-    void drawInhibitorChipDetector(DatapadTFTLCD &datapadTFTLCD)
+    void drawInhibitorChipDetector(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -151,7 +151,7 @@ public:
 private:
     ForeignBodyTracker *_foreignBodyTracker;
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Head Scan Image.
         DDSHeadScanImage ddsHeadScanImage = DDSHeadScanImage(datapadTFTLCD);
@@ -228,7 +228,7 @@ private:
         _foreignBodyTracker = new ForeignBodyTracker(datapadTFTLCD, centerX, foreignBodyTrackerY);
     }
 
-    void drawRightBannerDashes(DatapadTFTLCD &datapadTFTLCD, int16_t lineLeft, int16_t lineWidth, int16_t separation, int16_t y, int16_t width)
+    void drawRightBannerDashes(IDatapadTFTLCD &datapadTFTLCD, int16_t lineLeft, int16_t lineWidth, int16_t separation, int16_t y, int16_t width)
     {
         lineLeft += separation;
         int16_t lineHeight = 3;
@@ -241,7 +241,7 @@ private:
         datapadTFTLCD.drawFastHorizontalLine(lineLeft, y, (lineWidth / 2), 2, DISPLAY_RING_COLOR);
     }
 
-    void drawLeftBannerDashes(DatapadTFTLCD &datapadTFTLCD, int16_t lineLeft, int16_t lineWidth, int16_t separation, int16_t y, int16_t width)
+    void drawLeftBannerDashes(IDatapadTFTLCD &datapadTFTLCD, int16_t lineLeft, int16_t lineWidth, int16_t separation, int16_t y, int16_t width)
     {
         int16_t lineHeight = 3;
         int16_t left = lineLeft - separation - lineWidth;
@@ -270,7 +270,7 @@ private:
     }
 };
 
-InhibitorChipDetectorDDS::InhibitorChipDetectorDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+InhibitorChipDetectorDDS::InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void InhibitorChipDetectorDDS::show()
 {

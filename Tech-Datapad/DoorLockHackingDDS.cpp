@@ -12,7 +12,7 @@
 class DoorLockHackingDDSHelper
 {
 public:
-    void drawDoorLockHacking(DatapadTFTLCD &datapadTFTLCD)
+    void drawDoorLockHacking(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -34,7 +34,7 @@ public:
 private:
     int16_t _screenFrameWidth, _screenFrameLeft;
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
     {
         //Right Fixed Details.
         //Trapezoid.
@@ -95,7 +95,7 @@ private:
     }
 };
 
-DoorLockHackingDDS::DoorLockHackingDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+DoorLockHackingDDS::DoorLockHackingDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void DoorLockHackingDDS::show()
 {

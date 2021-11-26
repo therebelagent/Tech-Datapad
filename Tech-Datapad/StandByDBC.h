@@ -13,7 +13,7 @@
 class StandByDBC : public DatapadButtonsControler
 {
 public:
-    StandByDBC(uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
+    StandByDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED);
     void turnOnOffButtons();
 };
 

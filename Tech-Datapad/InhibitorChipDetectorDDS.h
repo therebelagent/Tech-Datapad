@@ -13,11 +13,8 @@
 class InhibitorChipDetectorDDS : public DatapadDisplaySequence
 {
 public:
-    InhibitorChipDetectorDDS(DatapadTFTLCD &datapadTFTLCD);
+    InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

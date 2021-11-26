@@ -8,16 +8,13 @@
 #ifndef LifeformAnalyzerDDS_h
 #define LifeformAnalyzerDDS_h
 
-#include "DatapadDisplaySequence.h""
+#include "DatapadDisplaySequence.h"
 
 class LifeformAnalyzerDDS : public DatapadDisplaySequence
 {
 public:
-    LifeformAnalyzerDDS(DatapadTFTLCD &datapadTFTLCD);
+    LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD);
     void show();
-
-private:
-    DatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

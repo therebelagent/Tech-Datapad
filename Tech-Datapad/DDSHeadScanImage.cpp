@@ -9,7 +9,7 @@
 #include "DDSImagePainter.h"
 #include "DDSHeadScanRepository.h"
 
-DDSHeadScanImage::DDSHeadScanImage(DatapadTFTLCD &datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
+DDSHeadScanImage::DDSHeadScanImage(IDatapadTFTLCD &datapadTFTLCD) : IDDSImage(datapadTFTLCD) {}
 
 void DDSHeadScanImage::drawImage(int16_t x, int16_t y)
 {

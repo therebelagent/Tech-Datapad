@@ -5,7 +5,7 @@
 //  2021 v 1.0.
 //
 
-#include "DatapadTFTLCD.h"
+#include "IDatapadTFTLCD.h"
 
 #ifndef DDSImagePainter_h
 #define DDSImagePainter_h
@@ -13,11 +13,11 @@
 class DDSImagePainter
 {
 public:
-    DDSImagePainter(DatapadTFTLCD datapadTFTLCD);
+    DDSImagePainter(IDatapadTFTLCD &datapadTFTLCD);
     void drawArrayJpeg(const uint8_t arrayname[], uint32_t array_size, int x, int y);
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
 };
 
 #endif

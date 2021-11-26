@@ -7,7 +7,7 @@
 
 #include "ExplosiveChargesDA.h"
 
-ExplosiveChargesDA::ExplosiveChargesDA(DatapadDisplaySequence &datapadDisplaySequence, DatapadButtonsControler &datapadButtonsControler) : DatapadAction(datapadDisplaySequence, datapadButtonsControler), _datapadDisplaySequence(datapadDisplaySequence), _datapadButtonsControler(datapadButtonsControler) {}
+ExplosiveChargesDA::ExplosiveChargesDA(IDatapadDisplaySequence &datapadDisplaySequence, IDatapadButtonsControler &datapadButtonsControler) : DatapadAction(datapadDisplaySequence, datapadButtonsControler), _datapadDisplaySequence(datapadDisplaySequence), _datapadButtonsControler(datapadButtonsControler) {}
 
 void ExplosiveChargesDA::play()
 {

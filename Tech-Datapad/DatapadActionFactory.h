@@ -8,8 +8,8 @@
 #ifndef DatapadActionFactory_h
 #define DatapadActionFactory_h
 
-#include "DatapadAction.h"
-#include "DatapadActionSetup.h"
+#include "IDatapadAction.h"
+#include "IDatapadActionSetup.h"
 
 enum class DatapadActionType
 {
@@ -32,7 +32,7 @@ class DatapadActionFactory
 
 public:
     DatapadActionFactory();
-    DatapadAction *getDatapadAction(DatapadActionType datapadActionType, DatapadActionSetup &datapadActionSetup);
+    IDatapadAction *getDatapadAction(DatapadActionType datapadActionType, IDatapadActionSetup &datapadActionSetup);
 };
 
 #endif

@@ -7,7 +7,7 @@
 
 #include "DDSProgressBar.h"
 
-DDSProgressBar::DDSProgressBar(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t color, int16_t backColor, float initialProgressLevel, float increment = 1) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _width(width), _height(height), _color(color), _backColor(backColor), _progressLevel(initialProgressLevel), _increment(increment)
+DDSProgressBar::DDSProgressBar(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t color, int16_t backColor, float initialProgressLevel, float increment = 1) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _width(width), _height(height), _color(color), _backColor(backColor), _progressLevel(initialProgressLevel), _increment(increment)
 {
     if (initialProgressLevel > 100)
         _progressLevel = 100;

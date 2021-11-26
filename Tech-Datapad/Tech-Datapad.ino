@@ -5,32 +5,27 @@
 //  2021 v 1.0.
 //
 
+#include "Datapad.h"
 #include "DatapadTFTLCD.h"
 #include "DatapadActionSetup.h"
 #include "DatapadNavigationMenu.h"
 #include "DatapadTouchScreen.h"
 #include "DatapadPinsConstants.h"
 
-DatapadNavigationMenu *datapadNavigationMenu;
-DatapadTouchScreen *datapadTouchScreen;
+IDatapadNavigationMenu *datapadNavigationMenu;
+IDatapadTouchScreen *datapadTouchScreen;
+IDatapad *datapad;
 
 void setup()
 {
+    datapadTouchScreen = new DatapadTouchScreen(XP, YP, XM, YM, 300);
     DatapadTFTLCD datapadTFTLCD = DatapadTFTLCD();
     DatapadActionSetup datapadActionSetup = DatapadActionSetup(datapadTFTLCD, SMALL_WHITE_BUTTON_PIN, RED_BUTTON_PIN, WHITE_BUTTON_PIN, YELLOW_BUTTON_PIN);
     datapadNavigationMenu = new DatapadNavigationMenu(datapadActionSetup);
-    datapadNavigationMenu->setup();
-    datapadTouchScreen = new DatapadTouchScreen(XP, YP, XM, YM, 300);
+    datapad = new Datapad(*datapadNavigationMenu, *datapadTouchScreen);
 }
 
 void loop()
 {
-    if (datapadTouchScreen->isTouching())
-    {
-        datapadNavigationMenu->clicked(datapadTouchScreen->getDatapadDisplayPoint());
-    }
-    else if (datapadNavigationMenu->isInactive())
-    {
-        datapadNavigationMenu->reset();
-    }
+    datapad->update();
 }

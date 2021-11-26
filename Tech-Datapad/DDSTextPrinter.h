@@ -5,7 +5,7 @@
 //  2021 v 1.0.
 //
 
-#include "DatapadTFTLCD.h"
+#include "IDatapadTFTLCD.h"
 
 #ifndef DDSTextPrinter_h
 #define DDSTextPrinter_h
@@ -16,13 +16,13 @@ const int16_t SENTENCE_BUFFER_SIZE = 32;
 class DDSTextPrinter
 {
 public:
-    DDSTextPrinter(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour);
+    DDSTextPrinter(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, int16_t lineHeight, int16_t lineVerticalGap, int16_t backColour);
     void print(const char *const paragraph[], byte paragraphSize, bool transparentBackground = false);
     void scrollDown(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
     void scrollUp(const char *const paragraph[], byte paragraphSize, int16_t steps = 1);
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     const int16_t _x, _y, _width, _height, _lineHeight, _lineVerticalGap, _backColor;
     char _buffer[SENTENCE_BUFFER_SIZE];
     void internalPrint(int16_t x, int16_t y, const char *text);

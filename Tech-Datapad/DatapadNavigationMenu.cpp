@@ -13,15 +13,15 @@
 class DatapadNavigationMenuHelper
 {
 public:
-    void playDatapadaAction(DatapadActionType datapadActionType, DatapadActionSetup datapadActionSetup)
+    void playDatapadaAction(DatapadActionType datapadActionType, IDatapadActionSetup &datapadActionSetup)
     {
-        DatapadAction *datapadAction = _datapadActionFactory.getDatapadAction(datapadActionType, datapadActionSetup);
+        IDatapadAction *datapadAction = _datapadActionFactory.getDatapadAction(datapadActionType, datapadActionSetup);
         datapadAction->reset();
         datapadAction->play();
         delete datapadAction;
     }
 
-    void navigationMenuSetup(DatapadTFTLCD &datapadTFTLCD, const GFXfont *gfxFont, DatapadDisplayButton datapadDisplayButtons[])
+    void navigationMenuSetup(IDatapadTFTLCD &datapadTFTLCD, const GFXfont *gfxFont, DatapadDisplayButton datapadDisplayButtons[])
     {
         int16_t centerX = datapadTFTLCD.width() / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
@@ -56,7 +56,7 @@ public:
         datapadDisplayButtons[9].initialize(&datapadTFTLCD, DatapadActionType::CommSignalTracker, nextButtonLeft, buttonTop, buttonWidth, NAVIGATION_MENU_BUTTON_1_TEXT, NAVIGATION_MENU_BUTTON_COLOR, NAVIGATION_MENU_BUTTON_BACK_COLOR, NAVIGATION_MENU_BUTTON_PRESS_COLOR, gfxFont);
     }
 
-    void refreshNavigationMenu(DatapadTFTLCD &datapadTFTLCD, const GFXfont *gfxFont, DatapadDisplayButton datapadDisplayButtons[])
+    void refreshNavigationMenu(IDatapadTFTLCD &datapadTFTLCD, const GFXfont *gfxFont, DatapadDisplayButton datapadDisplayButtons[])
     {
         //Draw Top Banner.
         int16_t centerX = datapadTFTLCD.width() / 2;
@@ -96,9 +96,7 @@ private:
     DatapadActionFactory _datapadActionFactory;
 };
 
-DatapadNavigationMenu::DatapadNavigationMenu(DatapadActionSetup &datapadActionSetup) : _datapadActionSetup(datapadActionSetup) {}
-
-void DatapadNavigationMenu::setup()
+DatapadNavigationMenu::DatapadNavigationMenu(IDatapadActionSetup &datapadActionSetup) : IDatapadNavigationMenu(datapadActionSetup)
 {
     _datapadActionSetup.getDatapadTFTLCD().setRotation(0);
     _datapadActionSetup.getDatapadTFTLCD().fillScreen(TFT_BLACK);

@@ -13,7 +13,7 @@
 class CannonPoweringUpDDSHelper
 {
 public:
-    void drawCannonPoweringUp(DatapadTFTLCD &datapadTFTLCD)
+    void drawCannonPoweringUp(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t centerX = datapadTFTLCD.width() / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
@@ -38,7 +38,7 @@ private:
 
     int16_t getBannerTop(int16_t y) { return y - 80; }
 
-    void drawDepletedCannon(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
+    void drawDepletedCannon(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t diameter = radius * 2;
         drawTopBanner(datapadTFTLCD, DEPLETED_CANNON_BANNER, &Aurebesh8pt7b, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
@@ -47,12 +47,12 @@ private:
         drawCannon(datapadTFTLCD, cannonX, cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredDownCannon(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
+    void drawPoweredDownCannon(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         drawTopBanner(datapadTFTLCD, POWERED_CANNON_DOWN_BANNER, &Aurebesh8pt7b, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredUpCannonAnimation(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
+    void drawPoweredUpCannonAnimation(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t diameter = radius * 2;
         drawCannonPoweringProgressBar(datapadTFTLCD, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 40);
@@ -61,7 +61,7 @@ private:
         drawCannon(datapadTFTLCD, cannonX, cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
     }
 
-    void drawCannonPoweringProgressBar(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour, int16_t pause = 0)
+    void drawCannonPoweringProgressBar(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour, int16_t pause = 0)
     {
         int16_t innerRadius = getInnerRadius(radius) - 1;
         int16_t angle = 151;
@@ -76,20 +76,20 @@ private:
         } while (angle >= 19);
     }
 
-    void drawSmallInnerCircle(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
+    void drawSmallInnerCircle(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
     {
         int16_t smallCircleCenterY = getSmallCircleCenterY(centerY, radius);
         int16_t smallCircleRadius = radius * 0.04;
         datapadTFTLCD.fillCircle(centerX, smallCircleCenterY, smallCircleRadius, colour);
     }
 
-    void drawTopBanner(DatapadTFTLCD &datapadTFTLCD, const char *text, const GFXfont *gfxFont, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
+    void drawTopBanner(IDatapadTFTLCD &datapadTFTLCD, const char *text, const GFXfont *gfxFont, int16_t centerX, int16_t centerY, int16_t radius, uint16_t colour)
     {
         int16_t diameter = radius * 2;
         datapadTFTLCD.drawBanner(centerX, getBannerTop(centerY) + 2, getBannerHeight(diameter), getBannerWidth(diameter), colour, text, gfxFont);
     }
 
-    void drawFixedScreenDetails(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t innerRadius = getInnerRadius(radius);
         int16_t innerCircleWidth = 9;
@@ -147,7 +147,7 @@ private:
         cannonY = lineY - (diameter * 0.03);
     }
 
-    void drawCannon(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t colour)
+    void drawCannon(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, int16_t height, uint16_t colour)
     {
         int16_t shapeWidth = width * 0.19;
         int16_t shapeHeight = height * 0.1;
@@ -199,7 +199,7 @@ private:
     }
 };
 
-CannonPoweringUpDDS::CannonPoweringUpDDS(DatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+CannonPoweringUpDDS::CannonPoweringUpDDS(IDatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD) {}
 
 void CannonPoweringUpDDS::show()
 {

@@ -12,7 +12,7 @@
 class SonarGauge
 {
 public:
-    SonarGauge(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t topY, int16_t innerCircleRadius, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _topY(topY), _radius(radius), _innerCircleRadius(innerCircleRadius), _friendlyTargetTriangleBaseWidth(friendlyTargetTriangleBaseWidth), _friendlyTargetTriangleHeight(friendlyTargetTriangleHeight){};
+    SonarGauge(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, int16_t topY, int16_t innerCircleRadius, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _topY(topY), _radius(radius), _innerCircleRadius(innerCircleRadius), _friendlyTargetTriangleBaseWidth(friendlyTargetTriangleBaseWidth), _friendlyTargetTriangleHeight(friendlyTargetTriangleHeight){};
 
     void setup()
     {
@@ -58,7 +58,7 @@ public:
     }
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     int16_t _x, _y, _radius, _topY, _innerCircleRadius, _friendlyTargetTriangleY, _friendlyTargetTriangleBaseWidth, _friendlyTargetTriangleHeight;
     int16_t _gaugeY, _gaugeLenght;
     int16_t _lines, _linesCounter, _angle = 95, _degress = 190;
@@ -71,7 +71,7 @@ private:
 class PulsingTriangle
 {
 public:
-    void initialize(DatapadTFTLCD *datapadTFTLCD, int16_t x, int16_t y, int16_t baseWidth, int16_t height, uint16_t color)
+    void initialize(IDatapadTFTLCD *datapadTFTLCD, int16_t x, int16_t y, int16_t baseWidth, int16_t height, uint16_t color)
     {
         _datapadTFTLCD = datapadTFTLCD;
         _x = x;
@@ -128,7 +128,7 @@ public:
     }
 
 private:
-    DatapadTFTLCD *_datapadTFTLCD;
+    IDatapadTFTLCD *_datapadTFTLCD;
     int16_t _x, _y, _baseWidth, _height;
     uint16_t _color;
     int16_t _state = 0, _elapsed = 0;
@@ -143,7 +143,7 @@ private:
 class EnemyTargetsDDSHelper
 {
 public:
-    void drawEnemyTargets(DatapadTFTLCD &datapadTFTLCD)
+    void drawEnemyTargets(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t centerX = (datapadTFTLCD.width() / 2);
         int16_t centerY = (datapadTFTLCD.height() / 2);
@@ -167,7 +167,7 @@ private:
     SonarGauge *_sonarGauge;
     PulsingTriangle _pulsingTriangles[21];
 
-    void drawHeaderText(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
+    void drawHeaderText(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
     {
         uint16_t textWidth, textHeight;
         int16_t textTop = (centerY - radius) + 8;
@@ -181,7 +181,7 @@ private:
         datapadTFTLCD.fillRect(textLeft + textWidth + 3, textTop, littleRectangleWidth, littleRectangleHeight, TFT_WHITE);
     }
 
-    void drawInnerArcs(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius)
+    void drawInnerArcs(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius)
     {
         int rx = radius - 3;
         int ry = radius - 3;
@@ -213,7 +213,7 @@ private:
         datapadTFTLCD.drawFastVerticalLine(x, topY - 19, height, 3, DISPLAY_RING_COLOR);
     }
 
-    void drawInnerCircles(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY)
+    void drawInnerCircles(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY)
     {
         int16_t innerCircleRadius = radius * A_INNER_CIRCLE_RELATIVE_DIAMETER;
         int16_t innerCircleCenterY = topY - (radius * A_INNER_CIRCLE_RELATIVE_BOTTOM_DISTANCE) - innerCircleRadius;
@@ -223,7 +223,7 @@ private:
         datapadTFTLCD.drawInnerCircle(centerX, innerCircleCenterY, innerCircleRadius, GRID_OUTER_FRAME_OFFSET, DISPLAY_RING_COLOR);
     }
 
-    void initializeTargets(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight)
+    void initializeTargets(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight)
     {
         int16_t innerCircleRadius = radius * B_INNER_CIRCLE_RELATIVE_DIAMETER;
         int16_t innerCircleCenterY = topY - (radius * B_INNER_CIRCLE_RELATIVE_BOTTOM_DISTANCE) - innerCircleRadius;
@@ -261,7 +261,7 @@ private:
         _pulsingTriangles[20].initialize(&datapadTFTLCD, enemyX, innerCircleCenterY - 145, enemyTargetTriangleBaseWidth, enemyTargetTriangleHeight, ENEMY_TARGET_COLOR);
     }
 
-    void drawTargetsAnimation(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight)
+    void drawTargetsAnimation(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t radius, int16_t topY, int16_t friendlyTargetTriangleBaseWidth, int16_t friendlyTargetTriangleHeight)
     {
         int16_t elapsed = 0;
         int16_t interval = 10000;
@@ -280,7 +280,7 @@ private:
     }
 };
 
-EnemyTargetsDDS::EnemyTargetsDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+EnemyTargetsDDS::EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void EnemyTargetsDDS::show()
 {

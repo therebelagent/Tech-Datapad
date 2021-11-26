@@ -13,11 +13,11 @@
 class DDSBlinkingDot
 {
 public:
-    DDSBlinkingDot(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour);
+    DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour);
     void update();
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     const int16_t _x, _y, _radius;
     const uint16_t _colour, _backColor;
     int16_t _state = 0, _elapsed = 0;

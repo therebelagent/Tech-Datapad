@@ -7,7 +7,7 @@
 
 #include "BasicGridDDS.h"
 
-BasicGridDDS::BasicGridDDS(DatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD) {}
+BasicGridDDS::BasicGridDDS(IDatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD) {}
 
 void BasicGridDDS::show()
 {

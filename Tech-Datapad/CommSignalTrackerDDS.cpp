@@ -11,7 +11,7 @@
 class PulsingDot
 {
 public:
-    PulsingDot(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour)
+    PulsingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour)
     {
     }
 
@@ -62,7 +62,7 @@ public:
     }
 
 private:
-    DatapadTFTLCD &_datapadTFTLCD;
+    IDatapadTFTLCD &_datapadTFTLCD;
     const int16_t _x, _y, _radius;
     const uint16_t _colour;
     int16_t _state = 0, _elapsed = 0;
@@ -77,7 +77,7 @@ private:
 class CommSignalTrackerDDSHelper
 {
 public:
-    void drawCommSignalTracker(DatapadTFTLCD &datapadTFTLCD)
+    void drawCommSignalTracker(IDatapadTFTLCD &datapadTFTLCD)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -96,7 +96,7 @@ public:
     }
 
 private:
-    void drawWalls(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
+    void drawWalls(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t width)
     {
         //Draw Wall A.
         int16_t wallHeight = (width * 0.36);
@@ -131,7 +131,7 @@ private:
         datapadTFTLCD.drawRoundedRectangle(wallLeft, wallTop, wallWidth, wallHeight, DISPLAY_RING_COLOR, TFT_DARKCYAN);
     }
 
-    void drawRoundFrame(DatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
+    void drawRoundFrame(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
     {
         int16_t firstArc = 12;
         int16_t secondArc = 90;
@@ -156,7 +156,7 @@ private:
         datapadTFTLCD.fillArc(centerX, centerY, 5, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
     }
 
-    void drawPulsingBlinkingDots(DatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width)
+    void drawPulsingBlinkingDots(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width)
     {
         int16_t redDotX = x + (width * 0.074);
         int16_t redDotY = y - (width * 0.23);
@@ -195,9 +195,7 @@ private:
     }
 };
 
-CommSignalTrackerDDS::CommSignalTrackerDDS(DatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD), _datapadTFTLCD(datapadTFTLCD)
-{
-}
+CommSignalTrackerDDS::CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
 
 void CommSignalTrackerDDS::show()
 {
