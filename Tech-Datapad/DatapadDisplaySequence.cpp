@@ -7,7 +7,7 @@
 
 #include "DatapadDisplaySequence.h"
 
-DatapadDisplaySequence::DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD) : IDatapadDisplaySequence(datapadTFTLCD) {}
+DatapadDisplaySequence::DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : IDatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void DatapadDisplaySequence::reset()
 {

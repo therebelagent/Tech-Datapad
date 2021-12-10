@@ -77,7 +77,7 @@ private:
 class CommSignalTrackerDDSHelper
 {
 public:
-    void drawCommSignalTracker(IDatapadTFTLCD &datapadTFTLCD)
+    void drawCommSignalTracker(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -92,7 +92,7 @@ public:
         //Draw Rounded Frame.
         drawRoundFrame(datapadTFTLCD, centerX, centerY, radius);
         //Draw Red Pulsing & Blinking Dots Animation.
-        drawPulsingBlinkingDots(datapadTFTLCD, centerX, centerY, width);
+        drawPulsingBlinkingDots(datapadTFTLCD, centerX, centerY, width, datapadSoundPlayer);
     }
 
 private:
@@ -156,7 +156,7 @@ private:
         datapadTFTLCD.fillArc(centerX, centerY, 5, 1, innerRoundFrameRadius, innerRoundFrameRadius, innerRoundFrameHeight, DISPLAY_RING_COLOR);
     }
 
-    void drawPulsingBlinkingDots(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width)
+    void drawPulsingBlinkingDots(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t width, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t redDotX = x + (width * 0.074);
         int16_t redDotY = y - (width * 0.23);
@@ -176,7 +176,10 @@ private:
         redDotY = y + (width * 0.21);
         PulsingDot pulsingDot6 = PulsingDot(datapadTFTLCD, redDotX, redDotY, redDotRadius, ENEMY_TARGET_COLOR);
         int16_t centerCommSinalBeepCircleRadius = (width * 0.088) / 2;
-        DDSBlinkingDot ddsblinkingDot = DDSBlinkingDot(datapadTFTLCD, x, y, centerCommSinalBeepCircleRadius, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR);
+        DatapadTone datapadTone;
+        datapadTone.frequency = 1200;
+        datapadTone.duration = 400;
+        DDSBlinkingDot ddsblinkingDot = DDSBlinkingDot(datapadTFTLCD, x, y, centerCommSinalBeepCircleRadius, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR, &datapadSoundPlayer, datapadTone);
         int16_t elapsed = 0;
         int16_t interval = 10000;
         unsigned long previousMillis = millis();
@@ -195,10 +198,10 @@ private:
     }
 };
 
-CommSignalTrackerDDS::CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+CommSignalTrackerDDS::CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void CommSignalTrackerDDS::show()
 {
     CommSignalTrackerDDSHelper commSignalTrackerDDSHelper = CommSignalTrackerDDSHelper();
-    commSignalTrackerDDSHelper.drawCommSignalTracker(_datapadTFTLCD);
+    commSignalTrackerDDSHelper.drawCommSignalTracker(_datapadTFTLCD, _datapadSoundPlayer);
 }

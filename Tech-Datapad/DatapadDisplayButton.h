@@ -9,6 +9,7 @@
 #define DatapadDisplayButton_h
 
 #include "DatapadTFTLCD.h"
+#include "IDatapadSoundPlayer.h"
 #include "DatapadTouchScreen.h"
 #include "DatapadActionFactory.h"
 
@@ -17,7 +18,7 @@ class DatapadDisplayButton
 
 public:
     DatapadDisplayButton();
-    virtual void initialize(IDatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL);
+    virtual void initialize(IDatapadTFTLCD *datapadTFTLCD, IDatapadSoundPlayer *datapadSoundPlayer, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL);
     virtual void draw();
     virtual void drawInverted();
     virtual bool contains(DatapadDisplayPoint datapadDisplayPoint);
@@ -25,13 +26,15 @@ public:
     virtual DatapadActionType getDatapadActionType();
 
 private:
-    IDatapadTFTLCD *_datapadTFTLCD;
+    IDatapadTFTLCD *_datapadTFTLCD = nullptr;
+    IDatapadSoundPlayer *_datapadSoundPlayer = nullptr;
+    DatapadTone _datapadTone;
     DatapadActionType _datapadActionType;
     int16_t _x, _y, _width, _height, _textY;
     DatapadDisplayPoint _aDatapadDisplayPoint, _bDatapadDisplayPoint, _cDatapadDisplayPoint;
-    const char *_text;
+    const char *_text = nullptr;
     uint16_t _color, _backColor, _pressColor;
-    const GFXfont *_gfxFont;
+    const GFXfont *_gfxFont = nullptr;
 };
 
 #endif

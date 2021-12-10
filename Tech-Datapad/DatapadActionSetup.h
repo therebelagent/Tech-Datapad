@@ -13,8 +13,9 @@
 class DatapadActionSetup : public IDatapadActionSetup
 {
 public:
-    DatapadActionSetup(IDatapadTFTLCD &datapadTFTLCD, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
+    DatapadActionSetup(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin);
     IDatapadTFTLCD &getDatapadTFTLCD();
+    IDatapadSoundPlayer &getDatapadSoundPlayer();
     uint8_t getSmallWhiteButtonPin();
     uint8_t getRedButtonPin();
     uint8_t getWhiteButtonPin();

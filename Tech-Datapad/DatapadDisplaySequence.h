@@ -14,7 +14,7 @@ class DatapadDisplaySequence : public IDatapadDisplaySequence
 {
 
 public:
-    DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD);
+    DatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
     void reset();
 };

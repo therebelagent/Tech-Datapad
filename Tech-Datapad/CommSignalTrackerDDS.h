@@ -13,7 +13,7 @@
 class CommSignalTrackerDDS : public DatapadDisplaySequence
 {
 public:
-    CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD);
+    CommSignalTrackerDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

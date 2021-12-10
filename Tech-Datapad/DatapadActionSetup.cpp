@@ -7,9 +7,11 @@
 
 #include "DatapadActionSetup.h"
 
-DatapadActionSetup::DatapadActionSetup(IDatapadTFTLCD &datapadTFTLCD, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin) : IDatapadActionSetup(datapadTFTLCD, smallWhiteButtonPin, redButtonPin, whiteButtonPin, yellowButtonPin) {}
+DatapadActionSetup::DatapadActionSetup(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer, uint8_t smallWhiteButtonPin, uint8_t redButtonPin, uint8_t whiteButtonPin, uint8_t yellowButtonPin) : IDatapadActionSetup(datapadTFTLCD, datapadSoundPlayer, smallWhiteButtonPin, redButtonPin, whiteButtonPin, yellowButtonPin) {}
 
 IDatapadTFTLCD &DatapadActionSetup::getDatapadTFTLCD() { return _datapadTFTLCD; }
+
+IDatapadSoundPlayer &DatapadActionSetup::getDatapadSoundPlayer() { return _datapadSoundPlayer; }
 
 uint8_t DatapadActionSetup::getSmallWhiteButtonPin() { return _smallWhiteButtonPin; }
 

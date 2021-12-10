@@ -36,11 +36,16 @@ public:
     }
 };
 
-DatapadDisplayButton::DatapadDisplayButton() {}
+DatapadDisplayButton::DatapadDisplayButton()
+{
+    _datapadTone.frequency = 2500;
+    _datapadTone.duration = 75;
+}
 
-void DatapadDisplayButton::initialize(IDatapadTFTLCD *datapadTFTLCD, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL)
+void DatapadDisplayButton::initialize(IDatapadTFTLCD *datapadTFTLCD, IDatapadSoundPlayer *datapadSoundPlayer, DatapadActionType datapadActionType, int16_t x, int16_t y, uint16_t width, const char *text, uint16_t color, uint16_t backColor, uint16_t pressColor, const GFXfont *gfxFont = NULL)
 {
     _datapadTFTLCD = datapadTFTLCD;
+    _datapadSoundPlayer = datapadSoundPlayer;
     _datapadActionType = datapadActionType;
     _x = x;
     _y = y;
@@ -87,6 +92,7 @@ bool DatapadDisplayButton::contains(DatapadDisplayPoint datapadDisplayPoint)
 
 void DatapadDisplayButton::press()
 {
+    _datapadSoundPlayer->playTone(_datapadTone);
     DatapadDisplayButtonHelper datapadDisplayButtonHelper;
     datapadDisplayButtonHelper.drawFilledTriangle(_datapadTFTLCD, _aDatapadDisplayPoint, _bDatapadDisplayPoint, _cDatapadDisplayPoint, _height, _text, _pressColor, _backColor, _textY, _gfxFont);
     delay(250);

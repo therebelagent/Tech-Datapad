@@ -13,7 +13,7 @@
 class CannonPoweringUpDDSHelper
 {
 public:
-    void drawCannonPoweringUp(IDatapadTFTLCD &datapadTFTLCD)
+    void drawCannonPoweringUp(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t centerX = datapadTFTLCD.width() / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
@@ -24,7 +24,7 @@ public:
         delay(1500);
         drawPoweredDownCannon(datapadTFTLCD, centerX, centerY, radius, cannonX, cannonY);
         delay(100);
-        drawPoweredUpCannonAnimation(datapadTFTLCD, centerX, centerY, radius, cannonX, cannonY);
+        drawPoweredUpCannonAnimation(datapadTFTLCD, datapadSoundPlayer, centerX, centerY, radius, cannonX, cannonY);
     }
 
 private:
@@ -52,13 +52,25 @@ private:
         drawTopBanner(datapadTFTLCD, POWERED_CANNON_DOWN_BANNER, &Aurebesh8pt7b, centerX, centerY, radius, CANNON_POWERED_DOWN_COLOR);
     }
 
-    void drawPoweredUpCannonAnimation(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
+    void drawPoweredUpCannonAnimation(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer, int16_t centerX, int16_t centerY, int16_t radius, int16_t &cannonX, int16_t &cannonY)
     {
         int16_t diameter = radius * 2;
         drawCannonPoweringProgressBar(datapadTFTLCD, centerX, centerY, radius, CANNON_POWERED_UP_COLOR, 40);
         drawSmallInnerCircle(datapadTFTLCD, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawTopBanner(datapadTFTLCD, POWERED_UP_CANNON_BANNER, &Aurebesh9pt7b, centerX, centerY, radius, CANNON_POWERED_UP_COLOR);
         drawCannon(datapadTFTLCD, cannonX, cannonY, diameter * CANNON_RELATIVE_WIDTH, diameter * CANNON_RELATIVE_HEIGHT, CANNON_POWERED_UP_COLOR);
+        playBeeps(datapadSoundPlayer);
+    }
+
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 2500;
+        datapadTone.duration = 100;
+        delay(200);
+        datapadSoundPlayer.playTone(datapadTone);
+        delay(400);
+        datapadSoundPlayer.playTone(datapadTone);
     }
 
     void drawCannonPoweringProgressBar(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, unsigned int colour, int16_t pause = 0)
@@ -199,11 +211,11 @@ private:
     }
 };
 
-CannonPoweringUpDDS::CannonPoweringUpDDS(IDatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD) {}
+CannonPoweringUpDDS::CannonPoweringUpDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : BasicGridDDS(datapadTFTLCD, datapadSoundPlayer) {}
 
 void CannonPoweringUpDDS::show()
 {
     BasicGridDDS::show();
     CannonPoweringUpDDSHelper cannonPoweringUpDDSHelper;
-    cannonPoweringUpDDSHelper.drawCannonPoweringUp(_datapadTFTLCD);
+    cannonPoweringUpDDSHelper.drawCannonPoweringUp(_datapadTFTLCD, _datapadSoundPlayer);
 }
