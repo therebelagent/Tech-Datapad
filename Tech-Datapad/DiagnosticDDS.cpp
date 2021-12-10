@@ -15,7 +15,7 @@ void DiagnosticDDS::show()
     DatapadTone datapadTone;
     datapadTone.frequency = 2500;
     datapadTone.duration = 75;
-    for (size_t counter = 0; counter < counter; counter++)
+    for (size_t counter = 0; counter < 4; counter++)
     {
         _datapadSoundPlayer.playTone(datapadTone);
         delay(95);
