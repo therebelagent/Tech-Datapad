@@ -12,7 +12,7 @@
 class DoorLockHackingDDSHelper
 {
 public:
-    void drawDoorLockHacking(IDatapadTFTLCD &datapadTFTLCD)
+    void drawDoorLockHacking(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -29,6 +29,7 @@ public:
         int16_t steps = 3;
         DDSTextPrinter ddsTextPrinter = DDSTextPrinter(datapadTFTLCD, _screenFrameLeft, screenTop, _screenFrameWidth, screnHeight, lineHeight, lineVerticalGap, DISPLAY_BACK_COLOR);
         ddsTextPrinter.scrollUp(doorLockHackingParagraph1, sizeof(doorLockHackingParagraph1) / sizeof(doorLockHackingParagraph1[0]), steps);
+        playBeeps(datapadSoundPlayer);
     }
 
 private:
@@ -93,12 +94,24 @@ private:
         _screenFrameWidth = (width * 0.35) + 1;
         _screenFrameLeft = ((thinTrapezoidWidth + thinTrapezoidLeft + (((width - (thinTrapezoidWidth + thinTrapezoidLeft)) - (width - trapezoidLeft)) / 2)) - (_screenFrameWidth / 2)) - 1;
     }
+
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 5000;
+        datapadTone.duration = 30;
+        for (size_t counter = 0; counter < 10; counter++)
+        {
+            datapadSoundPlayer.playTone(datapadTone);
+            delay(40);
+        }
+    }
 };
 
-DoorLockHackingDDS::DoorLockHackingDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+DoorLockHackingDDS::DoorLockHackingDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void DoorLockHackingDDS::show()
 {
     DoorLockHackingDDSHelper doorLockHackingDDSHelper = DoorLockHackingDDSHelper();
-    doorLockHackingDDSHelper.drawDoorLockHacking(_datapadTFTLCD);
+    doorLockHackingDDSHelper.drawDoorLockHacking(_datapadTFTLCD, _datapadSoundPlayer);
 }
