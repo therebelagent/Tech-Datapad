@@ -13,7 +13,7 @@
 class ForgingChainCodesDDS : public StandByDDS
 {
 public:
-    ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD);
+    ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

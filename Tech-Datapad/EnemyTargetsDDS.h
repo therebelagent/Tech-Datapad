@@ -13,7 +13,7 @@
 class EnemyTargetsDDS : public DatapadDisplaySequence
 {
 public:
-    EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD);
+    EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

@@ -9,18 +9,20 @@
 #define IDatapadDisplaySequence_h
 
 #include "DatapadTFTLCD.h"
+#include "IDatapadSoundPlayer.h"
 #include "DatapadDisplaySequenceConstants.h"
 
 class IDatapadDisplaySequence
 {
 
 public:
-    IDatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD) : _datapadTFTLCD(datapadTFTLCD) {}
+    IDatapadDisplaySequence(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : _datapadTFTLCD(datapadTFTLCD), _datapadSoundPlayer(datapadSoundPlayer) {}
     virtual void show() = 0;
     virtual void reset() = 0;
 
 protected:
     IDatapadTFTLCD &_datapadTFTLCD;
+    IDatapadSoundPlayer &_datapadSoundPlayer;
 };
 
 #endif

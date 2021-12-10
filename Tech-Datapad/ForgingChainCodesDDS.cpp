@@ -12,13 +12,14 @@
 class ForgingChainCodesDDSHelper
 {
 public:
-    void drawForgingChainCodes(IDatapadTFTLCD &datapadTFTLCD)
+    void drawForgingChainCodes(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t radius = centerX - 1;
         drawFixedScreenDetails(datapadTFTLCD, centerX, centerY, radius, width);
+        playBeeps(datapadSoundPlayer);
         //Draw Window Scroll Animation.
         datapadTFTLCD.setFont(&Aurebesh3pt7b);
         datapadTFTLCD.setTextColor(DISPLAY_RING_COLOR);
@@ -74,13 +75,25 @@ private:
             dashedBarTop = dashedBarTop + dashedBarLineHeight + 1;
         }
     }
+
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 4000;
+        datapadTone.duration = 30;
+        for (size_t counter = 0; counter < 5; counter++)
+        {
+            datapadSoundPlayer.playTone(datapadTone);
+            delay(40);
+        }
+    }
 };
 
-ForgingChainCodesDDS::ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD) : StandByDDS(datapadTFTLCD) {}
+ForgingChainCodesDDS::ForgingChainCodesDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : StandByDDS(datapadTFTLCD, datapadSoundPlayer) {}
 
 void ForgingChainCodesDDS::show()
 {
     StandByDDS::show();
     ForgingChainCodesDDSHelper forgingChainCodesDDSHelper;
-    forgingChainCodesDDSHelper.drawForgingChainCodes(_datapadTFTLCD);
+    forgingChainCodesDDSHelper.drawForgingChainCodes(_datapadTFTLCD, _datapadSoundPlayer);
 }

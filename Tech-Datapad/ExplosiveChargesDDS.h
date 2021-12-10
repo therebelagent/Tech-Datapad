@@ -13,7 +13,7 @@
 class ExplosiveChargesDDS : public DatapadDisplaySequence
 {
 public:
-    ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD);
+    ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

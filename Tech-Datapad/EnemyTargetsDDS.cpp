@@ -128,7 +128,7 @@ public:
     }
 
 private:
-    IDatapadTFTLCD *_datapadTFTLCD;
+    IDatapadTFTLCD *_datapadTFTLCD = nullptr;
     int16_t _x, _y, _baseWidth, _height;
     uint16_t _color;
     int16_t _state = 0, _elapsed = 0;
@@ -164,7 +164,7 @@ public:
     }
 
 private:
-    SonarGauge *_sonarGauge;
+    SonarGauge *_sonarGauge = nullptr;
     PulsingTriangle _pulsingTriangles[21];
 
     void drawHeaderText(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius)
@@ -280,7 +280,7 @@ private:
     }
 };
 
-EnemyTargetsDDS::EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+EnemyTargetsDDS::EnemyTargetsDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void EnemyTargetsDDS::show()
 {

@@ -79,7 +79,7 @@ private:
     }
 };
 
-ExplosiveChargesDDS::ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+ExplosiveChargesDDS::ExplosiveChargesDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void ExplosiveChargesDDS::show()
 {
