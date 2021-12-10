@@ -9,6 +9,8 @@
 
 DDSBlinkingDot::DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour), _backColor(backColour) {}
 
+DDSBlinkingDot::DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour, IDatapadSoundPlayer *datapadSoundPlayer, DatapadTone datapadTone) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y), _radius(radius), _colour(colour), _backColor(backColour), _datapadSoundPlayer(datapadSoundPlayer), _datapadTone(datapadTone) {}
+
 void DDSBlinkingDot::update()
 {
     if (_previousMillis > 0)
@@ -39,6 +41,10 @@ void DDSBlinkingDot::update()
         colour = TFT_DARKGREY;
         break;
     case 1:
+        if (_datapadSoundPlayer != nullptr)
+        {
+            _datapadSoundPlayer->playTone(_datapadTone);
+        }
         colour = _colour;
         break;
     case 2:

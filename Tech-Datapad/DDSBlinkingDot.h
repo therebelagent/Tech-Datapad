@@ -5,6 +5,7 @@
 //  2021 v 1.0.
 //
 
+#include "IDatapadSoundPlayer.h"
 #include "DatapadTFTLCD.h"
 
 #ifndef DDSBlinkingDot_h
@@ -14,10 +15,13 @@ class DDSBlinkingDot
 {
 public:
     DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour);
+    DDSBlinkingDot(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y, int16_t radius, uint16_t colour, uint16_t backColour, IDatapadSoundPlayer *datapadSoundPlayer, DatapadTone datapadTone);
     void update();
 
 private:
     IDatapadTFTLCD &_datapadTFTLCD;
+    IDatapadSoundPlayer *_datapadSoundPlayer = nullptr;
+    DatapadTone _datapadTone;
     const int16_t _x, _y, _radius;
     const uint16_t _colour, _backColor;
     int16_t _state = 0, _elapsed = 0;

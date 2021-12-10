@@ -8,6 +8,7 @@
 #ifndef DatapadNavigationMenu_h
 #define DatapadNavigationMenu_h
 
+#include "DatapadSoundPlayer.h"
 #include "IDatapadNavigationMenu.h"
 #include "IDatapadActionSetup.h"
 #include "DatapadDisplayButton.h"
