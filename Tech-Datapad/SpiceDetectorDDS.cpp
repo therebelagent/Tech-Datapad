@@ -14,7 +14,7 @@
 class SpiceDetectorDDSHelper
 {
 public:
-    void drawSpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD)
+    void drawSpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
@@ -22,6 +22,7 @@ public:
         int16_t radius = centerX - 1;
         drawFixedScreenDetails(datapadTFTLCD, centerX, centerY, radius, width);
         RunProgressBarAnimations();
+        playBeeps(datapadSoundPlayer);
     }
 
     void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
@@ -119,15 +120,27 @@ public:
         delete _progressBar3;
     }
 
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 1900;
+        datapadTone.duration = 75;
+        for (size_t counter = 0; counter < 5; counter++)
+        {
+            datapadSoundPlayer.playTone(datapadTone);
+            delay(86);
+        }
+    }
+
 private:
-    DDSProgressBar *_progressBar0, *_progressBar1, *_progressBar2, *_progressBar3;
+    DDSProgressBar *_progressBar0 = nullptr, *_progressBar1 = nullptr, *_progressBar2 = nullptr, *_progressBar3 = nullptr;
 };
 
-SpiceDetectorDDS::SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD) : BasicGridDDS(datapadTFTLCD) {}
+SpiceDetectorDDS::SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : BasicGridDDS(datapadTFTLCD, datapadSoundPlayer) {}
 
 void SpiceDetectorDDS::show()
 {
     BasicGridDDS::show();
     SpiceDetectorDDSHelper spiceDetectorDDSHelper;
-    spiceDetectorDDSHelper.drawSpiceDetectorDDS(_datapadTFTLCD);
+    spiceDetectorDDSHelper.drawSpiceDetectorDDS(_datapadTFTLCD, _datapadSoundPlayer);
 }

@@ -13,7 +13,7 @@
 class LifeformAnalyzerDDS : public DatapadDisplaySequence
 {
 public:
-    LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD);
+    LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

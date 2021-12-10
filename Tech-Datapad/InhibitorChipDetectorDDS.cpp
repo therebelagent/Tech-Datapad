@@ -13,7 +13,11 @@
 class ForeignBodyTracker
 {
 public:
-    ForeignBodyTracker(IDatapadTFTLCD &datapadTFTLCD, int16_t x, int16_t y) : _datapadTFTLCD(datapadTFTLCD), _x(x), _y(y) {}
+    ForeignBodyTracker(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer, int16_t x, int16_t y) : _datapadTFTLCD(datapadTFTLCD), _datapadSoundPlayer(datapadSoundPlayer), _x(x), _y(y)
+    {
+        _datapadTone.frequency = 1500;
+        _datapadTone.duration = 100;
+    }
 
     void draw()
     {
@@ -82,6 +86,7 @@ public:
                 }
                 else if (_progressLevel < 0)
                 {
+                    _datapadSoundPlayer.playTone(_datapadTone);
                     _progressLevel = 0;
                     _raising = true;
                 }
@@ -95,6 +100,8 @@ public:
 
 private:
     IDatapadTFTLCD &_datapadTFTLCD;
+    IDatapadSoundPlayer &_datapadSoundPlayer;
+    DatapadTone _datapadTone;
     int16_t _x, _y, _circleRadius, _progressLevel = 100, _increment = 10, _elapsed = 0, _baseCircleRadius = 0;
     unsigned long _previousMillis = 0;
     bool _raising = true;
@@ -138,20 +145,21 @@ private:
 class InhibitorChipDetectorDDSHelper
 {
 public:
-    void drawInhibitorChipDetector(IDatapadTFTLCD &datapadTFTLCD)
+    void drawInhibitorChipDetector(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t radius = centerX - 1;
-        drawFixedScreenDetails(datapadTFTLCD, centerX, centerY, radius, width);
+        drawFixedScreenDetails(datapadTFTLCD, datapadSoundPlayer, centerX, centerY, radius, width);
+        playBeeps(datapadSoundPlayer);
         RunForeignBodyTracker();
     }
 
 private:
-    ForeignBodyTracker *_foreignBodyTracker;
+    ForeignBodyTracker *_foreignBodyTracker = nullptr;
 
-    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
+    void drawFixedScreenDetails(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer, int16_t centerX, int16_t centerY, int16_t radius, int16_t width)
     {
         //Draw Head Scan Image.
         DDSHeadScanImage ddsHeadScanImage = DDSHeadScanImage(datapadTFTLCD);
@@ -225,7 +233,7 @@ private:
         datapadTFTLCD.fillArc(centerX, centerY, 202, 4, innerBottomArcRadius, innerBottomArcRadius, 2, DISPLAY_RING_COLOR);
         //Draw Foreign Body Tracker.
         int16_t foreignBodyTrackerY = centerY - (width * 0.27);
-        _foreignBodyTracker = new ForeignBodyTracker(datapadTFTLCD, centerX, foreignBodyTrackerY);
+        _foreignBodyTracker = new ForeignBodyTracker(datapadTFTLCD, datapadSoundPlayer, centerX, foreignBodyTrackerY);
     }
 
     void drawRightBannerDashes(IDatapadTFTLCD &datapadTFTLCD, int16_t lineLeft, int16_t lineWidth, int16_t separation, int16_t y, int16_t width)
@@ -268,12 +276,24 @@ private:
         } while (elapsed < interval);
         delete _foreignBodyTracker;
     }
+
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 3000;
+        datapadTone.duration = 40;
+        for (size_t counter = 0; counter < 5; counter++)
+        {
+            datapadSoundPlayer.playTone(datapadTone);
+            delay(50);
+        }
+    }
 };
 
-InhibitorChipDetectorDDS::InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+InhibitorChipDetectorDDS::InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void InhibitorChipDetectorDDS::show()
 {
     InhibitorChipDetectorDDSHelper inhibitorChipDetectorDDSHelper;
-    inhibitorChipDetectorDDSHelper.drawInhibitorChipDetector(_datapadTFTLCD);
+    inhibitorChipDetectorDDSHelper.drawInhibitorChipDetector(_datapadTFTLCD, _datapadSoundPlayer);
 }

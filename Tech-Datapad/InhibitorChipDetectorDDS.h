@@ -13,7 +13,7 @@
 class InhibitorChipDetectorDDS : public DatapadDisplaySequence
 {
 public:
-    InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD);
+    InhibitorChipDetectorDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

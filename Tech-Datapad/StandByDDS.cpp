@@ -7,7 +7,7 @@
 
 #include "StandByDDS.h"
 
-StandByDDS::StandByDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+StandByDDS::StandByDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void StandByDDS::show()
 {

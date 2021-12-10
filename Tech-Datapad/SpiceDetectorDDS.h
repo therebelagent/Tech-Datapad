@@ -13,7 +13,7 @@
 class SpiceDetectorDDS : public BasicGridDDS
 {
 public:
-    SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD);
+    SpiceDetectorDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer);
     void show();
 };
 

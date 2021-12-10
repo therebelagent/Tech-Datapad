@@ -19,20 +19,21 @@
 class CreatureAnalyzerDDSHelper
 {
 public:
-    void drawCreatureAnalyzer(IDatapadTFTLCD &datapadTFTLCD)
+    void drawCreatureAnalyzer(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer)
     {
         int16_t width = datapadTFTLCD.width();
         int16_t centerX = width / 2;
         int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t radius = centerX - 1;
         drawIrlingAScreenAnalyzer(datapadTFTLCD, centerX, centerY, radius, width);
+        playBeeps(datapadSoundPlayer);
         datapadTFTLCD.fillScreen(DISPLAY_BACK_COLOR);
         drawIrlingBScreenAnalyzer(datapadTFTLCD, centerX, centerY, radius, width);
     }
 
 private:
-    DDSBlinkingDot *_ddsBlinkingDot;
-    DDSProgressBar *_progressBar0, *_progressBar1, *_progressBar2, *_progressBar3, *_progressBar4;
+    DDSBlinkingDot *_ddsBlinkingDot = nullptr;
+    DDSProgressBar *_progressBar0 = nullptr, *_progressBar1 = nullptr, *_progressBar2 = nullptr, *_progressBar3 = nullptr, *_progressBar4 = nullptr;
     int16_t _innerBoxWidth, _innerBoxHeight, _innerBoxTop, _innerBoxLeft;
     int16_t _dotRadius, _dotTop, _dotALeft, _dotBLeft;
     int16_t _lineWidth = 2;
@@ -348,12 +349,20 @@ private:
             previousMillis = millis();
         } while (elapsed < interval);
     }
+
+    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
+    {
+        DatapadTone datapadTone;
+        datapadTone.frequency = 2500;
+        datapadTone.duration = 50;
+        datapadSoundPlayer.playTone(datapadTone);
+    }
 };
 
-LifeformAnalyzerDDS::LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD) : DatapadDisplaySequence(datapadTFTLCD) {}
+LifeformAnalyzerDDS::LifeformAnalyzerDDS(IDatapadTFTLCD &datapadTFTLCD, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadDisplaySequence(datapadTFTLCD, datapadSoundPlayer) {}
 
 void LifeformAnalyzerDDS::show()
 {
     CreatureAnalyzerDDSHelper creatureAnalyzerDDSHelper;
-    creatureAnalyzerDDSHelper.drawCreatureAnalyzer(_datapadTFTLCD);
+    creatureAnalyzerDDSHelper.drawCreatureAnalyzer(_datapadTFTLCD, _datapadSoundPlayer);
 }
