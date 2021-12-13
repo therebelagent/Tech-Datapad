@@ -13,7 +13,7 @@
 class AllLitUpDBC : public DatapadButtonsControler
 {
 public:
-    AllLitUpDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED);
+    AllLitUpDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer);
     void turnOnOffButtons();
 };
 

@@ -16,7 +16,7 @@
 class DatapadButtonsControler : public IDatapadButtonsControler
 {
 public:
-    DatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED);
+    DatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer);
     IDatapadLED &getSmallWhiteDatapadLED();
     IDatapadLED &getRedDatapadLED();
     IDatapadLED &getWhiteDatapadLED();

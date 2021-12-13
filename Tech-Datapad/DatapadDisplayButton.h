@@ -12,6 +12,7 @@
 #include "IDatapadSoundPlayer.h"
 #include "DatapadTouchScreen.h"
 #include "DatapadActionFactory.h"
+#include "DDSSoundPlayer.h"
 
 class DatapadDisplayButton
 {
@@ -27,8 +28,7 @@ public:
 
 private:
     IDatapadTFTLCD *_datapadTFTLCD = nullptr;
-    IDatapadSoundPlayer *_datapadSoundPlayer = nullptr;
-    DatapadTone _datapadTone;
+    DDSSoundPlayer *_ddsSoundPlayer = nullptr;
     DatapadActionType _datapadActionType;
     int16_t _x, _y, _width, _height, _textY;
     DatapadDisplayPoint _aDatapadDisplayPoint, _bDatapadDisplayPoint, _cDatapadDisplayPoint;

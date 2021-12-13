@@ -17,7 +17,6 @@
 #include "SpiceDetectorDDS.h"
 #include "LifeformAnalyzerDDS.h"
 #include "InhibitorChipDetectorDDS.h"
-#include "DiagnosticDDS.h"
 #include "DiagnosticDBC.h"
 #include "StandByDBC.h"
 #include "AllLitUpDBC.h"
@@ -36,40 +35,40 @@ IDatapadAction *DatapadActionFactory::getDatapadAction(DatapadActionType datapad
     switch (datapadActionType)
     {
     case DatapadActionType::Diagnostic:
-        datapadAction = new ExplosiveChargesDA(*new DiagnosticDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new DiagnosticDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new ExplosiveChargesDA(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new DiagnosticDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::StandBy:
-        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new StandByDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::CannonPoweringUp:
-        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new CannonPoweringUpDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::EnemyTargets:
-        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new EnemyTargetsDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::ExplosiveCharges:
-        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new ExplosiveChargesDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new ExplosiveChargesDA(*new ExplosiveChargesDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new ExplosiveChargesDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::RearAxleStabilizerCalibration:
-        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new RearAxleStabilizerCalibrationDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::ForgingChainCodes:
-        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new ForgingChainCodesDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::CommSignalTracker:
-        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new CommSignalTrackerDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::DoorLockHacking:
-        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new DoorLockHackingDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::SpiceDetector:
-        datapadAction = new DatapadAction(*new SpiceDetectorDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new SpiceDetectorDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::LifeformAnalyzer:
-        datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new LifeformAnalyzerDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new StandByDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     case DatapadActionType::InhibitorChipDetector:
-        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED));
+        datapadAction = new DatapadAction(*new InhibitorChipDetectorDDS(datapadActionSetup.getDatapadTFTLCD(), datapadActionSetup.getDatapadSoundPlayer()), *new AllLitUpDBC(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadActionSetup.getDatapadSoundPlayer()));
         break;
     }
     return datapadAction;

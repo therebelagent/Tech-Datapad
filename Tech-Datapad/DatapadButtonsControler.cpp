@@ -7,7 +7,7 @@
 
 #include "DatapadButtonsControler.h"
 
-DatapadButtonsControler::DatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED) : IDatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED){}
+DatapadButtonsControler::DatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer) : IDatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadSoundPlayer) {}
 
 IDatapadLED &DatapadButtonsControler::getSmallWhiteDatapadLED()
 {

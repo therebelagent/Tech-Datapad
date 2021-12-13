@@ -181,7 +181,7 @@ private:
         datapadTone.duration = 400;
         DDSBlinkingDot ddsblinkingDot = DDSBlinkingDot(datapadTFTLCD, x, y, centerCommSinalBeepCircleRadius, DISPLAY_RING_COLOR, DISPLAY_BACK_COLOR, &datapadSoundPlayer, datapadTone);
         int16_t elapsed = 0;
-        int16_t interval = 10000;
+        int16_t interval = 7500;
         unsigned long previousMillis = millis();
         do
         {
