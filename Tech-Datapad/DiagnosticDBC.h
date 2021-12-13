@@ -13,7 +13,7 @@
 class DiagnosticDBC : public DatapadButtonsControler
 {
 public:
-    DiagnosticDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED);
+    DiagnosticDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer);
     void turnOnOffButtons();
 };
 

@@ -7,16 +7,22 @@
 
 #include <Arduino.h>
 #include "DiagnosticDBC.h"
+#include "DDSSoundPlayer.h"
 
-DiagnosticDBC::DiagnosticDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED) : DatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED) {}
+DiagnosticDBC::DiagnosticDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadSoundPlayer) {}
 void DiagnosticDBC::turnOnOffButtons()
 {
+    DDSSoundPlayer ddsSoundPlayer = DDSSoundPlayer(_datapadSoundPlayer);
+    ddsSoundPlayer.playButtonTone();
     getSmallWhiteDatapadLED().turnOn();
     delay(500);
+    ddsSoundPlayer.playButtonTone();
     getRedDatapadLED().turnOn();
     delay(500);
+    ddsSoundPlayer.playButtonTone();
     getWhiteDatapadLED().turnOn();
     delay(500);
+    ddsSoundPlayer.playButtonTone();
     getYellowDatapadLED().turnOn();
     delay(500);
     reset();

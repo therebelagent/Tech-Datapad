@@ -6,12 +6,15 @@
 //
 
 #include "ExplosiveChargesDBC.h"
+#include "DDSSoundPlayer.h"
 
-ExplosiveChargesDBC::ExplosiveChargesDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED) : DatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED) {}
+ExplosiveChargesDBC::ExplosiveChargesDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer) : DatapadButtonsControler(smallWhiteDatapadLED, redDatapadLED, whiteDatapadLED, yellowDatapadLED, datapadSoundPlayer) {}
 
 void ExplosiveChargesDBC::turnOnOffButtons()
 {
     getSmallWhiteDatapadLED().turnOff();
+    DDSSoundPlayer ddsSoundPlayer = DDSSoundPlayer(_datapadSoundPlayer);
+    ddsSoundPlayer.playButtonTone();
     getRedDatapadLED().turnOn();
     getWhiteDatapadLED().turnOff();
     getYellowDatapadLED().turnOff();

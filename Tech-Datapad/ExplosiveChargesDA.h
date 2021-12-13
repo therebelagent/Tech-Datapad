@@ -15,10 +15,6 @@ class ExplosiveChargesDA : public DatapadAction
 public:
     ExplosiveChargesDA(IDatapadDisplaySequence &datapadDisplaySequence, IDatapadButtonsControler &datapadButtonsControler);
     void play();
-
-private:
-    IDatapadDisplaySequence &_datapadDisplaySequence;
-    IDatapadButtonsControler &_datapadButtonsControler;
 };
 
 #endif

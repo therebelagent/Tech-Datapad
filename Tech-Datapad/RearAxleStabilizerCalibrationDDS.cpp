@@ -262,12 +262,12 @@ private:
         datapadTone.duration = 75;
         datapadSoundPlayer.playTone(datapadTone);
         delay(500);
-        datapadTone.frequency = 4000;
-        datapadTone.duration = 25;
-        for (size_t counter = 0; counter < 6; counter++)
+        datapadTone.frequency = 3000;
+        datapadTone.duration = 10;
+        for (size_t counter = 0; counter < 10; counter++)
         {
             datapadSoundPlayer.playTone(datapadTone);
-            delay(35);
+            delay(15);
         }
     }
 };

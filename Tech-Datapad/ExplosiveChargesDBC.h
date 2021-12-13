@@ -13,7 +13,7 @@
 class ExplosiveChargesDBC : public DatapadButtonsControler
 {
 public:
-    ExplosiveChargesDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED);
+    ExplosiveChargesDBC(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer);
     void turnOnOffButtons();
 };
 

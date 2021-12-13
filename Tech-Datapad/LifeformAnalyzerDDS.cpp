@@ -11,6 +11,7 @@
 #include "DDSTextPrinter.h"
 #include "DDSBlinkingDot.h"
 #include "DDSProgressBar.h"
+#include "DDSSoundPlayer.h"
 #include "Fonts/Aurebesh2pt7b.h"
 #include "Fonts/Aurebesh4pt7b.h"
 #include "Fonts/Aurebesh6pt7b.h"
@@ -26,7 +27,8 @@ public:
         int16_t centerY = datapadTFTLCD.height() / 2;
         int16_t radius = centerX - 1;
         drawIrlingAScreenAnalyzer(datapadTFTLCD, centerX, centerY, radius, width);
-        playBeeps(datapadSoundPlayer);
+        DDSSoundPlayer ddsSoundPlayer = DDSSoundPlayer(datapadSoundPlayer);
+        ddsSoundPlayer.playDisplayButtonTone();
         datapadTFTLCD.fillScreen(DISPLAY_BACK_COLOR);
         drawIrlingBScreenAnalyzer(datapadTFTLCD, centerX, centerY, radius, width);
     }
@@ -348,14 +350,6 @@ private:
             elapsed += millis() - previousMillis;
             previousMillis = millis();
         } while (elapsed < interval);
-    }
-
-    void playBeeps(IDatapadSoundPlayer &datapadSoundPlayer)
-    {
-        DatapadTone datapadTone;
-        datapadTone.frequency = 2500;
-        datapadTone.duration = 50;
-        datapadSoundPlayer.playTone(datapadTone);
     }
 };
 

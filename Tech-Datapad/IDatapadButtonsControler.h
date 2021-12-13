@@ -9,11 +9,12 @@
 #define IDatapadButtonsControler_h
 
 #include "IDatapadLED.h"
+#include "IDatapadSoundPlayer.h"
 
 class IDatapadButtonsControler
 {
 public:
-    IDatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED) : _smallWhiteDatapadLED(smallWhiteDatapadLED), _redDatapadLED(redDatapadLED), _whiteDatapadLED(whiteDatapadLED), _yellowDatapadLED(yellowDatapadLED) {}
+    IDatapadButtonsControler(IDatapadLED &smallWhiteDatapadLED, IDatapadLED &redDatapadLED, IDatapadLED &whiteDatapadLED, IDatapadLED &yellowDatapadLED, IDatapadSoundPlayer &datapadSoundPlayer) : _smallWhiteDatapadLED(smallWhiteDatapadLED), _redDatapadLED(redDatapadLED), _whiteDatapadLED(whiteDatapadLED), _yellowDatapadLED(yellowDatapadLED), _datapadSoundPlayer(datapadSoundPlayer) {}
     virtual IDatapadLED &getSmallWhiteDatapadLED() = 0;
     virtual IDatapadLED &getRedDatapadLED() = 0;
     virtual IDatapadLED &getWhiteDatapadLED() = 0;
@@ -23,6 +24,7 @@ public:
 
 protected:
     IDatapadLED &_smallWhiteDatapadLED, &_redDatapadLED, &_whiteDatapadLED, &_yellowDatapadLED;
+    IDatapadSoundPlayer &_datapadSoundPlayer;
 };
 
 #endif

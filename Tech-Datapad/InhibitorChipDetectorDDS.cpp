@@ -266,7 +266,7 @@ private:
     {
         _foreignBodyTracker->draw();
         int16_t elapsed = 0;
-        int16_t interval = 5000;
+        int16_t interval = 6000;
         unsigned long previousMillis = millis();
         do
         {
