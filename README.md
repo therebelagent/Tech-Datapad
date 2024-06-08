@@ -11,9 +11,6 @@ https://cults3d.com/en/3d-model/gadget/the-bad-batch-tech-s-datapad
 ## Assembly Instructions Guide
 Tech's-Datapad-Visual-Assembly-Instructions-Guide-by-the.rebel.agent.pdf
 
-## Wiring Photo Tutorial
-https://flic.kr/s/aHBqjBuby1 
-
 Bill of materials:
 - 3D Printed Parts & Glue.
 - M3 x 10 [mm] Button Head Screws x 4 (Fix Screen Frame to Case).
@@ -36,3 +33,8 @@ Bill of materials:
 - MCUFRIEND_kbv USE_MEGA_8BIT_PROTOSHIELD Enabled.
 - TouchScreen.
 - JPEGDecoder.
+
+
+## My Wiring Photo Tutorial
+
+https://flic.kr/s/aHBqjBuby1 
